@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Teacher {
+  id          Int      @id @default(autoincrement())
+  name        String
+  subject     String
+  grades      String   // comma-separated grades
+  phone       String?
+  whatsapp    String?
+  facebook    String?
+  instagram   String?
+  bio         String?
+  image       String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CenterInfo {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Video {
+  id          Int      @id @default(autoincrement())
+  title       String
+  url         String
+  description String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  name         String   @default("مدير النظام")
+  username     String   @unique
+  passwordHash String
+  role         String   @default("ADMIN") // SUPER_ADMIN or ADMIN
+  permissions  String   @default("ALL") // Comma separated: TEACHERS,MATERIALS,MESSAGES,REVIEWS,SETTINGS
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  name       String
+  userType   String   @default("طالب")
+  content    String
+  rating     Int      @default(5)
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model Material {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subject     String
+  grade       String
+  teacherName String
+  fileUrl     String
+  downloads   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model CourseCard {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subject     String
+  grade       String
+  teacherName String
+  price       Float
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  orders      Order[]
+}
+
+model Order {
+  id            Int        @id @default(autoincrement())
+  customerName  String
+  phone         String
+  address       String?
+  courseCardId  Int
+  courseCard    CourseCard @relation(fields: [courseCardId], references: [id])
+  paymentMethod String     // CLIQ, ZAIN_CASH, DELIVERY
+  receiptUrl    String?
+  status        String     @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt     DateTime   @default(now())
+}
