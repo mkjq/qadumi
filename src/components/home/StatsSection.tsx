@@ -24,18 +24,27 @@ interface Stat {
   color: string; bgColor: string; description: string;
 }
 
-const stats: Stat[] = [
-  { icon: Users, value: 50000, suffix: '+', label: 'خريج وخريجة', color: 'text-blue-400', bgColor: 'bg-blue-500/20', description: 'بفضل الله تعالى (عدد تقريبي)' },
-  { icon: Award, value: 99, suffix: '%', label: 'نسبة النجاح', color: 'text-amber-400', bgColor: 'bg-amber-500/20', description: 'في الثانوية العامة' },
-  { icon: TrendingUp, value: 25, suffix: '+', label: 'سنة خبرة', color: 'text-green-400', bgColor: 'bg-green-500/20', description: 'في مجال التدريس' },
-  { icon: Clock, value: 7, suffix: '', label: 'ساعات يومياً', color: 'text-purple-400', bgColor: 'bg-purple-500/20', description: '2:00م حتى 9:00م' },
-  { icon: BookOpen, value: 12, suffix: '+', label: 'مادة دراسية', color: 'text-pink-400', bgColor: 'bg-pink-500/20', description: 'الأول حتى التوجيهي' },
-  { icon: MapPin, value: 4, suffix: '+', label: 'منطقة خدمة', color: 'text-cyan-400', bgColor: 'bg-cyan-500/20', description: 'الأمير حسن والمحيط' },
-];
+interface StatsSectionProps {
+  centerInfo?: Record<string, string>;
+}
 
-export default function StatsSection() {
+export default function StatsSection({ centerInfo }: StatsSectionProps) {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const grads = parseInt(centerInfo?.graduates || '50000') || 50000;
+  const success = parseInt(centerInfo?.successRate || '99') || 99;
+  const foundedYear = parseInt(centerInfo?.founded || '2000') || 2000;
+  const yearsExp = Math.max(1, new Date().getFullYear() - foundedYear);
+
+  const stats: Stat[] = [
+    { icon: Users, value: grads, suffix: '+', label: 'خريج وخريجة', color: 'text-blue-400', bgColor: 'bg-blue-500/20', description: 'بفضل الله تعالى (عدد تقريبي)' },
+    { icon: Award, value: success, suffix: '%', label: 'نسبة النجاح', color: 'text-amber-400', bgColor: 'bg-amber-500/20', description: 'في الثانوية العامة' },
+    { icon: TrendingUp, value: yearsExp, suffix: '+', label: 'سنة خبرة', color: 'text-green-400', bgColor: 'bg-green-500/20', description: 'في مجال التدريس' },
+    { icon: Clock, value: 7, suffix: '', label: 'ساعات يومياً', color: 'text-purple-400', bgColor: 'bg-purple-500/20', description: centerInfo?.workingHours || '2:00م حتى 9:00م' },
+    { icon: BookOpen, value: 12, suffix: '+', label: 'مادة دراسية', color: 'text-pink-400', bgColor: 'bg-pink-500/20', description: 'الأول حتى التوجيهي' },
+    { icon: MapPin, value: 4, suffix: '+', label: 'منطقة خدمة', color: 'text-cyan-400', bgColor: 'bg-cyan-500/20', description: centerInfo?.areas ? centerInfo.areas.split('،')[0] + ' والمحيط' : 'الأمير حسن والمحيط' },
+  ];
 
   useEffect(() => {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });

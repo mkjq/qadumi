@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: 'تعرف على مركز القدومي الثقافي — من أعرق المراكز التعليمية في الأردن منذ 2000م',
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getCenterInfo() {
   const info = await prisma.centerInfo.findMany();

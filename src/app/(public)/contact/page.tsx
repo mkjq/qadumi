@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: 'تواصل مع مركز القدومي الثقافي - نحن هنا لمساعدتك',
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getCenterInfo() {
   const info = await prisma.centerInfo.findMany();

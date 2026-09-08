@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: 'تعرف على نخبة أساتذة مركز القدومي الثقافي المتخصصين',
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function TeachersPage() {
   const teachers = await prisma.teacher.findMany({

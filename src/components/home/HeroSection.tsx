@@ -97,13 +97,13 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             </h1>
 
             <p className="text-white/60 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
-              من الصف الأول حتى التوجيهي — أساتذة متخصصون، مناهج شاملة، ونتائج مبهرة بفضل الله تعالى
+              {centerInfo?.mission || 'من الصف الأول حتى التوجيهي — أساتذة متخصصون، مناهج شاملة، ونتائج مبهرة بفضل الله تعالى'}
             </p>
 
             {/* Slogan */}
             <div className="flex items-center justify-center lg:justify-start gap-3 mb-10">
               <div className="h-px w-8 sm:w-12 bg-amber-400/50" />
-              <span className="text-amber-300/80 italic text-base sm:text-lg">"يدًا بيد لبناء جيل متعلم ومفكر"</span>
+              <span className="text-amber-300/80 italic text-base sm:text-lg">"{centerInfo?.slogan || 'يدًا بيد لبناء جيل متعلم ومفكر'}"</span>
               <div className="h-px w-8 sm:w-12 bg-amber-400/50 lg:hidden" />
             </div>
 
@@ -153,9 +153,9 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
                 {/* Mini stats */}
                 <div className="grid grid-cols-3 gap-2 xl:gap-3 w-full">
                   {[
-                    { v: '25+', l: 'سنة' },
-                    { v: '50K', l: 'خريج' },
-                    { v: '99%', l: 'نجاح' },
+                    { v: `${Math.max(1, new Date().getFullYear() - (parseInt(centerInfo?.founded || '2000') || 2000))}+`, l: 'سنة' },
+                    { v: `${Math.round((parseInt(centerInfo?.graduates || '50000') || 50000) / 1000)}K`, l: 'خريج' },
+                    { v: `${centerInfo?.successRate || '99'}%`, l: 'نجاح' },
                   ].map(s => (
                     <div key={s.l} className="text-center p-2 rounded-xl bg-white/5">
                       <div className="text-amber-400 font-black text-base xl:text-lg leading-none">{s.v}</div>

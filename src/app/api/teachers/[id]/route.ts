@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   const id = parseInt(params.id);
@@ -13,6 +14,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   const body = await request.json();
   try {
     const teacher = await prisma.teacher.update({ where: { id }, data: body });
+    revalidatePath('/', 'layout');
     return NextResponse.json(teacher);
   } catch {
     return NextResponse.json({ error: 'Failed to update' }, { status: 500 });
@@ -23,6 +25,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   const id = parseInt(params.id);
   try {
     await prisma.teacher.delete({ where: { id } });
+    revalidatePath('/', 'layout');
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: 'Failed to delete' }, { status: 500 });

@@ -46,7 +46,7 @@ export default function AboutSection({ centerInfo }: AboutSectionProps) {
                       <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-black text-base sm:text-lg">منذ عام 2000م</h3>
+                      <h3 className="text-white font-black text-base sm:text-lg">منذ عام {centerInfo?.founded || '2000'}م</h3>
                       <p className="text-white/40 text-xs sm:text-sm">أكثر من ربع قرن من العطاء</p>
                     </div>
                   </div>
@@ -54,7 +54,7 @@ export default function AboutSection({ centerInfo }: AboutSectionProps) {
                   {/* Progress bars */}
                   <div className="space-y-4 sm:space-y-5">
                     {[
-                      { label: 'نسبة النجاح', value: 99, color: 'bg-amber-400' },
+                      { label: 'نسبة النجاح', value: parseInt(centerInfo?.successRate || '99') || 99, color: 'bg-amber-400' },
                       { label: 'رضا الأهالي', value: 97, color: 'bg-green-400' },
                       { label: 'ختم المناهج', value: 100, color: 'bg-blue-400' },
                     ].map((item, i) => (
@@ -87,7 +87,7 @@ export default function AboutSection({ centerInfo }: AboutSectionProps) {
 
               {/* Floating stat */}
               <div className="absolute bottom-0 left-0 sm:-bottom-4 sm:-left-4 glass rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl border border-white/10 scale-90 sm:scale-100 origin-bottom-left z-10 translate-y-4 translate-x-4 sm:translate-x-0 sm:translate-y-0">
-                <div className="text-2xl sm:text-3xl font-black text-amber-400">+50K</div>
+                <div className="text-2xl sm:text-3xl font-black text-amber-400">+{Math.round((parseInt(centerInfo?.graduates || '50000') || 50000) / 1000)}K</div>
                 <div className="text-white/60 text-xs sm:text-sm whitespace-nowrap">خريج وخريجة</div>
               </div>
             </div>

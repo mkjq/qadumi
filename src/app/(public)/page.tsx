@@ -7,6 +7,9 @@ import ReviewsSection from '@/components/home/ReviewsSection';
 import ContactSection from '@/components/home/ContactSection';
 import { prisma } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Home() {
   const teachers = await prisma.teacher.findMany({
     where: { isActive: true },
@@ -19,7 +22,7 @@ export default async function Home() {
   return (
     <>
       <HeroSection centerInfo={centerInfo as any} />
-      <StatsSection />
+      <StatsSection centerInfo={centerInfo as any} />
       <AboutSection centerInfo={centerInfo as any} />
       <TeachersSection teachers={teachers} />
       <CoursesSection />

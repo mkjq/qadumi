@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   description: 'المواد الدراسية المتاحة في مركز القدومي من الصف الأول حتى التوجيهي',
 };
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const gradeGroups = [
   {
     title: 'المرحلة الأساسية الدنيا',

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   const info = await prisma.centerInfo.findMany();
@@ -17,5 +18,6 @@ export async function PUT(request: Request) {
       })
     )
   );
+  revalidatePath('/', 'layout');
   return NextResponse.json({ success: true, updated: updates.length });
 }
