@@ -320,82 +320,243 @@ textarea:not(.input-premium)::placeholder {
 
 
 /* ==============================================================
-   MULTI-THEME OVERRIDES (LIGHT & TRUE DARK)
+   MULTI-THEME OVERRIDES (LIGHT, NAVY, TRUE DARK)
    ============================================================== */
 
+/* ── BASE THEME ELEMENTS ── */
+.reviews-mask-left {
+  background: linear-gradient(to right, #0a0e1a 0%, transparent 100%);
+}
+.reviews-mask-right {
+  background: linear-gradient(to left, #0a0e1a 0%, transparent 100%);
+}
+.review-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+.review-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+.review-quote {
+  color: rgba(245, 158, 11, 0.15);
+}
+.review-star-inactive {
+  color: rgba(255, 255, 255, 0.12);
+}
+.hero-wave-fill {
+  fill: #0f172a;
+}
+.teacher-img-overlay {
+  background: linear-gradient(to top, #0a0e1a 0%, rgba(10, 14, 26, 0.2) 60%, transparent 100%);
+}
+.review-modal {
+  background: #0a0e1a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 /* ---------- LIGHT THEME ---------- */
-.theme-light body { background: #f8fafc !important; color: #0f172a !important; }
-.theme-light .bg-\[\#0a0e1a\], .theme-light .bg-\[\#060912\] { background-color: #f8fafc !important; }
-.theme-light .section-bg-light, .theme-light .section-bg-dark { background: #ffffff !important; }
-.theme-light .theme-header-scroll { background-color: rgba(255, 255, 255, 0.95) !important; border-color: rgba(0,0,0,0.1) !important; }
+.theme-light body { 
+  background: #f8fafc !important; 
+  color: #0f172a !important; 
+}
+
+/* Light Theme: Section Backgrounds */
+.theme-light .bg-\[\#0a0e1a\], 
+.theme-light .bg-\[\#060912\],
+.theme-light .section-bg-dark { 
+  background-color: #f8fafc !important; 
+}
+.theme-light .section-bg-light { 
+  background-color: #ffffff !important; 
+}
+
+/* Light Theme: Reviews Marquee Masks (Completely Fixes Dark Smudges) */
+.theme-light .reviews-mask-left {
+  background: linear-gradient(to right, #f8fafc 15%, transparent 100%) !important;
+}
+.theme-light .reviews-mask-right {
+  background: linear-gradient(to left, #f8fafc 15%, transparent 100%) !important;
+}
+.theme-light .review-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.02) !important;
+}
+.theme-light .review-card:hover {
+  background: #ffffff !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 20px 35px -5px rgba(245, 158, 11, 0.15), 0 0 0 1px rgba(245, 158, 11, 0.3) !important;
+}
+.theme-light .review-quote {
+  color: rgba(245, 158, 11, 0.2) !important;
+}
+.theme-light .review-star-inactive {
+  color: #cbd5e1 !important;
+}
+.theme-light .review-modal {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.2) !important;
+}
+.theme-light .review-modal input,
+.theme-light .review-modal textarea {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* Light Theme: Hero Wave & Overlays */
+.theme-light .hero-wave-fill {
+  fill: #ffffff !important;
+}
+.theme-light .teacher-img-overlay {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 100%) !important;
+}
+.theme-light .theme-header-scroll { 
+  background-color: rgba(255, 255, 255, 0.95) !important; 
+  border-color: rgba(0, 0, 0, 0.08) !important; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
 
 /* Light Theme: Hero Background */
 .theme-light .hero-bg {
-   background: radial-gradient(ellipse at 20% 50%, rgba(30,58,138,0.08) 0%, transparent 50%),
-               radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.08) 0%, transparent 40%),
-               linear-gradient(135deg, #f8fafc 0%, #ffffff 100%) !important;
+  background: radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+              linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%) !important;
 }
 
 /* Light Theme: Text Colors */
-.theme-light .text-white, .theme-light .text-white\/90 { color: #0f172a !important; }
-.theme-light .title-text { color: #0f172a !important; }
-.theme-light .text-white\/80, .theme-light .text-white\/70 { color: #334155 !important; }
-.theme-light .text-white\/60, .theme-light .text-white\/50 { color: #475569 !important; }
-.theme-light .text-white\/40, .theme-light .text-white\/20 { color: #64748b !important; }
-.theme-light .hover\:text-white:hover { color: #0f172a !important; }
+.theme-light .text-white, 
+.theme-light .text-white\/90 { 
+  color: #0f172a !important; 
+}
+.theme-light .title-text { 
+  color: #0f172a !important; 
+}
+.theme-light .text-white\/80, 
+.theme-light .text-white\/70 { 
+  color: #334155 !important; 
+}
+.theme-light .text-white\/60, 
+.theme-light .text-white\/50 { 
+  color: #64748b !important; 
+}
+.theme-light .text-white\/40, 
+.theme-light .text-white\/20 { 
+  color: #94a3b8 !important; 
+}
+.theme-light .hover\:text-white:hover { 
+  color: #0f172a !important; 
+}
+
+/* Light Theme: Section Badges */
+.theme-light .section-label {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  color: #b45309 !important;
+}
 
 /* Light Theme: Nav links */
-.theme-light .nav-link { color: #475569 !important; }
-.theme-light .nav-link:hover { color: #0f172a !important; }
-
-/* Light Theme: Backgrounds & Borders */
-.theme-light .bg-white\/5, .theme-light .bg-white\/3 { background-color: rgba(0,0,0,0.03) !important; }
-.theme-light .bg-white\/10 { background-color: rgba(0,0,0,0.06) !important; }
-.theme-light .bg-white\/20 { background-color: rgba(0,0,0,0.1) !important; }
-.theme-light .border-white\/5, .theme-light .border-white\/8 { border-color: rgba(0,0,0,0.05) !important; }
-.theme-light .border-white\/10 { border-color: rgba(0,0,0,0.1) !important; }
-.theme-light .border-white\/20 { border-color: rgba(0,0,0,0.15) !important; }
-.theme-light .hover\:bg-white\/5:hover { background-color: rgba(0,0,0,0.04) !important; }
-.theme-light .hover\:bg-white\/10:hover { background-color: rgba(0,0,0,0.08) !important; }
+.theme-light .nav-link { 
+  color: #475569 !important; 
+}
+.theme-light .nav-link:hover { 
+  color: #0f172a !important; 
+}
 
 /* Light Theme: Cards & Components */
-.theme-light .glass, .theme-light .glass-dark, .theme-light .card-premium, .theme-light .teacher-card {
-   background: #ffffff !important;
-   border-color: rgba(0,0,0,0.08) !important;
-   box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
+.theme-light .glass, 
+.theme-light .glass-dark, 
+.theme-light .card-premium, 
+.theme-light .teacher-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
 }
-.theme-light .glass-light { background: #f8fafc !important; }
-.theme-light .teacher-card::before { display: none; }
-.theme-light .btn-outline-white { color: #0f172a !important; border-color: rgba(0,0,0,0.2) !important; background: transparent !important; }
-.theme-light .btn-outline-white:hover { background: rgba(0,0,0,0.05) !important; }
+.theme-light .teacher-card:hover,
+.theme-light .card-premium:hover {
+  box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(245, 158, 11, 0.3) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+.theme-light .glass-light { 
+  background: #f8fafc !important; 
+}
+.theme-light .teacher-card::before { 
+  display: none; 
+}
+
+/* Light Theme: Outline Buttons */
+.theme-light .btn-outline-white { 
+  color: #0f172a !important; 
+  border-color: #cbd5e1 !important; 
+  background: #ffffff !important; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+.theme-light .btn-outline-white:hover { 
+  background: #f1f5f9 !important; 
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
 
 /* Light Theme: Inputs */
 .theme-light .input-premium {
-   background: #ffffff !important;
-   border-color: rgba(0,0,0,0.15) !important;
-   color: #0f172a !important;
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
 }
-.theme-light .input-premium::placeholder { color: #94a3b8 !important; }
-.theme-light .input-premium:focus { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,0.15) !important; }
+.theme-light .input-premium::placeholder { 
+  color: #94a3b8 !important; 
+}
+.theme-light .input-premium:focus { 
+  border-color: #f59e0b !important; 
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15) !important; 
+}
 
 /* ---------- TRUE DARK THEME ---------- */
-.theme-dark body { background: #000000 !important; }
-.theme-dark .bg-\[\#0a0e1a\] { background-color: #000000 !important; }
-.theme-dark .bg-\[\#060912\] { background-color: #050505 !important; }
-.theme-dark .section-bg-light { background: #0a0a0a !important; }
-.theme-dark .theme-header-scroll { background-color: rgba(0, 0, 0, 0.95) !important; border-color: rgba(255,255,255,0.05) !important; }
-
-.theme-dark .hero-bg {
-   background: radial-gradient(ellipse at 20% 50%, rgba(30,58,138,0.15) 0%, transparent 50%),
-               radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.1) 0%, transparent 40%),
-               linear-gradient(135deg, #000000 0%, #050505 100%) !important;
+.theme-dark body { 
+  background: #000000 !important; 
 }
-
-.theme-dark .glass, .theme-dark .glass-dark, .theme-dark .card-premium, .theme-dark .teacher-card {
-   background: #080808 !important;
-   border-color: rgba(255,255,255,0.03) !important;
+.theme-dark .bg-\[\#0a0e1a\] { 
+  background-color: #000000 !important; 
+}
+.theme-dark .bg-\[\#060912\] { 
+  background-color: #050505 !important; 
+}
+.theme-dark .section-bg-light { 
+  background-color: #0a0a0a !important; 
+}
+.theme-dark .theme-header-scroll { 
+  background-color: rgba(0, 0, 0, 0.95) !important; 
+  border-color: rgba(255, 255, 255, 0.05) !important; 
+}
+.theme-dark .hero-wave-fill {
+  fill: #0a0a0a !important;
+}
+.theme-dark .reviews-mask-left {
+  background: linear-gradient(to right, #000000 0%, transparent 100%) !important;
+}
+.theme-dark .reviews-mask-right {
+  background: linear-gradient(to left, #000000 0%, transparent 100%) !important;
+}
+.theme-dark .teacher-img-overlay {
+  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%) !important;
+}
+.theme-dark .hero-bg {
+  background: radial-gradient(ellipse at 20% 50%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
+              linear-gradient(135deg, #000000 0%, #050505 100%) !important;
+}
+.theme-dark .glass, 
+.theme-dark .glass-dark, 
+.theme-dark .card-premium, 
+.theme-dark .teacher-card {
+  background: #080808 !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
 }
 .theme-dark .input-premium {
-   background: #0a0a0a !important;
-   border-color: rgba(255,255,255,0.05) !important;
+  background: #0a0a0a !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
 }

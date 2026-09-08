@@ -61,7 +61,7 @@ export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
                     </div>
                   )}
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-[#0a0e1a]/20 to-transparent" />
+                  <div className="teacher-img-overlay absolute inset-0" />
 
                   {/* Subject badge */}
                   <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r ${colors.bg} backdrop-blur border border-white/10 text-xs sm:text-sm font-bold ${colors.text}`}>

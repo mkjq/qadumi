@@ -81,8 +81,8 @@ export default function ReviewsSection() {
         {reviews.length > 0 ? (
           <div className="relative flex overflow-hidden group py-10 -my-10">
             {/* Gradient masks for smooth edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-r from-[#0a0e1a] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-l from-[#0a0e1a] to-transparent z-10 pointer-events-none" />
+            <div className="reviews-mask-left absolute left-0 top-0 bottom-0 w-24 sm:w-48 z-10 pointer-events-none" />
+            <div className="reviews-mask-right absolute right-0 top-0 bottom-0 w-24 sm:w-48 z-10 pointer-events-none" />
 
             <div className="flex w-max">
               {/* Generate enough items to fill the screen */}
@@ -93,13 +93,13 @@ export default function ReviewsSection() {
                   aria-hidden={trackIdx === 2}
                 >
                   {[...reviews, ...reviews, ...reviews, ...reviews].map((review, idx) => (
-                    <div key={`${trackIdx}-${review.id}-${idx}`} className="w-[320px] sm:w-[420px] flex-shrink-0 bg-white/[0.02] hover:bg-white/[0.04] border border-white/5 hover:border-amber-500/30 rounded-3xl p-8 relative transition-all duration-300 hover:-translate-y-2 shadow-2xl shadow-black/20 group/card flex flex-col justify-between h-full min-h-[280px]">
-                      <Quote className="absolute top-8 left-8 w-12 h-12 text-amber-500/10 rotate-180 group-hover/card:text-amber-500/20 transition-colors" />
+                    <div key={`${trackIdx}-${review.id}-${idx}`} className="review-card w-[320px] sm:w-[420px] flex-shrink-0 rounded-3xl p-8 relative transition-all duration-300 hover:-translate-y-2 group/card flex flex-col justify-between h-full min-h-[280px]">
+                      <Quote className="review-quote absolute top-8 left-8 w-12 h-12 rotate-180 group-hover/card:opacity-40 transition-all" />
                       
                       <div>
                         <div className="flex items-center gap-1.5 mb-6">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${i < review.rating ? 'text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]' : 'text-white/10'}`} />
+                            <Star key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${i < review.rating ? 'text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]' : 'review-star-inactive'}`} />
                           ))}
                         </div>
                         <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8 relative z-10 line-clamp-4 font-medium">
@@ -133,7 +133,7 @@ export default function ReviewsSection() {
       {/* Add Review Modal */}
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-          <div className="bg-[#0a0e1a] border border-white/10 rounded-[2rem] w-full max-w-lg p-8 relative shadow-2xl animate-fade-in-up">
+          <div className="review-modal border rounded-[2rem] w-full max-w-lg p-8 relative shadow-2xl animate-fade-in-up">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent rounded-[2rem] pointer-events-none" />
             
             <button 

@@ -176,9 +176,9 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
       </div>
 
       {/* Bottom wave */}
-      <div className="absolute bottom-0 inset-x-0">
-        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 80L1440 80L1440 40C1200 80 960 0 720 20C480 40 240 80 0 40L0 80Z" fill="#0f172a"/>
+      <div className="absolute bottom-0 inset-x-0 pointer-events-none">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+          <path d="M0 80L1440 80L1440 40C1200 80 960 0 720 20C480 40 240 80 0 40L0 80Z" className="hero-wave-fill"/>
         </svg>
       </div>
     </section>
