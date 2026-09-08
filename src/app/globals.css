@@ -126,6 +126,59 @@ textarea:not(.input-premium)::placeholder {
 .section-bg-dark  { background: linear-gradient(180deg, #0a0e1a 0%, #0f172a 100%); }
 .section-bg-light { background: #0f172a; }
 
+.gradient-bg {
+  background: radial-gradient(ellipse at 20% 50%, rgba(30,58,138,0.5) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(245,158,11,0.15) 0%, transparent 40%),
+              linear-gradient(135deg, #060912 0%, #0a1128 40%, #0f172a 70%, #1e3a8a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.3);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.45);
+}
+
+.section-title {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2.5rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
 /* ── Card styles ── */
 .card-premium {
   background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
@@ -356,15 +409,53 @@ textarea:not(.input-premium)::placeholder {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ---------- LIGHT THEME ---------- */
+/* ==============================================================
+   PRESTIGIOUS FOOTER (CONSISTENT ROYAL NAVY ACROSS ALL THEMES)
+   ============================================================== */
+footer.footer-navy,
+.theme-light footer.footer-navy,
+.theme-navy footer.footer-navy,
+.theme-dark footer.footer-navy {
+  background-color: #060912 !important;
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.theme-light footer.footer-navy .text-white {
+  color: #ffffff !important;
+}
+.theme-light footer.footer-navy .text-white\/90 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.theme-light footer.footer-navy .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.theme-light footer.footer-navy .text-white\/40 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.theme-light footer.footer-navy .text-white\/20 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+.theme-light footer.footer-navy a.btn-outline-white {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: none !important;
+}
+.theme-light footer.footer-navy a.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ==============================================================
+   LIGHT THEME (WHITE & ROYAL NAVY - أبيض وكحلي ملوكي)
+   ============================================================== */
 .theme-light body { 
   background: #f8fafc !important; 
   color: #0f172a !important; 
 }
 
 /* Light Theme: Section Backgrounds */
-.theme-light .bg-\[\#0a0e1a\], 
-.theme-light .bg-\[\#060912\],
+.theme-light .bg-\[\#0a0e1a\],
 .theme-light .section-bg-dark { 
   background-color: #f8fafc !important; 
 }
@@ -372,7 +463,189 @@ textarea:not(.input-premium)::placeholder {
   background-color: #ffffff !important; 
 }
 
-/* Light Theme: Reviews Marquee Masks (Completely Fixes Dark Smudges) */
+/* Light Theme: Base text and headings in Deep Royal Navy */
+.theme-light h1,
+.theme-light h2,
+.theme-light h3,
+.theme-light h4,
+.theme-light .section-title { 
+  color: #0f172a !important; 
+}
+.theme-light .title-text { 
+  color: #0f172a !important; 
+}
+
+/* Light Theme: Target dark text strictly in light containers (cards, light sections) */
+.theme-light .card-premium .text-white,
+.theme-light .teacher-card .text-white,
+.theme-light .review-card .text-white,
+.theme-light .section-bg-light .text-white,
+.theme-light .section-bg-dark .text-white,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white { 
+  color: #0f172a !important; 
+}
+
+.theme-light .card-premium .text-white\/90,
+.theme-light .teacher-card .text-white\/90,
+.theme-light .review-card .text-white\/90,
+.theme-light .section-bg-light .text-white\/90,
+.theme-light .section-bg-dark .text-white\/90,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/90 { 
+  color: #0f172a !important; 
+}
+
+.theme-light .card-premium .text-white\/80,
+.theme-light .teacher-card .text-white\/80,
+.theme-light .review-card .text-white\/80,
+.theme-light .section-bg-light .text-white\/80,
+.theme-light .section-bg-dark .text-white\/80,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/80 { 
+  color: #1e293b !important; 
+}
+
+.theme-light .card-premium .text-white\/60,
+.theme-light .card-premium .text-white\/50,
+.theme-light .teacher-card .text-white\/60,
+.theme-light .teacher-card .text-white\/50,
+.theme-light .review-card .text-white\/60,
+.theme-light .review-card .text-white\/50,
+.theme-light .section-bg-light .text-white\/60,
+.theme-light .section-bg-light .text-white\/50,
+.theme-light .section-bg-dark .text-white\/60,
+.theme-light .section-bg-dark .text-white\/50,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/60,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/50 { 
+  color: #475569 !important; 
+}
+
+.theme-light .card-premium .text-white\/40,
+.theme-light .card-premium .text-white\/20,
+.theme-light .teacher-card .text-white\/40,
+.theme-light .teacher-card .text-white\/20,
+.theme-light .review-card .text-white\/40,
+.theme-light .review-card .text-white\/20,
+.theme-light .section-bg-light .text-white\/40,
+.theme-light .section-bg-light .text-white\/20,
+.theme-light .section-bg-dark .text-white\/40,
+.theme-light .section-bg-dark .text-white\/20,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/40,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/20 { 
+  color: #64748b !important; 
+}
+
+/* Ensure intentional dark surfaces preserve white text */
+.theme-light .gradient-bg,
+.theme-light .gradient-bg *,
+.theme-light [class*="from-primary-900"] *,
+.theme-light [class*="bg-primary-900"] *,
+.theme-light [class*="bg-blue-600"] *,
+.theme-light [class*="bg-green-600"] * {
+  /* keep white text */
+}
+.theme-light .gradient-bg .text-white {
+  color: #ffffff !important;
+}
+.theme-light .gradient-bg .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Light Theme: Secondary Outline Buttons -> Royal Navy Solid with White Text */
+.theme-light .btn-outline-white { 
+  color: #ffffff !important; 
+  border: 1.5px solid #0f172a !important; 
+  background: #0f172a !important; 
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15) !important;
+  font-weight: 700 !important;
+}
+.theme-light .btn-outline-white:hover { 
+  background: #1e3a8a !important; 
+  border-color: #1e3a8a !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.25) !important;
+}
+
+/* Light Theme: Section Badges -> Royal Navy Pill */
+.theme-light .section-label {
+  background: rgba(30, 58, 138, 0.08) !important;
+  border-color: rgba(30, 58, 138, 0.2) !important;
+  color: #1e3a8a !important;
+  font-weight: 700 !important;
+}
+
+/* Light Theme: Nav links & Header */
+.theme-light header {
+  background: rgba(248, 250, 252, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+}
+.theme-light .theme-header-scroll { 
+  background-color: rgba(255, 255, 255, 0.96) !important; 
+  border-color: rgba(15, 23, 42, 0.08) !important; 
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+}
+.theme-light .nav-link { 
+  color: #1e293b !important; 
+  font-weight: 600 !important;
+}
+.theme-light .nav-link:hover { 
+  color: #d97706 !important; 
+}
+.theme-light .header-burger-btn {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+.theme-light .mobile-nav-menu {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15) !important;
+}
+.theme-light .mobile-nav-item {
+  color: #0f172a !important;
+}
+.theme-light .mobile-nav-item:hover {
+  background: #f1f5f9 !important;
+  color: #d97706 !important;
+}
+
+/* Light Theme: Cards & Glass */
+.theme-light .glass, 
+.theme-light .glass-dark, 
+.theme-light .card,
+.theme-light .card-premium, 
+.theme-light .teacher-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
+}
+.theme-light .card:hover,
+.theme-light .teacher-card:hover,
+.theme-light .card-premium:hover {
+  box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(30, 58, 138, 0.25) !important;
+  border-color: rgba(30, 58, 138, 0.35) !important;
+}
+.theme-light .glass-light { 
+  background: #f8fafc !important; 
+}
+.theme-light .teacher-card::before { 
+  display: none; 
+}
+
+/* Light Theme: Hero Background & Waves */
+.theme-light .hero-bg {
+  background: radial-gradient(ellipse at 20% 40%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+              linear-gradient(180deg, #f1f5f9 0%, #f8fafc 100%) !important;
+}
+.theme-light .hero-wave-fill {
+  fill: #ffffff !important;
+}
+.theme-light .teacher-img-overlay {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 100%) !important;
+}
+
+/* Light Theme: Reviews Marquee Masks & Cards */
 .theme-light .reviews-mask-left {
   background: linear-gradient(to right, #f8fafc 15%, transparent 100%) !important;
 }
@@ -407,100 +680,26 @@ textarea:not(.input-premium)::placeholder {
   color: #0f172a !important;
 }
 
-/* Light Theme: Hero Wave & Overlays */
-.theme-light .hero-wave-fill {
-  fill: #ffffff !important;
+/* Light Theme: Stat Numbers Jewel Tones */
+.theme-light .stat-number.text-blue-400 { color: #1d4ed8 !important; }
+.theme-light .stat-number.text-amber-400 { color: #d97706 !important; }
+.theme-light .stat-number.text-green-400 { color: #15803d !important; }
+.theme-light .stat-number.text-purple-400 { color: #7e22ce !important; }
+.theme-light .stat-number.text-pink-400 { color: #be185d !important; }
+.theme-light .stat-number.text-cyan-400 { color: #0e7490 !important; }
+
+/* Light Theme: Subject Pills & Badges */
+.theme-light span[class*="bg-white/5"] {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  border-color: #cbd5e1 !important;
 }
-.theme-light .teacher-img-overlay {
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 100%) !important;
-}
-.theme-light .theme-header-scroll { 
-  background-color: rgba(255, 255, 255, 0.95) !important; 
-  border-color: rgba(0, 0, 0, 0.08) !important; 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+.theme-light div[class*="bg-white/5"] {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
 }
 
-/* Light Theme: Hero Background */
-.theme-light .hero-bg {
-  background: radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-              linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%) !important;
-}
-
-/* Light Theme: Text Colors */
-.theme-light .text-white, 
-.theme-light .text-white\/90 { 
-  color: #0f172a !important; 
-}
-.theme-light .title-text { 
-  color: #0f172a !important; 
-}
-.theme-light .text-white\/80, 
-.theme-light .text-white\/70 { 
-  color: #334155 !important; 
-}
-.theme-light .text-white\/60, 
-.theme-light .text-white\/50 { 
-  color: #64748b !important; 
-}
-.theme-light .text-white\/40, 
-.theme-light .text-white\/20 { 
-  color: #94a3b8 !important; 
-}
-.theme-light .hover\:text-white:hover { 
-  color: #0f172a !important; 
-}
-
-/* Light Theme: Section Badges */
-.theme-light .section-label {
-  background: rgba(245, 158, 11, 0.12) !important;
-  border-color: rgba(245, 158, 11, 0.3) !important;
-  color: #b45309 !important;
-}
-
-/* Light Theme: Nav links */
-.theme-light .nav-link { 
-  color: #475569 !important; 
-}
-.theme-light .nav-link:hover { 
-  color: #0f172a !important; 
-}
-
-/* Light Theme: Cards & Components */
-.theme-light .glass, 
-.theme-light .glass-dark, 
-.theme-light .card-premium, 
-.theme-light .teacher-card {
-  background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
-}
-.theme-light .teacher-card:hover,
-.theme-light .card-premium:hover {
-  box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(245, 158, 11, 0.3) !important;
-  border-color: rgba(245, 158, 11, 0.4) !important;
-}
-.theme-light .glass-light { 
-  background: #f8fafc !important; 
-}
-.theme-light .teacher-card::before { 
-  display: none; 
-}
-
-/* Light Theme: Outline Buttons */
-.theme-light .btn-outline-white { 
-  color: #0f172a !important; 
-  border-color: #cbd5e1 !important; 
-  background: #ffffff !important; 
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
-}
-.theme-light .btn-outline-white:hover { 
-  background: #f1f5f9 !important; 
-  border-color: #94a3b8 !important;
-  color: #0f172a !important;
-}
-
-/* Light Theme: Inputs */
+/* Light Theme: Form Inputs */
 .theme-light .input-premium {
   background: #ffffff !important;
   border-color: #cbd5e1 !important;
@@ -511,8 +710,22 @@ textarea:not(.input-premium)::placeholder {
   color: #94a3b8 !important; 
 }
 .theme-light .input-premium:focus { 
-  border-color: #f59e0b !important; 
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15) !important; 
+  border-color: #1e3a8a !important; 
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15) !important; 
+}
+
+/* Light Theme: Suggestions Dropdown */
+.theme-light .suggestions-dropdown {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+.theme-light .suggestions-dropdown div {
+  color: #0f172a !important;
+}
+.theme-light .suggestions-dropdown div:hover {
+  background-color: #f1f5f9 !important;
+  color: #d97706 !important;
 }
 
 /* ---------- TRUE DARK THEME ---------- */

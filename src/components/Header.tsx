@@ -7,7 +7,7 @@ import ThemeSwitcher from './ThemeSwitcher';
 
 const navLinks = [
   { href: '/', label: 'الرئيسية' },
-  { href: '/store', label: 'المتجر 🛒' },
+  { href: '/store', label: 'المتجر' },
   { href: '/materials', label: 'الدوسيات' },
   { href: '/about', label: 'عن المركز' },
   { href: '/teachers', label: 'كادر المعلمين' },
@@ -29,7 +29,7 @@ export default function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
       scrolled
         ? 'bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-white/5 py-2 shadow-2xl theme-header-scroll'
-        : 'py-4'
+        : 'py-3 sm:py-4'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
 
@@ -60,7 +60,8 @@ export default function Header() {
             <span className="ltr">0791586891</span>
           </a>
           <button onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-xl glass text-white">
+            className="lg:hidden p-2 rounded-xl glass text-white header-burger-btn"
+            aria-label="القائمة">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -68,15 +69,15 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="lg:hidden mx-4 mt-2 rounded-2xl glass-dark p-4 border border-white/10">
+        <div className="lg:hidden mx-4 mt-2 rounded-2xl glass-dark p-4 border border-white/10 mobile-nav-menu shadow-2xl">
           {navLinks.map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className="flex items-center px-4 py-3 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-xl transition-all font-medium">
+              className="flex items-center px-4 py-3 text-white/80 hover:text-amber-400 hover:bg-white/5 rounded-xl transition-all font-medium mobile-nav-item">
               {l.label}
             </Link>
           ))}
           <a href="tel:0791586891"
-            className="flex items-center justify-center gap-2 btn-gold w-full mt-3 text-sm">
+            className="flex items-center justify-center gap-2 btn-gold w-full mt-3 text-sm py-3">
             <Phone className="w-4 h-4" /> <span className="ltr">0791586891</span>
           </a>
         </div>

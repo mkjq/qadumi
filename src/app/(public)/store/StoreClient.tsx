@@ -153,15 +153,15 @@ function CheckoutModal({ card, onClose }: { card: CourseCard, onClose: () => voi
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-      <div className="bg-white dark:bg-primary-900 rounded-[2rem] w-full max-w-xl shadow-2xl relative animate-fade-in-up my-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-white dark:bg-primary-900 rounded-[2rem] w-full max-w-xl shadow-2xl relative animate-fade-in-up my-auto max-h-[90vh] overflow-y-auto">
         {step < 3 && (
-          <button onClick={onClose} className="absolute top-6 left-6 p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors z-10">
+          <button onClick={onClose} className="absolute top-5 left-5 sm:top-6 sm:left-6 p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-colors z-10" aria-label="إغلاق">
             <X className="w-5 h-5" />
           </button>
         )}
 
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
           {step === 1 && (
             <div>
               <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-6">معلومات المشتري</h3>

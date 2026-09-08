@@ -89,33 +89,33 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.3] lg:leading-[1.1] mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black leading-[1.25] lg:leading-[1.1] mb-4 sm:mb-6">
               <span className="text-white">مركز</span>{' '}
               <span className="gradient-text">القدومي</span>
               <br />
-              <span className="text-white/90 text-3xl sm:text-4xl lg:text-5xl mt-2 block">الثقافي</span>
+              <span className="text-white/90 text-2xl sm:text-4xl lg:text-5xl mt-1.5 sm:mt-2 block">الثقافي</span>
             </h1>
 
-            <p className="text-white/60 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+            <p className="text-white/60 text-sm sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">
               {centerInfo?.mission || 'من الصف الأول حتى التوجيهي — أساتذة متخصصون، مناهج شاملة، ونتائج مبهرة بفضل الله تعالى'}
             </p>
 
             {/* Slogan */}
-            <div className="flex items-center justify-center lg:justify-start gap-3 mb-10">
-              <div className="h-px w-8 sm:w-12 bg-amber-400/50" />
-              <span className="text-amber-300/80 italic text-base sm:text-lg">"{centerInfo?.slogan || 'يدًا بيد لبناء جيل متعلم ومفكر'}"</span>
-              <div className="h-px w-8 sm:w-12 bg-amber-400/50 lg:hidden" />
+            <div className="flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-8 sm:mb-10">
+              <div className="h-px w-6 sm:w-12 bg-amber-400/50" />
+              <span className="text-amber-300/80 italic text-sm sm:text-lg">"{centerInfo?.slogan || 'يدًا بيد لبناء جيل متعلم ومفكر'}"</span>
+              <div className="h-px w-6 sm:w-12 bg-amber-400/50 lg:hidden" />
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto">
-              <Link href="/teachers" className="btn-gold flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 sm:mb-10 w-full sm:w-auto">
+              <Link href="/teachers" className="btn-gold flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto py-3 sm:py-3.5 px-6 sm:px-8">
                 <span>تعرف على أساتذتنا</span>
                 <ChevronLeft className="w-5 h-5" />
               </Link>
               <a href={whatsappLink(phone, 'أهلًا، أود الاستفسار عن المركز')}
                 target="_blank" rel="noopener noreferrer"
-                className="btn-outline-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto">
+                className="btn-outline-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto py-3 sm:py-3.5 px-6 sm:px-8">
                 <Phone className="w-5 h-5" />
                 <span>تواصل معنا</span>
               </a>

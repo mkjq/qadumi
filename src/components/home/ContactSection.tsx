@@ -152,7 +152,7 @@ export default function ContactSection({ centerInfo }: ContactSectionProps) {
                     
                     {/* Suggestions Dropdown */}
                     {showSuggestions && filteredGrades.length > 0 && (
-                      <div className="absolute z-20 w-full mt-1 bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl max-h-48 overflow-y-auto">
+                      <div className="suggestions-dropdown absolute z-20 w-full mt-1 bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl max-h-48 overflow-y-auto">
                         {filteredGrades.map(g => (
                           <div 
                             key={g}

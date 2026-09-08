@@ -62,13 +62,13 @@ export default function MaterialsPage() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 relative z-10">
-        <div className="text-center mb-12">
-          <div className="section-label mx-auto mb-4">مجاناً للجميع</div>
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-12 relative z-10">
+        <div className="text-center mb-10 sm:mb-12">
+          <div className="section-label mx-auto mb-4 w-fit">مجاناً للجميع</div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
             مكتبة <span className="gradient-text">الدوسيات والملفات</span>
           </h1>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg">
+          <p className="text-white/60 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
             حمل الآن أقوى الدوسيات، الملخصات، وأوراق العمل المجهزة بعناية من نخبة أساتذة مركز القدومي.
           </p>
         </div>

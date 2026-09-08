@@ -5,23 +5,23 @@ import { Phone, MapPin, Clock, Facebook, ArrowUpRight } from 'lucide-react';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-[#060912] border-t border-white/5">
+    <footer className="footer-navy bg-[#060912] border-t border-white/10 text-white">
       {/* Top CTA bar */}
       <div className="border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
             <div>
               <h3 className="text-white font-black text-2xl mb-1">
                 هل أنت مستعد للتفوق؟ <span className="gradient-text">ابدأ الآن!</span>
               </h3>
               <p className="text-white/40">انضم إلى آلاف الطلاب الناجحين في مركز القدومي</p>
             </div>
-            <div className="flex gap-3">
-              <a href="tel:0791586891" className="btn-gold flex items-center gap-2 whitespace-nowrap">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <a href="tel:0791586891" className="btn-gold flex items-center justify-center gap-2 whitespace-nowrap">
                 <Phone className="w-4 h-4" />
                 <span className="ltr">0791586891</span>
               </a>
-              <Link href="/contact" className="btn-outline-white flex items-center gap-2 whitespace-nowrap">
+              <Link href="/contact" className="btn-outline-white flex items-center justify-center gap-2 whitespace-nowrap">
                 تواصل معنا <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
