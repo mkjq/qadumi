@@ -223,43 +223,43 @@ export default function AdminTeachersPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">الاسم *</label>
-                  <input value={editingTeacher.name} onChange={(e) => setEditingTeacher({ ...editingTeacher, name: e.target.value })} placeholder="اسم الأستاذ" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingTeacher.name ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, name: e.target.value })} placeholder="اسم الأستاذ" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">المادة *</label>
-                  <input value={editingTeacher.subject} onChange={(e) => setEditingTeacher({ ...editingTeacher, subject: e.target.value })} placeholder="مثال: اللغة العربية" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingTeacher.subject ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, subject: e.target.value })} placeholder="مثال: اللغة العربية" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">الصفوف (مفصولة بفاصلة)</label>
-                <input value={editingTeacher.grades} onChange={(e) => setEditingTeacher({ ...editingTeacher, grades: e.target.value })} placeholder="مثال: عاشر,أول ثانوي,ثاني ثانوي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                <input value={editingTeacher.grades ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, grades: e.target.value })} placeholder="مثال: عاشر,أول ثانوي,ثاني ثانوي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف</label>
-                  <input value={editingTeacher.phone} onChange={(e) => setEditingTeacher({ ...editingTeacher, phone: e.target.value })} placeholder="07xxxxxxxx" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm ltr text-right" />
+                  <input value={editingTeacher.phone ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, phone: e.target.value })} placeholder="07xxxxxxxx" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white ltr text-right" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">واتساب</label>
-                  <input value={editingTeacher.whatsapp} onChange={(e) => setEditingTeacher({ ...editingTeacher, whatsapp: e.target.value })} placeholder="07xxxxxxxx" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm ltr text-right" />
+                  <input value={editingTeacher.whatsapp ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, whatsapp: e.target.value })} placeholder="07xxxxxxxx" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white ltr text-right" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">النبذة التعريفية</label>
-                <textarea value={editingTeacher.bio} onChange={(e) => setEditingTeacher({ ...editingTeacher, bio: e.target.value })} placeholder="اكتب نبذة عن الأستاذ وخبراته..." rows={4} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm resize-none" />
+                <textarea value={editingTeacher.bio ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, bio: e.target.value })} placeholder="اكتب نبذة عن الأستاذ وخبراته..." rows={4} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white resize-none" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">الترتيب</label>
-                  <input type="number" value={editingTeacher.order} onChange={(e) => setEditingTeacher({ ...editingTeacher, order: parseInt(e.target.value) || 0 })} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input type="number" value={editingTeacher.order ?? 0} onChange={(e) => setEditingTeacher({ ...editingTeacher, order: parseInt(e.target.value) || 0 })} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div className="flex items-end pb-1">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={editingTeacher.isActive} onChange={(e) => setEditingTeacher({ ...editingTeacher, isActive: e.target.checked })} className="w-4 h-4 rounded" />
+                    <input type="checkbox" checked={editingTeacher.isActive ?? true} onChange={(e) => setEditingTeacher({ ...editingTeacher, isActive: e.target.checked })} className="w-4 h-4 rounded" />
                     <span className="text-sm font-medium text-gray-700">نشط (يظهر في الموقع)</span>
                   </label>
                 </div>

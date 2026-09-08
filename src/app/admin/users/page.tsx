@@ -214,30 +214,30 @@ export default function AdminUsersPage() {
               <button onClick={() => setShowForm(false)} className="p-2 hover:bg-gray-100 rounded-xl"><X className="w-5 h-5" /></button>
             </div>
 
-            <div className="p-6 space-y-5">
+            <div className="p-6 space-y-5 text-gray-900">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">الاسم الكامل *</label>
-                  <input value={editingUser.name} onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })} placeholder="مثال: أحمد القدومي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingUser.name ?? ''} onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })} placeholder="مثال: أحمد القدومي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">اسم المستخدم للدخول *</label>
-                  <input value={editingUser.username} onChange={(e) => setEditingUser({ ...editingUser, username: e.target.value })} placeholder="مثال: ahmad_q" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm ltr text-right" dir="ltr" />
+                  <input value={editingUser.username ?? ''} onChange={(e) => setEditingUser({ ...editingUser, username: e.target.value })} placeholder="مثال: ahmad_q" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white ltr text-right" dir="ltr" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     كلمة المرور {isEditing && <span className="text-gray-400 font-normal">(اتركها فارغة إذا لم ترد تغييرها)</span>}
                   </label>
-                  <input type="password" value={editingUser.password} onChange={(e) => setEditingUser({ ...editingUser, password: e.target.value })} placeholder="••••••••" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm ltr text-right" dir="ltr" />
+                  <input type="password" value={editingUser.password ?? ''} onChange={(e) => setEditingUser({ ...editingUser, password: e.target.value })} placeholder="••••••••" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white ltr text-right" dir="ltr" />
                 </div>
               </div>
 
               <div className="border-t pt-4">
                 <label className="block text-sm font-bold text-gray-900 mb-3">الصلاحيات والرتبة</label>
                 <select 
-                  value={editingUser.role} 
+                  value={editingUser.role ?? 'ADMIN'} 
                   onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value })}
-                  className="w-full mb-4 px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm"
+                  className="w-full mb-4 px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white"
                 >
                   <option value="ADMIN">مشرف فرعي (صلاحيات مخصصة)</option>
                   <option value="SUPER_ADMIN">مدير عام (جميع الصلاحيات)</option>

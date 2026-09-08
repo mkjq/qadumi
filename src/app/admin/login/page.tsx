@@ -63,11 +63,11 @@ export default function AdminLoginPage() {
                 <User className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  value={credentials.username}
+                  value={credentials.username ?? ''}
                   onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                   placeholder="admin"
                   required
-                  className="w-full pr-10 pl-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                  className="w-full pr-10 pl-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all text-gray-900 bg-white"
                 />
               </div>
             </div>
@@ -80,11 +80,11 @@ export default function AdminLoginPage() {
                 <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  value={credentials.password}
+                  value={credentials.password ?? ''}
                   onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                   placeholder="••••••••"
                   required
-                  className="w-full pr-10 pl-10 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                  className="w-full pr-10 pl-10 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all text-gray-900 bg-white"
                 />
                 <button
                   type="button"

@@ -16,6 +16,19 @@ body {
   max-width: 100%;
 }
 
+/* Force dark readable text and white background for all standard form controls */
+input:not(.input-premium),
+textarea:not(.input-premium),
+select:not(.input-premium) {
+  color: #0f172a !important;
+  background-color: #ffffff;
+}
+
+input:not(.input-premium)::placeholder,
+textarea:not(.input-premium)::placeholder {
+  color: #94a3b8 !important;
+}
+
 /* ── Animated gradient background orbs ── */
 @keyframes blob {
   0%, 100% { transform: translate(0, 0) scale(1); }

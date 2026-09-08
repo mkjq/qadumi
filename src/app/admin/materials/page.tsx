@@ -195,26 +195,26 @@ export default function AdminMaterialsPage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 text-gray-900">
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">اسم الدوسية / الملف *</label>
-                  <input value={editingMat.title} onChange={(e) => setEditingMat({ ...editingMat, title: e.target.value })} placeholder="مثال: مكثف الفيزياء الشامل" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingMat.title ?? ''} onChange={(e) => setEditingMat({ ...editingMat, title: e.target.value })} placeholder="مثال: مكثف الفيزياء الشامل" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">المادة *</label>
-                  <input value={editingMat.subject} onChange={(e) => setEditingMat({ ...editingMat, subject: e.target.value })} placeholder="مثال: فيزياء" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingMat.subject ?? ''} onChange={(e) => setEditingMat({ ...editingMat, subject: e.target.value })} placeholder="مثال: فيزياء" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">الصف المستهدف *</label>
-                  <input value={editingMat.grade} onChange={(e) => setEditingMat({ ...editingMat, grade: e.target.value })} placeholder="مثال: توجيهي علمي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingMat.grade ?? ''} onChange={(e) => setEditingMat({ ...editingMat, grade: e.target.value })} placeholder="مثال: توجيهي علمي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">اسم الأستاذ</label>
-                  <input value={editingMat.teacherName} onChange={(e) => setEditingMat({ ...editingMat, teacherName: e.target.value })} placeholder="مثال: أ. محمد القدومي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm" />
+                  <input value={editingMat.teacherName ?? ''} onChange={(e) => setEditingMat({ ...editingMat, teacherName: e.target.value })} placeholder="مثال: أ. محمد القدومي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
                 </div>
                 <div className="col-span-2 flex items-center mt-2">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={editingMat.isActive} onChange={(e) => setEditingMat({ ...editingMat, isActive: e.target.checked })} className="w-4 h-4 rounded" />
+                    <input type="checkbox" checked={editingMat.isActive ?? true} onChange={(e) => setEditingMat({ ...editingMat, isActive: e.target.checked })} className="w-4 h-4 rounded" />
                     <span className="text-sm font-medium text-gray-700">نشط (يظهر للطلاب)</span>
                   </label>
                 </div>

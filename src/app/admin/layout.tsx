@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!session) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-100 flex text-gray-900" style={{ color: '#0f172a' }}>
       {/* Sidebar */}
       <div className={`fixed inset-y-0 right-0 z-50 w-64 bg-primary-900 text-white transform transition-transform md:translate-x-0 ${sidebarOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`}>
         <div className="flex flex-col h-full">

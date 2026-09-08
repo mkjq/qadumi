@@ -182,31 +182,31 @@ export default function CardsAdminPage() {
               </button>
             </div>
             
-            <form onSubmit={handleSave} className="p-6 space-y-4">
+            <form onSubmit={handleSave} className="p-6 space-y-4 text-gray-900">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">اسم الدورة/البطاقة</label>
-                  <input required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full px-4 py-2 border rounded-xl" placeholder="مثال: مكثف الفيزياء" />
+                  <input required type="text" value={formData.title ?? ''} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full px-4 py-2 border rounded-xl text-gray-900 bg-white" placeholder="مثال: مكثف الفيزياء" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">اسم الأستاذ</label>
-                  <input required type="text" value={formData.teacherName} onChange={e => setFormData({...formData, teacherName: e.target.value})} className="w-full px-4 py-2 border rounded-xl" />
+                  <input required type="text" value={formData.teacherName ?? ''} onChange={e => setFormData({...formData, teacherName: e.target.value})} className="w-full px-4 py-2 border rounded-xl text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">المادة</label>
-                  <input required type="text" value={formData.subject} onChange={e => setFormData({...formData, subject: e.target.value})} className="w-full px-4 py-2 border rounded-xl" />
+                  <input required type="text" value={formData.subject ?? ''} onChange={e => setFormData({...formData, subject: e.target.value})} className="w-full px-4 py-2 border rounded-xl text-gray-900 bg-white" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">الصف</label>
-                  <input required type="text" value={formData.grade} onChange={e => setFormData({...formData, grade: e.target.value})} className="w-full px-4 py-2 border rounded-xl" placeholder="توجيهي، أول ثانوي..." />
+                  <input required type="text" value={formData.grade ?? ''} onChange={e => setFormData({...formData, grade: e.target.value})} className="w-full px-4 py-2 border rounded-xl text-gray-900 bg-white" placeholder="توجيهي، أول ثانوي..." />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">السعر (بالدينار)</label>
-                  <input required type="number" step="0.5" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full px-4 py-2 border rounded-xl" />
+                  <input required type="number" step="0.5" value={formData.price ?? ''} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full px-4 py-2 border rounded-xl text-gray-900 bg-white" />
                 </div>
                 <div className="flex flex-col justify-center pt-6">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={formData.isActive} onChange={e => setFormData({...formData, isActive: e.target.checked})} className="w-5 h-5 text-primary-600 rounded" />
+                    <input type="checkbox" checked={formData.isActive ?? true} onChange={e => setFormData({...formData, isActive: e.target.checked})} className="w-5 h-5 text-primary-600 rounded" />
                     <span className="text-sm font-medium text-gray-700">البطاقة متاحة للبيع</span>
                   </label>
                 </div>

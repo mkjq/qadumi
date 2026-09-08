@@ -120,9 +120,9 @@ export default function AdminSettingsPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">{field.label}</label>
               <input
                 type={field.type}
-                value={settings[field.key]}
+                value={settings[field.key] ?? ''}
                 onChange={(e) => setSettings({ ...settings, [field.key]: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white"
                 dir={field.type === 'url' || field.type === 'tel' ? 'ltr' : 'rtl'}
               />
             </div>
@@ -133,10 +133,10 @@ export default function AdminSettingsPage() {
           <div key={field.key} className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-1.5">{field.label}</label>
             <textarea
-              value={settings[field.key]}
+              value={settings[field.key] ?? ''}
               onChange={(e) => setSettings({ ...settings, [field.key]: e.target.value })}
               rows={4}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm resize-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white resize-none"
             />
           </div>
         ))}
