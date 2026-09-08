@@ -13,8 +13,13 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getCenterInfo() {
-  const info = await prisma.centerInfo.findMany();
-  return Object.fromEntries(info.map((i) => [i.key, i.value]));
+  try {
+    const info = await prisma.centerInfo.findMany();
+    return Object.fromEntries(info.map((i) => [i.key, i.value]));
+  } catch (err) {
+    console.error('[Contact] Error loading centerInfo:', err);
+    return {};
+  }
 }
 
 export default async function ContactPage() {

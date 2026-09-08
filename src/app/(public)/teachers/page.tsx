@@ -13,10 +13,15 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function TeachersPage() {
-  const teachers = await prisma.teacher.findMany({
-    where: { isActive: true },
-    orderBy: { order: 'asc' },
-  });
+  let teachers: any[] = [];
+  try {
+    teachers = await prisma.teacher.findMany({
+      where: { isActive: true },
+      orderBy: { order: 'asc' },
+    });
+  } catch (err) {
+    console.error('[Teachers] Error loading teachers:', err);
+  }
 
   return (
     <div>
@@ -64,7 +69,7 @@ export default async function TeachersPage() {
                 <div className="p-6">
                   {/* Grades */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {teacher.grades.split(',').map((grade) => (
+                    {teacher.grades.split(',').map((grade: string) => (
                       <span
                         key={grade}
                         className="bg-primary-50 text-primary-700 text-xs px-3 py-1 rounded-full font-medium border border-primary-100"

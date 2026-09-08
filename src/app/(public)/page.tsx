@@ -11,13 +11,24 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function Home() {
-  const teachers = await prisma.teacher.findMany({
-    where: { isActive: true },
-    orderBy: { order: 'asc' },
-  });
+  let teachers: any[] = [];
+  let centerInfo: Record<string, string> = {};
 
-  const rawInfo = await prisma.centerInfo.findMany();
-  const centerInfo = rawInfo.reduce((acc, curr) => ({ ...acc, [curr.key]: curr.value }), {});
+  try {
+    teachers = await prisma.teacher.findMany({
+      where: { isActive: true },
+      orderBy: { order: 'asc' },
+    });
+  } catch (err) {
+    console.error('[Home] Error loading teachers:', err);
+  }
+
+  try {
+    const rawInfo = await prisma.centerInfo.findMany();
+    centerInfo = rawInfo.reduce((acc, curr) => ({ ...acc, [curr.key]: curr.value }), {});
+  } catch (err) {
+    console.error('[Home] Error loading centerInfo:', err);
+  }
 
   return (
     <>

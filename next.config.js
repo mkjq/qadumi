@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = 'file:./dev.db';
+  process.env.DATABASE_URL = 'file:./prisma/dev.db';
 }
 if (!process.env.NEXTAUTH_URL) {
   process.env.NEXTAUTH_URL = process.env.VERCEL_URL 
@@ -14,9 +14,13 @@ if (!process.env.NEXTAUTH_SECRET) {
 
 const nextConfig = {
   env: {
-    DATABASE_URL: process.env.DATABASE_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  },
+  experimental: {
+    outputFileTracingIncludes: {
+      '/**': ['./prisma/dev.db', './dev.db'],
+    },
   },
   images: {
     domains: ['localhost'],
