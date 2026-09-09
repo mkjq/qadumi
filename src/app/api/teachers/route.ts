@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const admin = searchParams.get('admin');
+    
     const teachers = await prisma.teacher.findMany({
-      where: { isActive: true },
+      where: admin ? undefined : { isActive: true },
       orderBy: { order: 'asc' },
     });
     return NextResponse.json(teachers);

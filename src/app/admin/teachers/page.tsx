@@ -49,7 +49,7 @@ export default function AdminTeachersPage() {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('/api/teachers');
+      const res = await fetch('/api/teachers?admin=true');
       const data = await res.json();
       setTeachers(data);
     } finally {
@@ -175,7 +175,14 @@ export default function AdminTeachersPage() {
                 )}
               </div>
               <div className="p-4">
-                <h3 className="font-bold text-gray-900">أ. {teacher.name}</h3>
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-bold text-gray-900">أ. {teacher.name}</h3>
+                  {!teacher.isActive && (
+                    <span className="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      غير نشط
+                    </span>
+                  )}
+                </div>
                 <p className="text-primary-600 text-sm">{teacher.subject}</p>
                 <p className="text-gray-500 text-xs mt-1">{teacher.grades}</p>
                 <div className="flex gap-2 mt-4">

@@ -11,7 +11,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem('app-theme-v2') as Theme;
-    if (saved) setTheme(saved);
+    if (saved) {
+      setTheme(saved);
+    } else {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'navy' : 'light');
+    }
   }, []);
 
   useEffect(() => {

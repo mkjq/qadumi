@@ -728,6 +728,72 @@ footer.footer-navy,
   color: #d97706 !important;
 }
 
+/* Light Theme: Hero & Glass Text Fixes */
+.theme-light .hero-bg .text-white,
+.theme-light .hero-bg h1 .text-white,
+.theme-light .glass .text-white,
+.theme-light .glass-dark .text-white {
+  color: #0f172a !important;
+}
+
+.theme-light .hero-bg .text-white\/90,
+.theme-light .hero-bg h1 .text-white\/90 {
+  color: #0f172a !important;
+}
+
+.theme-light .hero-bg .text-white\/60,
+.theme-light .hero-bg .text-white\/50,
+.theme-light .glass .text-white\/50,
+.theme-light .glass .text-white\/60 {
+  color: #475569 !important;
+}
+
+/* Light Theme: Opacity Text Fixes */
+.theme-light .text-white\/70,
+.theme-light .bg-\[\#0a0e1a\]:not(footer) .text-white\/70,
+.theme-light .section-bg-light .text-white\/70 {
+  color: #1e293b !important;
+}
+
+.theme-light .text-white\/10 {
+  color: #cbd5e1 !important;
+}
+
+/* Light Theme: Review Modal Form */
+.theme-light .review-modal input::placeholder,
+.theme-light .review-modal textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.theme-light .review-modal label[class*="bg-white/5"] {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+.theme-light .review-modal button.text-white\/50 {
+  color: #475569 !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.theme-light .review-modal button.text-white\/50:hover {
+  color: #0f172a !important;
+  background-color: #e2e8f0 !important;
+}
+
+/* Light Theme: Dividers & Progress Track */
+.theme-light .teacher-card div[class*="bg-white/5"].h-px,
+.theme-light .review-card .border-white\/10,
+.theme-light .suggestions-dropdown .border-white\/5 {
+  background-color: #e2e8f0 !important;
+  border-color: #e2e8f0 !important;
+}
+
+.theme-light .glass-dark div[class*="bg-white/5"].rounded-full {
+  background-color: #e2e8f0 !important;
+}
+
 /* ---------- TRUE DARK THEME ---------- */
 .theme-dark body { 
   background: #000000 !important; 

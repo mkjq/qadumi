@@ -198,7 +198,7 @@ export default function ContactSection({ centerInfo }: ContactSectionProps) {
         <div className="mt-8 sm:mt-12 rounded-2xl sm:rounded-3xl overflow-hidden border border-white/5 h-64 sm:h-72 relative z-10">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3382.8!2d35.8947!3d31.9773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca15be5a28ba9%3A0x0!2zMjDZiNmBINmF2LHZg9myINin2YTZgtin2K/ZiNmF2Ys!5e0!3m2!1sar!2sjo!4v1234567890"
-            width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+            width="100%" height="100%" style={{ border: 0 }}
             allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="موقع مركز القدومي"
           />
         </div>

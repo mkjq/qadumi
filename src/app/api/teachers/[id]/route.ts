@@ -12,8 +12,13 @@ export async function GET(request: Request, { params }: { params: { id: string }
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   const id = parseInt(params.id);
   const body = await request.json();
+  
+  // Sanitize input to prevent updating restricted fields like id or createdAt
+  const { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, order, isActive } = body;
+  const data = { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, order, isActive };
+
   try {
-    const teacher = await prisma.teacher.update({ where: { id }, data: body });
+    const teacher = await prisma.teacher.update({ where: { id }, data });
     revalidatePath('/', 'layout');
     return NextResponse.json(teacher);
   } catch {
