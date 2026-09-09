@@ -3,6 +3,8 @@ import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { Providers } from '@/components/Providers';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'مركز القدومي الثقافي',
   description: 'مركز القدومي الثقافي - من أعرق المراكز التعليمية في المنطقة. يقدم دروسًا من الصف الأول حتى التوجيهي بجميع المواد. تأسس عام 2000م.',
