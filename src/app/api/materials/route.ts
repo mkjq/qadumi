@@ -20,8 +20,10 @@ export async function POST(request: Request) {
       title: body.title,
       subject: body.subject,
       grade: body.grade,
+      branch: body.branch,
       teacherName: body.teacherName,
-      fileUrl: body.fileUrl,
+      googleDriveLink: body.googleDriveLink,
+      coverImage: body.coverImage,
       isActive: body.isActive ?? true,
     },
   });

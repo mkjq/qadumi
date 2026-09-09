@@ -75,15 +75,17 @@ model Review {
 }
 
 model Material {
-  id          Int      @id @default(autoincrement())
-  title       String
-  subject     String
-  grade       String
-  teacherName String
-  fileUrl     String
-  downloads   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  title           String
+  subject         String
+  grade           String
+  branch          String?  // e.g., 'أكاديمي', 'مهني / BTEC', 'مشترك'
+  teacherName     String
+  googleDriveLink String
+  coverImage      String?
+  downloads       Int      @default(0)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
 }
 
 model CourseCard {
