@@ -106,16 +106,16 @@ const ALL_STEPS: Record<string, Step[]> = {
 
 const DEFAULT_STEPS: Step[] = [
   {
-    target: '#tour-sidebar',
-    title: 'القائمة الجانبية',
-    content: 'استخدم هذه القائمة للتنقل بين كل أقسام لوحة التحكم (الأساتذة، الطلبات، البطاقات، وغيرها).',
-    placement: 'left',
+    target: '#tour-tutorial-btn',
+    title: 'تفعيل الشرح المخصص',
+    content: 'اضغط هنا في أي صفحة وسأقوم بشرح عناصرها لك خطوة بخطوة.',
+    placement: 'bottom',
     disableBeacon: true,
   },
   {
     target: '#tour-user-info',
-    title: 'تفعيل الشرح المخصص',
-    content: 'إذا انتقلت إلى أي صفحة (مثل صفحة الطلبات)، اضغط على هذا الزر وسأقوم بشرح عناصر تلك الصفحة لك بشكل مخصص!',
+    title: 'حسابك',
+    content: 'من هنا يمكنك معرفة الحساب الذي تستخدمه حالياً في لوحة التحكم.',
     placement: 'bottom',
     disableBeacon: true,
   }
@@ -220,8 +220,6 @@ export default function TutorialTour() {
     return () => window.removeEventListener('start-tour', handleStartTour);
   }, [pathname]);
 
-  if (!steps.length && !run) return null;
-
   return (
     <JoyrideNoSSR
       key={tourKey}
@@ -231,9 +229,10 @@ export default function TutorialTour() {
       run={run}
       scrollToFirstStep
       showSkipButton={false}
-      steps={steps}
+      steps={steps.length > 0 ? steps : DEFAULT_STEPS}
       tooltipComponent={CustomTooltip}
       disableOverlayClose={false}
+      disableBeacon={true}
       styles={{
         options: {
           zIndex: 10000,
