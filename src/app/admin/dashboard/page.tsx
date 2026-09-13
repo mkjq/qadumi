@@ -121,8 +121,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts */}
+      <div id="tour-dashboard-charts">
       {!loading && stats?.chartData && (
-        <div id="tour-dashboard-charts" className="grid lg:grid-cols-2 gap-6 mb-8">
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             <h2 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-blue-500" />
@@ -167,6 +168,7 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+      </div>
 
       {/* Quick Actions */}
       <div id="tour-dashboard-quick" className="grid md:grid-cols-3 gap-6 mb-8">

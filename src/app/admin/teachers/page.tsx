@@ -159,11 +159,12 @@ export default function AdminTeachersPage() {
         </button>
       </div>
 
-      {loading ? (
-        <div className="text-center py-20 text-gray-500">جاري التحميل...</div>
-      ) : (
-        <div id="tour-teachers-list" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teachers.map((teacher) => (
+      <div id="tour-teachers-list">
+        {loading ? (
+          <div className="text-center py-20 text-gray-500">جاري التحميل...</div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {teachers.map((teacher) => (
             <div key={teacher.id} className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="relative h-48 bg-gray-100">
                 {teacher.image ? (
@@ -198,6 +199,7 @@ export default function AdminTeachersPage() {
           ))}
         </div>
       )}
+      </div>
 
       {/* Main Add/Edit Form */}
       {showForm && (

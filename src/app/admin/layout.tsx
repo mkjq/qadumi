@@ -151,14 +151,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button 
               id="tour-tutorial-btn"
               onClick={startTutorial}
-              className="hidden md:flex items-center gap-2 text-primary-600 hover:text-primary-800 transition-colors bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg text-sm font-medium border border-primary-100"
+              className="flex items-center gap-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white hover:from-primary-700 hover:to-primary-600 transition-all px-4 py-2 rounded-xl text-sm font-bold shadow-md shadow-primary-500/20 active:scale-95"
             >
-              <HelpCircle className="w-4 h-4" />
-              <span>شرح لوحة التحكم</span>
+              <HelpCircle className="w-4 h-4 animate-pulse" />
+              <span>شرح هذه الصفحة</span>
             </button>
             <div id="tour-user-info" className="flex items-center gap-2 text-sm text-gray-600 border-r border-gray-200 pr-4 mr-2">
               <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">

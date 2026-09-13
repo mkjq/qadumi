@@ -116,7 +116,7 @@ export default function CardsAdminPage() {
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <div id="tour-cards-table" className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
         <div id="tour-cards-search" className="relative max-w-md mb-6">
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
@@ -131,7 +131,7 @@ export default function CardsAdminPage() {
         {loading ? (
           <div className="text-center py-10">جاري التحميل...</div>
         ) : (
-          <div id="tour-cards-table" className="overflow-x-auto">
+          <div className="overflow-x-auto">
             <table className="w-full text-right">
               <thead>
                 <tr className="border-b border-gray-100 text-gray-500 text-sm">
