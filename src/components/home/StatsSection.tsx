@@ -2,22 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Users, Award, BookOpen, Clock, TrendingUp, MapPin } from 'lucide-react';
 
-function useCountUp(target: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let startTime: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(ease * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, duration, start]);
-  return count;
-}
+import CountUp from '@/components/ui/CountUp';
 
 interface Stat {
   icon: any; value: number; suffix: string; label: string;
@@ -79,9 +64,10 @@ export default function StatsSection({ centerInfo }: StatsSectionProps) {
 }
 
 function StatCard({ stat, index, animate }: { stat: Stat; index: number; animate: boolean }) {
-  const count = useCountUp(stat.value, 2000 + index * 200, animate);
-  const formatted = stat.value >= 1000 ? (count / 1000).toFixed(count >= 1000 ? 0 : 1) + 'K' : String(count);
-
+  // If the value is >= 1000, we might want to animate up to 50K or just 50,000. 
+  // Since the user has 50000, let's animate to 50000 and the CountUp component will format it as 50,000.
+  // We can drop the "K" suffix and let the separator do the work.
+  // Wait, if they had "+50K" before, "50,000+" is better anyway.
   return (
     <div className="card-premium rounded-2xl p-5 sm:p-6 group flex items-start gap-4 sm:block"
       style={{ transitionDelay: `${index * 80}ms`, opacity: animate ? 1 : 0, transform: animate ? 'none' : 'translateY(20px)', transition: 'all 0.6s cubic-bezier(0.4,0,0.2,1)' }}>
@@ -89,8 +75,17 @@ function StatCard({ stat, index, animate }: { stat: Stat; index: number; animate
         <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.color}`} />
       </div>
       <div>
-        <div className={`stat-number ${stat.color} mb-1 leading-none`}>
-          {formatted}{stat.suffix}
+        <div className={`stat-number ${stat.color} mb-1 leading-none font-bold text-3xl sm:text-4xl`}>
+          <CountUp
+            to={stat.value}
+            from={0}
+            direction="up"
+            duration={2}
+            className="count-up-text"
+            separator=","
+            startWhen={animate}
+            suffix={stat.suffix}
+          />
         </div>
         <div className="text-white font-bold text-sm sm:text-base mb-1">{stat.label}</div>
         <div className="text-white/40 text-xs sm:text-sm">{stat.description}</div>

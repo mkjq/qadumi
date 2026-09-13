@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, MapPin, ChevronLeft, Star, GraduationCap, Users } from 'lucide-react';
 import DynamicLogo from '../DynamicLogo';
+import CountUp from '@/components/ui/CountUp';
 import { whatsappLink } from '@/lib/utils';
 
 interface HeroSectionProps { centerInfo: Record<string, string>; }
@@ -35,7 +36,9 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             </div>
             <div>
               <p className="text-white font-bold text-sm">نسبة نجاح</p>
-              <p className="text-amber-400 font-black text-lg leading-none">99%</p>
+              <p className="text-amber-400 font-black text-lg leading-none">
+                <CountUp to={99} suffix="%" duration={3} />
+              </p>
             </div>
           </div>
         </div>
@@ -49,7 +52,9 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             </div>
             <div>
               <p className="text-white font-bold text-sm">خريجون</p>
-              <p className="text-blue-400 font-black text-lg leading-none">+50K</p>
+              <p className="text-blue-400 font-black text-lg leading-none">
+                <CountUp to={50000} prefix="+" separator="," duration={4} />
+              </p>
             </div>
           </div>
         </div>
@@ -63,7 +68,9 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             </div>
             <div>
               <p className="text-white font-bold text-sm">خبرة</p>
-              <p className="text-green-400 font-black text-lg leading-none">25+ سنة</p>
+              <p className="text-green-400 font-black text-lg leading-none">
+                <CountUp to={25} suffix="+ سنة" duration={3} />
+              </p>
             </div>
           </div>
         </div>
