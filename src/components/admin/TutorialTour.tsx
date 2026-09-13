@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Joyride, { CallBackProps, STATUS, Step, TooltipRenderProps } from 'react-joyride';
+import type { CallBackProps, Step, TooltipRenderProps } from 'react-joyride';
+import { STATUS } from 'react-joyride';
+import dynamic from 'next/dynamic';
+
+const JoyrideNoSSR = dynamic(() => import('react-joyride'), { ssr: false });
 
 // Define the steps for each page contextually
 const ALL_STEPS: Record<string, Step[]> = {
@@ -152,7 +156,7 @@ export default function TutorialTour() {
   if (!steps.length && !run) return null;
 
   return (
-    <Joyride
+    <JoyrideNoSSR
       callback={handleJoyrideCallback}
       continuous
       hideCloseButton
