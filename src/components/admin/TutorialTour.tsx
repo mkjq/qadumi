@@ -58,7 +58,59 @@ const ALL_STEPS: Record<string, Step[]> = {
       placement: 'top',
     }
   ],
+  '/admin/orders': [
+    {
+      target: '#tour-orders-search',
+      title: 'البحث المتقدم',
+      content: 'يمكنك البحث عن أي طلب بسهولة باستخدام رقم هاتف الطالب، اسمه، أو حتى اسم البطاقة المطلوبة.',
+      placement: 'bottom',
+      disableBeacon: true,
+    },
+    {
+      target: '#tour-orders-table',
+      title: 'جدول الطلبات',
+      content: 'هنا تجد كافة الطلبات. يمكنك مراجعة الإيصالات، ومن ثم الموافقة على الطلب ليتم تفعيله أو رفضه.',
+      placement: 'top',
+    }
+  ],
+  '/admin/cards': [
+    {
+      target: '#tour-add-card',
+      title: 'إضافة بطاقة جديدة',
+      content: 'من هنا يمكنك طرح بطاقة جديدة للبيع، وتحديد سعرها واسم الأستاذ الخاص بها بكل سهولة.',
+      placement: 'left',
+      disableBeacon: true,
+    },
+    {
+      target: '#tour-cards-search',
+      title: 'البحث السريع',
+      content: 'ابحث هنا لتجد أي بطاقة مسجلة في المتجر بشكل فوري وسريع.',
+      placement: 'bottom',
+    },
+    {
+      target: '#tour-cards-table',
+      title: 'قائمة البطاقات',
+      content: 'تستطيع تعديل سعر البطاقة، تعطيل بيعها، أو إيقافها تماماً من خلال هذه القائمة.',
+      placement: 'top',
+    }
+  ],
 };
+
+const DEFAULT_STEPS: Step[] = [
+  {
+    target: '#tour-sidebar',
+    title: 'القائمة الجانبية',
+    content: 'استخدم هذه القائمة للتنقل بين كل أقسام لوحة التحكم (الأساتذة، الطلبات، البطاقات، وغيرها).',
+    placement: 'left',
+    disableBeacon: true,
+  },
+  {
+    target: '#tour-user-info',
+    title: 'تفعيل الشرح المخصص',
+    content: 'إذا انتقلت إلى أي صفحة (مثل صفحة الطلبات)، اضغط على هذا الزر وسأقوم بشرح عناصر تلك الصفحة لك بشكل مخصص!',
+    placement: 'bottom',
+  }
+];
 
 const CustomTooltip = ({
   continuous,
@@ -139,12 +191,12 @@ export default function TutorialTour() {
   useEffect(() => {
     const handleStartTour = () => {
       const pageSteps = ALL_STEPS[pathname];
-      if (pageSteps) {
+      if (pageSteps && pageSteps.length > 0) {
         setSteps(pageSteps);
         setRun(true);
       } else {
-        // If they click tutorial on a page with no specific steps, show a default tour for the layout
-        setSteps(ALL_STEPS['/admin/dashboard']); 
+        // If they click tutorial on a page with no specific steps, show a default tour
+        setSteps(DEFAULT_STEPS); 
         setRun(true);
       }
     };

@@ -107,6 +107,7 @@ export default function CardsAdminPage() {
           <p className="text-gray-500">إدارة بطاقات الدورات المعروضة للبيع</p>
         </div>
         <button
+          id="tour-add-card"
           onClick={() => openModal()}
           className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-xl hover:bg-primary-700 transition-colors"
         >
@@ -116,7 +117,7 @@ export default function CardsAdminPage() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <div className="relative max-w-md mb-6">
+        <div id="tour-cards-search" className="relative max-w-md mb-6">
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
             type="text"
@@ -130,7 +131,7 @@ export default function CardsAdminPage() {
         {loading ? (
           <div className="text-center py-10">جاري التحميل...</div>
         ) : (
-          <div className="overflow-x-auto">
+          <div id="tour-cards-table" className="overflow-x-auto">
             <table className="w-full text-right">
               <thead>
                 <tr className="border-b border-gray-100 text-gray-500 text-sm">
