@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = 'file:./prisma/dev.db';
-}
+// DATABASE_URL is now expected to be provided by the environment (PostgreSQL)
 if (!process.env.NEXTAUTH_URL) {
   process.env.NEXTAUTH_URL = process.env.VERCEL_URL 
     ? `https://${process.env.VERCEL_URL}` 
@@ -18,9 +16,7 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
   experimental: {
-    outputFileTracingIncludes: {
-      '/**': ['./prisma/dev.db', './dev.db'],
-    },
+    // outputFileTracingIncludes removed for PostgreSQL migration
   },
   images: {
     domains: ['localhost'],
