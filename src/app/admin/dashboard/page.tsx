@@ -73,7 +73,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div id="tour-dashboard-stats" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -122,7 +122,7 @@ export default function DashboardPage() {
 
       {/* Charts */}
       {!loading && stats?.chartData && (
-        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+        <div id="tour-dashboard-charts" className="grid lg:grid-cols-2 gap-6 mb-8">
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             <h2 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-blue-500" />
@@ -169,7 +169,7 @@ export default function DashboardPage() {
       )}
 
       {/* Quick Actions */}
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
+      <div id="tour-dashboard-quick" className="grid md:grid-cols-3 gap-6 mb-8">
         {quickLinks.map((item) => (
           <Link
             key={item.href}

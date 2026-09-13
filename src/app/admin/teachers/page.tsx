@@ -153,7 +153,7 @@ export default function AdminTeachersPage() {
           <h1 className="text-2xl font-bold text-gray-900">إدارة الأساتذة</h1>
           <p className="text-gray-500 text-sm mt-1">{teachers.length} أستاذ مسجل</p>
         </div>
-        <button onClick={openAdd} className="btn-primary flex items-center gap-2">
+        <button id="tour-add-teacher" onClick={openAdd} className="btn-primary flex items-center gap-2">
           <Plus className="w-5 h-5" />
           <span>إضافة أستاذ</span>
         </button>
@@ -162,7 +162,7 @@ export default function AdminTeachersPage() {
       {loading ? (
         <div className="text-center py-20 text-gray-500">جاري التحميل...</div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="tour-teachers-list" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {teachers.map((teacher) => (
             <div key={teacher.id} className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="relative h-48 bg-gray-100">
