@@ -23,24 +23,28 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'إحصائيات المركز',
       content: 'نظرة سريعة على أهم الأرقام: عدد الأساتذة، الرسائل، والمبيعات الإجمالية.',
       placement: 'bottom',
+      disableBeacon: true,
     },
     {
       target: '#tour-dashboard-charts',
       title: 'الرسوم البيانية للمبيعات',
       content: 'راقب أداء مبيعاتك اليومية وعدد الطلبات الواردة خلال الأيام السبعة الماضية لتتخذ قرارات أفضل.',
       placement: 'top',
+      disableBeacon: true,
     },
     {
       target: '#tour-dashboard-quick',
       title: 'الوصول السريع',
       content: 'اختصارات مباشرة لأهم أقسام الإدارة لتوفر وقتك وجهدك.',
       placement: 'top',
+      disableBeacon: true,
     },
     {
       target: '#tour-user-info',
       title: 'معلومات حسابك',
       content: 'هنا يظهر حسابك الحالي، وبجانبه زر إعادة هذا الشرح في حال رغبت بتذكره لاحقاً.',
       placement: 'bottom',
+      disableBeacon: true,
     }
   ],
   '/admin/teachers': [
@@ -56,6 +60,7 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'قائمة الأساتذة',
       content: 'هنا يظهر جميع الأساتذة المسجلين. يمكنك تعديل بياناتهم، حذفهم، أو التحكم بظهورهم للطلاب بكل سهولة.',
       placement: 'top',
+      disableBeacon: true,
     }
   ],
   '/admin/orders': [
@@ -71,6 +76,7 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'جدول الطلبات',
       content: 'هنا تجد كافة الطلبات. يمكنك مراجعة الإيصالات، ومن ثم الموافقة على الطلب ليتم تفعيله أو رفضه.',
       placement: 'top',
+      disableBeacon: true,
     }
   ],
   '/admin/cards': [
@@ -86,12 +92,14 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'البحث السريع',
       content: 'ابحث هنا لتجد أي بطاقة مسجلة في المتجر بشكل فوري وسريع.',
       placement: 'bottom',
+      disableBeacon: true,
     },
     {
       target: '#tour-cards-table',
       title: 'قائمة البطاقات',
       content: 'تستطيع تعديل سعر البطاقة، تعطيل بيعها، أو إيقافها تماماً من خلال هذه القائمة.',
       placement: 'top',
+      disableBeacon: true,
     }
   ],
 };
@@ -109,6 +117,7 @@ const DEFAULT_STEPS: Step[] = [
     title: 'تفعيل الشرح المخصص',
     content: 'إذا انتقلت إلى أي صفحة (مثل صفحة الطلبات)، اضغط على هذا الزر وسأقوم بشرح عناصر تلك الصفحة لك بشكل مخصص!',
     placement: 'bottom',
+    disableBeacon: true,
   }
 ];
 
