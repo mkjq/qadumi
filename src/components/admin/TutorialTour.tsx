@@ -6,7 +6,7 @@ import type { CallBackProps, Step, TooltipRenderProps } from 'react-joyride';
 import { STATUS } from 'react-joyride';
 import dynamic from 'next/dynamic';
 
-const JoyrideNoSSR = dynamic(() => import('react-joyride').then((mod) => mod.default), { ssr: false });
+const JoyrideNoSSR = dynamic(() => import('./JoyrideWrapper'), { ssr: false });
 
 // Define the steps for each page contextually
 const ALL_STEPS: Record<string, Step[]> = {
