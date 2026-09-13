@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description: 'مركز القدومي الثقافي - من أعرق المراكز التعليمية في المنطقة. يقدم دروسًا من الصف الأول حتى التوجيهي بجميع المواد. تأسس عام 2000م.',
   keywords: 'مركز القدومي, مركز دراسي, دروس خصوصية, عمان, الأردن, تعليم',
   icons: {
-    icon: '/logo.jpeg',
-    apple: '/logo.jpeg',
+    icon: '/images/logos/logo-original-notext-white.jpg',
+    apple: '/images/logos/logo-original-notext-white.jpg',
   },
   openGraph: {
     title: 'مركز القدومي الثقافي',

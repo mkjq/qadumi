@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Phone } from 'lucide-react';
 import ThemeSwitcher from './ThemeSwitcher';
+import DynamicLogo from './DynamicLogo';
 
 const navLinks = [
   { href: '/', label: 'الرئيسية' },
@@ -36,7 +37,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden ring-2 ring-amber-500/30 group-hover:ring-amber-400/60 transition-all duration-300 group-hover:scale-105">
-            <Image src="/logo.jpeg" alt="مركز القدومي" fill className="object-contain" priority />
+            <DynamicLogo withText={false} fill className="object-contain" priority />
           </div>
           <div className="hidden sm:block">
             <p className="text-white font-bold text-[15px] leading-tight title-text">مركز القدومي الثقافي</p>

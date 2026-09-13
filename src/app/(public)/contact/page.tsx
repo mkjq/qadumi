@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db';
 import Image from 'next/image';
+import DynamicLogo from '@/components/DynamicLogo';
 import ContactSection from '@/components/home/ContactSection';
 import type { Metadata } from 'next';
 import { Phone } from 'lucide-react';
@@ -34,7 +35,7 @@ export default async function ContactPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 bg-white/10 rounded-2xl p-2 backdrop-blur border border-white/20 shadow-xl">
-            <Image src="/logo.jpeg" alt="مركز القدومي" fill className="object-contain rounded-xl" />
+            <DynamicLogo withText={false} fill className="object-contain rounded-xl" />
           </div>
           <div className="section-label mx-auto mb-4 w-fit">خدمة واستفسارات</div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4">

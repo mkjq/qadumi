@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, MapPin, ChevronLeft, Star, GraduationCap, Users } from 'lucide-react';
+import DynamicLogo from '../DynamicLogo';
 import { whatsappLink } from '@/lib/utils';
 
 interface HeroSectionProps { centerInfo: Record<string, string>; }
@@ -78,7 +79,7 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             {/* Logo on mobile only (replaces the desktop floating logo) */}
             <div className="lg:hidden mb-6">
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/10 rounded-2xl p-2 backdrop-blur border border-white/20 mx-auto">
-                <Image src="/logo.jpeg" alt="مركز القدومي الثقافي" fill className="object-contain rounded-xl" priority />
+                <DynamicLogo withText={false} fill className="object-contain rounded-xl" priority />
               </div>
             </div>
 
@@ -144,7 +145,7 @@ export default function HeroSection({ centerInfo }: HeroSectionProps) {
             <div className="relative gradient-border transform transition-transform hover:scale-105">
               <div className="glass rounded-3xl p-6 xl:p-8 flex flex-col items-center gap-6 w-64 xl:w-72">
                 <div className="relative w-32 h-32 xl:w-36 xl:h-36 bg-white/5 rounded-2xl p-3">
-                  <Image src="/logo.jpeg" alt="مركز القدومي" fill className="object-contain rounded-xl" />
+                  <DynamicLogo withText={false} fill className="object-contain rounded-xl" />
                 </div>
                 <div className="text-center">
                   <h3 className="text-white font-black text-lg xl:text-xl">مركز القدومي</h3>

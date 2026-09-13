@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Lock, User, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
+import DynamicLogo from '@/components/DynamicLogo';
 
 export default function AdminLoginPage() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -38,10 +39,9 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="relative w-24 h-24 mx-auto mb-4 bg-white rounded-2xl p-2 shadow-lg">
-            <Image
-              src="/logo.jpeg"
-              alt="مركز القدومي الثقافي"
+          <div className="relative w-32 h-32 mx-auto mb-4 bg-white rounded-2xl p-2 shadow-lg">
+            <DynamicLogo
+              withText={false}
               fill
               className="object-contain rounded-xl"
             />

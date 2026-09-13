@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, MapPin, Clock, Facebook, ArrowUpRight } from 'lucide-react';
+import DynamicLogo from './DynamicLogo';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -36,7 +37,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-5 group">
               <div className="relative w-14 h-14 rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-amber-400/30 transition-all">
-                <Image src="/logo.jpeg" alt="مركز القدومي" fill className="object-contain" />
+                <DynamicLogo withText={false} fill className="object-contain" />
               </div>
               <div>
                 <p className="text-white font-black text-base">مركز القدومي الثقافي</p>

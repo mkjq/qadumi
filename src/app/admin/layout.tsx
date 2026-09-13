@@ -23,6 +23,7 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import TutorialTour, { startTutorial } from '@/components/admin/TutorialTour';
+import DynamicLogo from '@/components/DynamicLogo';
 
 const navItems = [
   { href: '/admin/dashboard', label: 'لوحة القيادة', icon: LayoutDashboard },
@@ -64,9 +65,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="p-5 border-b border-primary-700">
             <div className="flex items-center gap-3">
               <div className="relative w-12 h-12 flex-shrink-0 bg-white rounded-xl p-1">
-                <Image
-                  src="/logo.jpeg"
-                  alt="مركز القدومي"
+                <DynamicLogo
+                  withText={false}
                   fill
                   className="object-contain rounded-lg"
                 />
