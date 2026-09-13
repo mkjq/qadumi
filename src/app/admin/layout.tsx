@@ -20,7 +20,9 @@ import {
   CreditCard,
   ShoppingCart,
   UserCog,
+  HelpCircle,
 } from 'lucide-react';
+import TutorialTour, { startTutorial } from '@/components/admin/TutorialTour';
 
 const navItems = [
   { href: '/admin/dashboard', label: 'لوحة القيادة', icon: LayoutDashboard },
@@ -77,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-1">
+          <nav id="tour-sidebar" className="flex-1 p-4 space-y-1">
             {navItems.filter(item => {
               const userRole = (session.user as any)?.role;
               const userPerms = (session.user as any)?.permissions || '';
@@ -113,6 +115,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="p-4 border-t border-primary-700">
             <div className="text-white/60 text-xs mb-3 px-2">مسجل كـ: {session.user?.name}</div>
             <Link
+              id="tour-view-site"
               href="/"
               target="_blank"
               className="flex items-center gap-3 px-4 py-2 rounded-xl text-white/70 hover:bg-white/10 hover:text-white transition-all text-sm mb-1"
@@ -121,6 +124,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <span>عرض الموقع</span>
             </Link>
             <button
+              id="tour-logout"
               onClick={() => signOut({ callbackUrl: '/admin/login' })}
               className="w-full flex items-center gap-3 px-4 py-2 rounded-xl text-red-400 hover:bg-red-900/30 hover:text-red-300 transition-all text-sm"
             >
@@ -146,13 +150,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-              <span className="text-primary-700 font-bold text-xs">
-                {session.user?.name?.[0]?.toUpperCase()}
-              </span>
+          
+          <div className="flex items-center gap-4">
+            <button 
+              id="tour-tutorial-btn"
+              onClick={startTutorial}
+              className="hidden md:flex items-center gap-2 text-primary-600 hover:text-primary-800 transition-colors bg-primary-50 hover:bg-primary-100 px-3 py-1.5 rounded-lg text-sm font-medium border border-primary-100"
+            >
+              <HelpCircle className="w-4 h-4" />
+              <span>شرح لوحة التحكم</span>
+            </button>
+            <div id="tour-user-info" className="flex items-center gap-2 text-sm text-gray-600 border-r border-gray-200 pr-4 mr-2">
+              <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                <span className="text-primary-700 font-bold text-xs">
+                  {session.user?.name?.[0]?.toUpperCase()}
+                </span>
+              </div>
+              <span className="hidden sm:block font-medium">{session.user?.name}</span>
             </div>
-            <span className="hidden sm:block">{session.user?.name}</span>
           </div>
         </div>
 
@@ -160,6 +175,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {children}
         </main>
       </div>
+      <TutorialTour />
     </div>
   );
 }

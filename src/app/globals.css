@@ -839,3 +839,4 @@ footer.footer-navy,
   background: #0a0a0a !important;
   border-color: rgba(255, 255, 255, 0.06) !important;
 }
+.driver-popover { direction: rtl; font-family: inherit; }

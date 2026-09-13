@@ -2,30 +2,36 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Users, MessageSquare, Settings, TrendingUp, GraduationCap, Clock, Phone } from 'lucide-react';
+import { Users, MessageSquare, Settings, TrendingUp, GraduationCap, Clock, Phone, ShoppingCart, DollarSign } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
+
+interface ChartData {
+  date: string;
+  orders: number;
+  revenue: number;
+}
 
 interface Stats {
   teachersCount: number;
   messagesCount: number;
   unreadMessages: number;
+  ordersCount: number;
+  totalRevenue: number;
+  chartData: ChartData[];
 }
 
 export default function DashboardPage() {
-  const [stats, setStats] = useState<Stats>({ teachersCount: 0, messagesCount: 0, unreadMessages: 0 });
+  const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/teachers').then((r) => r.json()),
-      fetch('/api/messages').then((r) => r.json()),
-    ]).then(([teachers, messages]) => {
-      setStats({
-        teachersCount: teachers.length,
-        messagesCount: messages.length,
-        unreadMessages: messages.filter((m: any) => !m.isRead).length,
-      });
-      setLoading(false);
-    }).catch(() => setLoading(false));
+    fetch('/api/stats')
+      .then((r) => r.json())
+      .then((data) => {
+        setStats(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   const quickLinks = [
@@ -35,7 +41,7 @@ export default function DashboardPage() {
       title: 'إدارة الأساتذة',
       desc: 'إضافة، تعديل، حذف الأساتذة',
       color: 'bg-blue-500',
-      value: loading ? '...' : stats.teachersCount,
+      value: loading ? '...' : stats?.teachersCount,
       label: 'أستاذ',
     },
     {
@@ -44,64 +50,123 @@ export default function DashboardPage() {
       title: 'الرسائل الواردة',
       desc: 'رسائل التواصل من الطلاب',
       color: 'bg-green-500',
-      value: loading ? '...' : stats.messagesCount,
+      value: loading ? '...' : stats?.messagesCount,
       label: 'رسالة',
-      badge: stats.unreadMessages > 0 ? stats.unreadMessages : undefined,
+      badge: stats?.unreadMessages ? stats.unreadMessages : undefined,
     },
     {
-      href: '/admin/settings',
-      icon: Settings,
-      title: 'إعدادات المركز',
-      desc: 'معلومات الاتصال وأوقات الدوام',
+      href: '/admin/orders',
+      icon: ShoppingCart,
+      title: 'الطلبات والمبيعات',
+      desc: 'إدارة طلبات البطاقات',
       color: 'bg-purple-500',
-      value: null,
-      label: '',
+      value: loading ? '...' : stats?.ordersCount,
+      label: 'طلب',
     },
   ];
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">لوحة التحكم</h1>
-        <p className="text-gray-500 mt-1">مرحبًا بك في لوحة إدارة مركز القدومي الثقافي</p>
+        <h1 className="text-2xl font-bold text-gray-900">لوحة القيادة والمبيعات</h1>
+        <p className="text-gray-500 mt-1">نظرة عامة على أداء المركز والإحصائيات الحديثة</p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
               <Users className="w-6 h-6 text-blue-600" />
             </div>
             <div>
-              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : stats.teachersCount}</div>
+              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : stats?.teachersCount}</div>
               <div className="text-gray-500 text-sm">أستاذ نشط</div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
               <MessageSquare className="w-6 h-6 text-green-600" />
             </div>
             <div>
-              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : stats.unreadMessages}</div>
+              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : stats?.unreadMessages}</div>
               <div className="text-gray-500 text-sm">رسائل غير مقروءة</div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-gold-600" />
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+              <ShoppingCart className="w-6 h-6 text-purple-600" />
             </div>
             <div>
-              <div className="text-2xl font-bold text-gray-900">99%</div>
-              <div className="text-gray-500 text-sm">نسبة النجاح</div>
+              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : stats?.ordersCount}</div>
+              <div className="text-gray-500 text-sm">إجمالي الطلبات</div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center">
+              <DollarSign className="w-6 h-6 text-gold-600" />
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-gray-900">{loading ? '...' : `${stats?.totalRevenue} د.أ`}</div>
+              <div className="text-gray-500 text-sm">إجمالي المبيعات المؤكدة</div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Charts */}
+      {!loading && stats?.chartData && (
+        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <h2 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-blue-500" />
+              المبيعات خلال آخر 7 أيام
+            </h2>
+            <div className="h-72" dir="ltr">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={stats.chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                  <XAxis dataKey="date" tick={{fontSize: 12}} tickMargin={10} stroke="#9ca3af" />
+                  <YAxis tick={{fontSize: 12}} stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  />
+                  <Legend />
+                  <Line type="monotone" name="الأرباح (د.أ)" dataKey="revenue" stroke="#3b82f6" strokeWidth={3} activeDot={{ r: 8 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <h2 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5 text-purple-500" />
+              الطلبات خلال آخر 7 أيام
+            </h2>
+            <div className="h-72" dir="ltr">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={stats.chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                  <XAxis dataKey="date" tick={{fontSize: 12}} tickMargin={10} stroke="#9ca3af" />
+                  <YAxis tick={{fontSize: 12}} stroke="#9ca3af" allowDecimals={false} />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                    cursor={{fill: '#f3f4f6'}}
+                  />
+                  <Legend />
+                  <Bar name="عدد الطلبات" dataKey="orders" fill="#a855f7" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quick Actions */}
       <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -109,7 +174,7 @@ export default function DashboardPage() {
           <Link
             key={item.href}
             href={item.href}
-            className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group"
+            className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-primary-200 hover:shadow-md transition-all group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
@@ -130,33 +195,6 @@ export default function DashboardPage() {
             )}
           </Link>
         ))}
-      </div>
-
-      {/* Center Info Quick View */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
-        <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <GraduationCap className="w-5 h-5 text-primary-600" />
-          معلومات المركز السريعة
-        </h2>
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="flex items-center gap-3 text-sm">
-            <Clock className="w-4 h-4 text-gray-400" />
-            <span className="text-gray-600">2:00 ظهرًا - 9:00 مساءً</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <Phone className="w-4 h-4 text-gray-400" />
-            <span className="text-gray-600 ltr">0791586891</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <Users className="w-4 h-4 text-gray-400" />
-            <span className="text-gray-600">+50,000 خريج منذ 2000م</span>
-          </div>
-        </div>
-        <div className="mt-4">
-          <Link href="/admin/settings" className="text-primary-600 hover:text-primary-800 text-sm font-medium">
-            تعديل المعلومات ←
-          </Link>
-        </div>
       </div>
     </div>
   );
