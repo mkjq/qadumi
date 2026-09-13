@@ -155,6 +155,7 @@ export default function TutorialTour() {
   const pathname = usePathname();
   const [steps, setSteps] = useState<Step[]>([]);
   const [run, setRun] = useState(false);
+  const [tourKey, setTourKey] = useState(0);
 
   useEffect(() => {
     // Check if there are steps for the current page
@@ -167,7 +168,10 @@ export default function TutorialTour() {
       if (!hasSeen) {
         setSteps(pageSteps);
         // Delay to ensure elements are mounted before starting tour
-        const timer = setTimeout(() => setRun(true), 800);
+        const timer = setTimeout(() => {
+          setTourKey(prev => prev + 1);
+          setRun(true);
+        }, 800);
         return () => clearTimeout(timer);
       }
     } else {
@@ -193,10 +197,12 @@ export default function TutorialTour() {
       const pageSteps = ALL_STEPS[pathname];
       if (pageSteps && pageSteps.length > 0) {
         setSteps(pageSteps);
+        setTourKey(prev => prev + 1);
         setRun(true);
       } else {
         // If they click tutorial on a page with no specific steps, show a default tour
         setSteps(DEFAULT_STEPS); 
+        setTourKey(prev => prev + 1);
         setRun(true);
       }
     };
@@ -209,6 +215,7 @@ export default function TutorialTour() {
 
   return (
     <JoyrideNoSSR
+      key={tourKey}
       callback={handleJoyrideCallback}
       continuous
       hideCloseButton
