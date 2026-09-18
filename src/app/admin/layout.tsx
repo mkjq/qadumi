@@ -34,6 +34,9 @@ const navItems = [
   { href: '/admin/messages', label: 'الرسائل', icon: MessageSquare, perm: 'MESSAGES' },
   { href: '/admin/reviews', label: 'التقييمات', icon: Star, perm: 'REVIEWS' },
   { href: '/admin/settings', label: 'إعدادات المركز', icon: Settings, perm: 'SETTINGS' },
+  { href: '/admin/quizzes', label: 'بنك الامتحانات', icon: FileText, perm: 'QUIZZES' },
+  { href: '/admin/rewards', label: 'المكافآت والجوائز', icon: Star, perm: 'REWARDS' },
+  { href: '/admin/students', label: 'إدارة الطلاب والنقاط', icon: Users, perm: 'STUDENTS' },
   { href: '/admin/users', label: 'المشرفين والصلاحيات', icon: UserCog, perm: 'USERS', superAdminOnly: true },
 ];
 

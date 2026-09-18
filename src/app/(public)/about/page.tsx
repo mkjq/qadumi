@@ -1,12 +1,11 @@
 import { prisma } from '@/lib/db';
-import Image from 'next/image';
 import DynamicLogo from '@/components/DynamicLogo';
-import { CheckCircle2, GraduationCap, Users, Award, MapPin, Target, Heart, Lightbulb } from 'lucide-react';
+import { CheckCircle2, GraduationCap, Users, Award, MapPin, Target, Heart, Lightbulb, Sparkles, ChevronLeft, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'من نحن | مركز القدومي الثقافي',
+  title: 'عن المركز | مركز القدومي الثقافي',
   description: 'تعرف على مركز القدومي الثقافي — من أعرق المراكز التعليمية في الأردن منذ 2000م',
 };
 
@@ -24,131 +23,134 @@ async function getCenterInfo() {
 }
 
 const values = [
-  { icon: Target, title: 'رسالتنا', desc: 'تزويد الطلاب بالعلم والمعرفة اللازمة لتحقيق أهدافهم الأكاديمية وتنمية شخصياتهم.' },
-  { icon: Heart, title: 'قيمنا', desc: 'الإخلاص والتفاني في العمل، والحرص الشديد على مستوى ونجاح كل طالب.' },
-  { icon: Lightbulb, title: 'منهجنا', desc: 'أساليب شرح مبتكرة وسهلة مع مواد تعليمية مصممة بشكل احترافي لضمان الفهم الكامل.' },
+  { icon: Target, title: 'رسالتنا التعليمية', desc: 'تزويد الطلاب بالمعرفة العميقة والمهارات اللازمة لتحقيق التميز في امتحانات التوجيهي وكافة المراحل.' },
+  { icon: Heart, title: 'قيمنا ومبادئنا', desc: 'الإخلاص والتفاني، والمتابعة الفردية الحثيثة لكل طالب وطالبة لنصنع منهم قصص نجاح حقيقية.' },
+  { icon: Lightbulb, title: 'منهجنا وأسلوبنا', desc: 'شروحات مبسطة وشاملة، امتحانات دورية، ودوسيات صممت بأعلى معايير الدقة لتثبيت الفهم.' },
 ];
 
 const milestones = [
-  { year: '2000', text: 'تأسيس المركز في ضاحية الأمير حسن' },
-  { year: '2005', text: 'توسع المركز وإضافة مواد وأساتذة جدد' },
-  { year: '2010', text: 'تخريج أول 10,000 طالب وطالبة' },
-  { year: '2015', text: 'الانتشار في عدة مناطق محيطة' },
-  { year: '2020', text: 'تخريج 40,000 طالب وطالبة' },
-  { year: '2025', text: 'أكثر من 50,000 خريج وخريجة الحمد لله' },
+  { year: '2000', text: 'تأسيس مركز القدومي في ضاحية الأمير حسن' },
+  { year: '2005', text: 'توسعة المركز واستقطاب نخبة من كبار معلمي المملكة' },
+  { year: '2010', text: 'تخريج أول 10,000 طالب وطالبة بمعدلات تفوق' },
+  { year: '2015', text: 'انتشار اسم المركز في العاصمة عمان وضواحيها' },
+  { year: '2020', text: 'تطوير أساليب التدريس وتقديم أنظمة امتحانات متقدمة' },
+  { year: '2025', text: 'أكثر من 50,000 خريج وخريجة يخدمون وطنهم بنجاح' },
 ];
 
 export default async function AboutPage() {
   const centerInfo = await getCenterInfo();
 
   return (
-    <div className="min-h-screen">
-      {/* Hero */}
-      <section className="gradient-bg pt-32 pb-20 text-white text-center relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-6 bg-white/10 rounded-2xl p-2 backdrop-blur border border-white/20 shadow-xl">
-            <DynamicLogo withText={false} fill className="object-contain rounded-xl" />
-          </div>
-          <div className="section-label mx-auto mb-4 w-fit">عطاء ممتد منذ عام 2000م</div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4">
-            من <span className="gradient-text">نحن</span>
+    <div className="min-h-screen bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] text-white font-arabic pb-24" dir="rtl">
+      {/* ── 1. Hero Header ── */}
+      <section className="relative bg-transparent text-white pt-28 sm:pt-32 pb-20 px-4 text-center overflow-hidden">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-accent-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+
+
+          <h1 className="text-3xl sm:text-5xl font-black mb-4 tracking-tight text-white">
+            قصة صرح <span className="gradient-text-gold">القدومي الثقافي</span>
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-2xl mx-auto">
-            {centerInfo.slogan || 'يدًا بيد لبناء جيل متعلم ومفكر'}
+
+          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            {centerInfo.slogan || 'يدًا بيد لبناء جيل متعلم، متفوق ومتمكن'}
           </p>
         </div>
       </section>
 
-      {/* About */}
-      <section className="py-16 sm:py-20 section-bg-light">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-            <h2 className="section-title">قصة مركز <span className="gradient-text">القدومي</span></h2>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base">
-              {centerInfo.about}
-            </p>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base mt-4">
-              خرّجَ المركز أكثر من 50 ألف طالب وطالبة على مدار السنوات منذ عام 2000 حتى اليوم، منهم الأطباء والمهندسين والمعلمين وجميع التخصصات، ونأمل أن تكونوا من هؤلاء الأبطال والمبدعين.
-            </p>
+      {/* ── 2. Story Section ── */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-16">
+            <div className="max-w-3xl mx-auto text-center">
+              <span className="badge-gold mb-4">مسيرة ربع قرن</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-navy-900 mb-6">
+                أكثر من 25 عاماً في خدمة طلبتنا
+              </h2>
+              <p className="text-slate-600 leading-relaxed text-base sm:text-lg mb-4">
+                {centerInfo.about || 'مركز القدومي الثقافي من أعرق المراكز التعليمية في العاصمة عمّان، ويحظى بثقة آلاف الأهالي والطلبة في مناطق ضاحية الأمير حسن، جبل النزهة، ضاحية الأقصى، طبربور والمناطق المحيطة.'}
+              </p>
+              <p className="text-slate-600 leading-relaxed text-base sm:text-lg">
+                بفضل الله تعالى، خرّج المركز ما يزيد عن 50 ألف طالب وطالبة، تفوقوا في امتحانات الثانوية العامة وأصبحوا أطباء ومهندسين ومعلمين وقادة في مختلف المجالات، ونسعد بأن تكون أنت قصة النجاح القادمة.
+              </p>
+            </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16">
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-20">
             {[
-              { icon: Users, value: '+50,000', label: 'خريج وخريجة', color: 'bg-blue-600' },
-              { icon: Award, value: '99%', label: 'نسبة النجاح', color: 'bg-amber-500' },
-              { icon: GraduationCap, value: '+25', label: 'سنة خبرة', color: 'bg-emerald-600' },
-              { icon: MapPin, value: '4+', label: 'مناطق خدمة', color: 'bg-purple-600' },
+              { icon: Users, value: '+50,000', label: 'طالب وطالبة متخرجين', color: 'from-blue-500 to-cyan-500' },
+              { icon: Award, value: '99%', label: 'نسبة النجاح والتفوق', color: 'from-amber-500 to-orange-500' },
+              { icon: GraduationCap, value: '+25', label: 'سنة خبرة وتدريس', color: 'from-emerald-500 to-teal-500' },
+              { icon: MapPin, value: '4+', label: 'مناطق رئيسية في عمان', color: 'from-purple-500 to-indigo-500' },
             ].map((stat, i) => (
-              <div key={i} className="card p-5 sm:p-6 text-center">
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md`}>
-                  <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <div key={i} className="bg-white/5 rounded-2xl p-6 text-center border border-white/10 shadow-sm hover:border-amber-400/60 transition-all">
+                <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} text-white rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md`}>
+                  <stat.icon className="w-6 h-6" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-primary-900 dark:text-white mb-1">{stat.value}</div>
-                <div className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm font-medium">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-black text-navy-900 mb-1">{stat.value}</div>
+                <div className="text-slate-500 text-xs sm:text-sm font-semibold">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* Values */}
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-16">
+          {/* Pillars of Excellence */}
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-20">
             {values.map((val, i) => (
-              <div key={i} className="card p-6 sm:p-8 text-center">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <val.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary-700 dark:text-amber-400" />
+              <div key={i} className="bg-white/5 rounded-3xl p-7 border border-white/10 shadow-sm hover:shadow-md hover:border-amber-400 transition-all text-center">
+                <div className="w-14 h-14 bg-amber-50 rounded-2xl border border-amber-200 flex items-center justify-center mx-auto mb-5 text-amber-600">
+                  <val.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-primary-900 dark:text-white mb-2 sm:mb-3">{val.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{val.desc}</p>
+                <h3 className="text-xl font-bold text-navy-900 mb-3">{val.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{val.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Timeline */}
-      <section className="py-16 sm:py-20 section-bg-dark">
-        <div className="container mx-auto px-4">
-          <h2 className="section-title text-center mb-12">مسيرتنا عبر السنين</h2>
-          <div className="max-w-2xl mx-auto">
-            <div className="relative">
-              <div className="absolute right-8 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-white/10" />
-              <div className="space-y-6">
+          {/* Timeline */}
+          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-20">
+            <div className="text-center mb-10">
+              <span className="badge-gold mb-3">محطات الفخر</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-navy-900">محطات في تاريخ المركز</h2>
+            </div>
+            <div className="max-w-2xl mx-auto">
+              <div className="relative border-r-2 border-amber-300 pr-6 space-y-8">
                 {milestones.map((m, i) => (
-                  <div key={i} className="flex items-start gap-4 sm:gap-6 relative">
-                    <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 bg-primary-800 text-white rounded-2xl flex items-center justify-center font-black text-sm sm:text-base z-10 shadow-lg border border-primary-700">
-                      {m.year}
-                    </div>
-                    <div className="card p-4 sm:p-5 flex-1 mt-1 sm:mt-2">
-                      <p className="text-gray-800 dark:text-gray-200 font-medium text-sm sm:text-base">{m.text}</p>
-                    </div>
+                  <div key={i} className="relative">
+                    {/* Golden Dot */}
+                    <div className="absolute -right-[31px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow" />
+                    <div className="text-sm font-black text-amber-600 mb-1">{m.year}م</div>
+                    <div className="text-base font-bold text-navy-900">{m.text}</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Areas */}
-      <section className="py-16 sm:py-20 section-bg-light">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="section-title">مناطق خدمتنا</h2>
-          <p className="section-subtitle">نخدم الطلاب في هذه المناطق وما حولها</p>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {(centerInfo.areas || 'ضاحية الأمير حسن، جبل النزهة، ضاحية الأقصى، طبربور').split('،').map((area) => (
-              <div key={area} className="flex items-center gap-2 bg-blue-50 dark:bg-white/5 border border-blue-100 dark:border-white/10 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full">
-                <MapPin className="w-4 h-4 text-primary-600 dark:text-amber-400" />
-                <span className="text-primary-900 dark:text-white text-xs sm:text-sm font-semibold">{area.trim()}</span>
+          {/* Location & Call to Action */}
+          <div className="bg-gradient-to-br from-navy-900 to-navy-950 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden border border-white/10 shadow-xl">
+            <h2 className="text-2xl sm:text-3xl font-black mb-3">موقع المركز</h2>
+            <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8">
+              نرحب بطلابنا الأعزاء في مقرنا الرئيسي والوحيد المجهز بأحدث الوسائل التعليمية:
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              <div className="flex items-center gap-2 bg-white/5/10 border border-white/15 px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg">
+                <MapPin className="w-5 h-5 text-cyan-400" />
+                <span>ضاحية الأمير حسن</span>
               </div>
-            ))}
-          </div>
-          <div className="mt-10 sm:mt-12">
-            <Link href="/contact" className="btn-gold inline-flex items-center gap-2 text-sm sm:text-base py-3 px-8">
-              تواصل معنا الآن
-            </Link>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/grades" className="btn-cyan py-3.5 px-8 text-sm sm:text-base font-black">
+                استعرض البرامج التعليمية
+              </Link>
+              <Link href="/contact" className="btn-outline-white py-3 px-7 text-sm font-bold">
+                تواصل مع الإدارة
+              </Link>
+            </div>
           </div>
         </div>
       </section>

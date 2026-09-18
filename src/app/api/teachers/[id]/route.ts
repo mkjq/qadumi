@@ -14,8 +14,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   const body = await request.json();
   
   // Sanitize input to prevent updating restricted fields like id or createdAt
-  const { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, order, isActive } = body;
-  const data = { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, order, isActive };
+  const { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, imagePosition, order, isActive } = body;
+  const data = { name, subject, grades, phone, whatsapp, facebook, instagram, bio, image, imagePosition, order, isActive };
 
   try {
     const teacher = await prisma.teacher.update({ where: { id }, data });

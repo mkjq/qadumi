@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/db';
+import Link from 'next/link';
 import Image from 'next/image';
 import DynamicLogo from '@/components/DynamicLogo';
 import { Phone, Facebook, Instagram, MessageCircle, GraduationCap } from 'lucide-react';
@@ -58,7 +59,7 @@ export default async function TeachersPage() {
                       src={teacher.image}
                       alt={teacher.name}
                       fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className={`object-cover group-hover:scale-105 transition-transform duration-500 ${teacher.imagePosition || 'object-center'}`}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-primary-900/30">
@@ -70,7 +71,9 @@ export default async function TeachersPage() {
                     {teacher.subject}
                   </div>
                   <div className="absolute bottom-4 right-4 left-4 z-10">
-                    <h2 className="text-xl font-black text-white drop-shadow">أ. {teacher.name}</h2>
+                    <Link href={`/teachers/${teacher.id}`} className="hover:underline">
+                      <h2 className="text-xl font-black text-white drop-shadow">أ. {teacher.name}</h2>
+                    </Link>
                   </div>
                 </div>
 

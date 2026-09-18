@@ -94,6 +94,84 @@ async function main() {
   }
   console.log('✅ تم إدخال بيانات الأساتذة');
 
+  // Materials / Dousies
+  const sampleMaterials = [
+    {
+      title: 'دوسية مهارات الاتصال والتعبير الشاملة - التوجيهي',
+      subject: 'اللغة العربية',
+      grade: 'ثاني ثانوي',
+      branch: 'مشترك',
+      teacherName: 'يوسف الحوراني',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ1k_youssef_tawjihi_arabic/view?usp=sharing',
+      coverImage: '/images/materials/arabic_tawjihi.jpg',
+      downloads: 142,
+      isActive: true,
+    },
+    {
+      title: 'دوسية النحو والصرف والقواعد الذهبية - الأول الثانوي',
+      subject: 'اللغة العربية',
+      grade: 'أول ثانوي',
+      branch: 'مشترك',
+      teacherName: 'يوسف الحوراني',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ2k_youssef_11th_arabic/view?usp=sharing',
+      coverImage: '/images/materials/arabic_11th.jpg',
+      downloads: 88,
+      isActive: true,
+    },
+    {
+      title: 'دوسية التفاضل والتطبيقات والأسئلة الوزارية - توجيهي علمي',
+      subject: 'الرياضيات',
+      grade: 'ثاني ثانوي',
+      branch: 'علمي',
+      teacherName: 'ليث أبو الشيخ',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ3k_laith_tawjihi_math/view?usp=sharing',
+      coverImage: '/images/materials/math_tawjihi.jpg',
+      downloads: 215,
+      isActive: true,
+    },
+    {
+      title: 'أوراق عمل الاقترانات المثلثية والهندسة التحليلية - الأول ثانوي',
+      subject: 'الرياضيات',
+      grade: 'أول ثانوي',
+      branch: 'علمي',
+      teacherName: 'ليث أبو الشيخ',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ4k_laith_11th_math/view?usp=sharing',
+      coverImage: '/images/materials/math_11th.jpg',
+      downloads: 97,
+      isActive: true,
+    },
+    {
+      title: 'كراسة المفردات والقواعد الأساسية Action Pack - الصف العاشر',
+      subject: 'اللغة الإنجليزية',
+      grade: 'عاشر',
+      branch: 'مشترك',
+      teacherName: 'أحمد زياد',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ5k_ahmad_10th_english/view?usp=sharing',
+      coverImage: '/images/materials/english_10th.jpg',
+      downloads: 120,
+      isActive: true,
+    },
+    {
+      title: 'دوسية الإنجليزية المهنية ومصطلحات الأعمال - توجيهي BTEC',
+      subject: 'اللغة الإنجليزية',
+      grade: 'BETC',
+      branch: 'مهني / BTEC',
+      teacherName: 'أحمد زياد',
+      googleDriveLink: 'https://drive.google.com/file/d/1BziF7wZ6k_ahmad_btec_english/view?usp=sharing',
+      coverImage: '/images/materials/english_btec.jpg',
+      downloads: 74,
+      isActive: true,
+    },
+  ];
+
+  for (const mat of sampleMaterials) {
+    const existing = await prisma.material.findFirst({ where: { title: mat.title } });
+    if (!existing) {
+      await prisma.material.create({ data: mat });
+    }
+  }
+  console.log('✅ تم إدخال الدوسيات والمواد التعليمية النموذجية');
+
   console.log('🎉 انتهى إدخال البيانات بنجاح!');
   console.log('🔑 بيانات تسجيل الدخول: admin / qadoumi2025');
 }

@@ -1,192 +1,197 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Phone, MapPin, ChevronLeft, Star, GraduationCap, Users } from 'lucide-react';
-import DynamicLogo from '../DynamicLogo';
-import CountUp from '@/components/ui/CountUp';
-import { whatsappLink } from '@/lib/utils';
 
-interface HeroSectionProps { centerInfo: Record<string, string>; }
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import {
+  Sparkles,
+  ArrowLeft,
+  Flame,
+  MessageCircle,
+  GraduationCap,
+} from 'lucide-react';
+import { whatsappLink } from '@/lib/utils';
+import OrganicBlob from '@/components/ui/OrganicBlob';
+
+interface HeroSectionProps {
+  centerInfo?: Record<string, string>;
+}
+
+
 
 export default function HeroSection({ centerInfo }: HeroSectionProps) {
   const phone = centerInfo?.phone_admin || '0791586891';
+  const mission =
+    centerInfo?.mission ||
+    'من الصف الأول حتى التوجيهي — أساتذة متميزون، مناهج شاملة، بيئة تعليمية تفاعلية، وتحديات أسبوعية وجوائز للمتفوقين.';
+
+  // Stagger animation container
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden hero-bg">
-
-      {/* Animated background blobs */}
-      <div className="absolute top-20 -right-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-blue-600/20 blur-[80px] md:blur-[100px] animate-blob" />
-      <div className="absolute bottom-10 -left-32 w-[250px] md:w-[400px] h-[250px] md:h-[400px] rounded-full bg-purple-600/20 blur-[80px] md:blur-[100px] animate-blob-2" />
-      <div className="absolute top-1/2 left-1/2 w-[200px] md:w-[300px] h-[200px] md:h-[300px] rounded-full bg-amber-500/10 blur-[80px] md:blur-[100px] animate-blob-3" />
-
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px'
-      }} />
-
-      {/* Floating decorative elements - HIDDEN ON MOBILE */}
-      <div className="absolute top-32 left-[5%] xl:left-[10%] animate-float hidden lg:block">
-        <div className="glass rounded-2xl p-3 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-amber-400 rounded-xl flex items-center justify-center">
-              <Star className="w-4 h-4 text-amber-900" fill="currentColor" />
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm">نسبة نجاح</p>
-              <p className="text-amber-400 font-black text-lg leading-none">
-                <CountUp to={99} suffix="%" duration={3} />
-              </p>
-            </div>
+    <section className="relative flex flex-col justify-between bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] pt-16 sm:pt-20 md:pt-24 pb-0 overflow-hidden text-white font-arabic select-none">
+      
+      {/* ── 1. Top Announcement Marquee Strip (Continuous Scrolling Ticker) ── */}
+      <div className="w-full bg-navy-950/85 backdrop-blur-md border-b border-white/10 py-2.5 overflow-hidden z-30 group select-none">
+        <Link href="/quizzes" className="flex items-center" title="جديد منصة القدومي: امتحانات تفاعلية ونقاط فورية">
+          <div className="flex w-max">
+            {[1, 2].map((trackIdx) => (
+              <div
+                key={trackIdx}
+                className="flex items-center gap-8 sm:gap-12 whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] text-xs sm:text-sm font-medium text-slate-200 px-4 sm:px-6 shrink-0"
+                style={{ animationDuration: '30s' }}
+                aria-hidden={trackIdx === 2}
+              >
+                <span className="inline-flex items-center gap-2">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan-accent animate-ping" />
+                  <Flame className="w-4 h-4 text-gold-400 shrink-0" />
+                  <span className="font-bold text-cyan-accent-300">جديد منصة القدومي:</span>
+                  <span className="text-white">امتحانات تفاعلية ونقاط فورية ومكافآت قيّمة للطلاب المتفوقين</span>
+                  <span className="text-gold-300 font-bold">⭐ ابدأ التحدي الآن واحصد النقاط!</span>
+                </span>
+                <span className="text-slate-600">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan-accent animate-ping" />
+                  <Flame className="w-4 h-4 text-gold-400 shrink-0" />
+                  <span className="font-bold text-cyan-accent-300">جديد منصة القدومي:</span>
+                  <span className="text-white">امتحانات تفاعلية ونقاط فورية</span>
+                  <span className="text-gold-300 font-bold">⭐ اختبر معلوماتك وتحدى زملاءك!</span>
+                </span>
+                <span className="text-slate-600">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan-accent animate-ping" />
+                  <Flame className="w-4 h-4 text-gold-400 shrink-0" />
+                  <span className="font-bold text-cyan-accent-300">جديد منصة القدومي:</span>
+                  <span className="text-white">امتحانات تفاعلية ونقاط فورية ومكافآت قيّمة</span>
+                  <span className="text-gold-300 font-bold">⭐ ابدأ الآن!</span>
+                </span>
+                <span className="text-slate-600">•</span>
+              </div>
+            ))}
           </div>
-        </div>
+        </Link>
       </div>
 
-      <div className="absolute top-48 right-[3%] xl:right-[8%] animate-float-2 hidden lg:block">
-        <div className="glass rounded-2xl p-3 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-500 rounded-xl flex items-center justify-center">
-              <Users className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm">خريجون</p>
-              <p className="text-blue-400 font-black text-lg leading-none">
-                <CountUp to={50000} prefix="+" separator="," duration={4} />
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* ── 2. Background Atmosphere & Subtle Blobs ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {/* Soft Organic Cyan Blob */}
+        <OrganicBlob
+          variant="cyan"
+          size="2xl"
+          className="-top-32 -right-32 opacity-40"
+          duration={18}
+          blur="3xl"
+        />
+
+        {/* Deep Navy Backdrop Blob behind center */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-2xl h-72 sm:h-88 bg-navy-900/60 rounded-[80px] blur-3xl pointer-events-none -z-10" />
+
+        {/* Subtle grid mesh */}
+        <div 
+          className="absolute inset-0 opacity-[0.025] pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)`,
+            backgroundSize: '44px 44px',
+          }}
+        />
       </div>
 
-      <div className="absolute bottom-32 right-[8%] xl:right-[12%] animate-float hidden lg:block" style={{ animationDelay: '2s' }}>
-        <div className="glass rounded-2xl p-3 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-green-500 rounded-xl flex items-center justify-center">
-              <GraduationCap className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm">خبرة</p>
-              <p className="text-green-400 font-black text-lg leading-none">
-                <CountUp to={25} suffix="+ سنة" duration={3} />
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* ── 5. Main Hero Content ── */}
+      <div className="relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6 pt-5 pb-5 sm:pt-10 sm:pb-8 flex flex-col items-center text-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col items-center w-full"
+        >
+          {/* Main Headline: Jo Academy Style */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-3 sm:mb-4 leading-[1.2]"
+          >
+            <span className="text-white drop-shadow-sm">
+              مركز القدومي{' '}
+            </span>
+            <span className="bg-gradient-to-r from-cyan-accent via-cyan-accent-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-md">
+              التعليمي
+            </span>
+          </motion.h1>
+
+          {/* Subtitle / Mission */}
+          <motion.p
+            variants={itemVariants}
+            className="text-slate-200/90 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-5 sm:mb-7 leading-relaxed font-normal"
+          >
+            {mission}
+          </motion.p>
+
+          {/* CTA Buttons: Full-width rounded pills stacked vertically on mobile with clear hierarchy */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full sm:w-auto max-w-sm sm:max-w-none"
+          >
+            {/* Primary CTA - Full-width rounded pill */}
+            <Link
+              href="/quizzes"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-cyan-accent via-cyan-500 to-cyan-600 hover:from-cyan-accent-400 hover:to-cyan-accent text-white font-bold text-sm sm:text-base shadow-lg shadow-cyan-accent/30 hover:scale-[1.02] active:scale-95 transition-all"
+            >
+              <span>ابدأ الاختبارات التفاعلية</span>
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+
+            {/* Secondary CTA - WhatsApp - Full-width rounded glass pill */}
+            <a
+              href={whatsappLink(phone, 'أهلًا، أود الاستفسار عن التسجيل والدورات في مركز القدومي')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 text-white font-semibold text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
+            >
+              <MessageCircle className="w-4 h-4 text-cyan-accent-300" />
+              <span>تواصل عبر واتساب</span>
+            </a>
+          </motion.div>
+
+          {/* Tertiary Teacher Link */}
+          <motion.div variants={itemVariants} className="mt-3">
+            <Link
+              href="/teachers"
+              className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-slate-300/80 hover:text-white transition-colors"
+            >
+              <GraduationCap className="w-3.5 h-3.5 text-cyan-accent-300" />
+              <span>أو تصفح نخبة كادر المعلمين المتميزين</span>
+              <ArrowLeft className="w-3 h-3" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-20 lg:py-32 w-full">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-
-          {/* Left / Text */}
-          <div className="text-center lg:text-right flex flex-col items-center lg:items-start">
-            
-            {/* Logo on mobile only (replaces the desktop floating logo) */}
-            <div className="lg:hidden mb-6">
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-white/10 rounded-2xl p-2 backdrop-blur border border-white/20 mx-auto">
-                <DynamicLogo withText={false} fill className="object-contain rounded-xl" priority />
-              </div>
-            </div>
-
-            {/* Badge */}
-            <div className="section-label mb-6 mx-auto lg:mx-0 text-xs sm:text-sm">
-              <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              منذ عام 2000م — عطاء لا ينقطع
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black leading-[1.25] lg:leading-[1.1] mb-4 sm:mb-6">
-              <span className="text-white">مركز</span>{' '}
-              <span className="gradient-text">القدومي</span>
-              <br />
-              <span className="text-white/90 text-2xl sm:text-4xl lg:text-5xl mt-1.5 sm:mt-2 block">الثقافي</span>
-            </h1>
-
-            <p className="text-white/60 text-sm sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">
-              {centerInfo?.mission || 'من الصف الأول حتى التوجيهي — أساتذة متخصصون، مناهج شاملة، ونتائج مبهرة بفضل الله تعالى'}
-            </p>
-
-            {/* Slogan */}
-            <div className="flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-8 sm:mb-10">
-              <div className="h-px w-6 sm:w-12 bg-amber-400/50" />
-              <span className="text-amber-300/80 italic text-sm sm:text-lg">"{centerInfo?.slogan || 'يدًا بيد لبناء جيل متعلم ومفكر'}"</span>
-              <div className="h-px w-6 sm:w-12 bg-amber-400/50 lg:hidden" />
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 sm:mb-10 w-full sm:w-auto">
-              <Link href="/teachers" className="btn-gold flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto py-3 sm:py-3.5 px-6 sm:px-8">
-                <span>تعرف على أساتذتنا</span>
-                <ChevronLeft className="w-5 h-5" />
-              </Link>
-              <a href={whatsappLink(phone, 'أهلًا، أود الاستفسار عن المركز')}
-                target="_blank" rel="noopener noreferrer"
-                className="btn-outline-white flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto py-3 sm:py-3.5 px-6 sm:px-8">
-                <Phone className="w-5 h-5" />
-                <span>تواصل معنا</span>
-              </a>
-            </div>
-
-            {/* Quick info */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-5 text-white/50 text-xs sm:text-sm">
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                ضاحية الأمير حسن، عمّان
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span className="ltr">{phone}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right / Logo + visual card (Hidden on small mobile, visible on desktop) */}
-          <div className="relative hidden lg:flex items-center justify-center">
-            {/* Outer ring */}
-            <div className="absolute w-[360px] xl:w-[420px] h-[360px] xl:h-[420px] rounded-full border border-white/5 animate-spin-slow" />
-            <div className="absolute w-[280px] xl:w-[340px] h-[280px] xl:h-[340px] rounded-full border border-amber-400/10" style={{ animation: 'spin-slow 15s linear infinite reverse' }} />
-
-            {/* Logo card */}
-            <div className="relative gradient-border transform transition-transform hover:scale-105">
-              <div className="glass rounded-3xl p-6 xl:p-8 flex flex-col items-center gap-6 w-64 xl:w-72">
-                <div className="relative w-32 h-32 xl:w-36 xl:h-36 bg-white/5 rounded-2xl p-3">
-                  <DynamicLogo withText={false} fill className="object-contain rounded-xl" />
-                </div>
-                <div className="text-center">
-                  <h3 className="text-white font-black text-lg xl:text-xl">مركز القدومي</h3>
-                  <p className="text-amber-400 text-sm">الثقافي</p>
-                </div>
-                {/* Mini stats */}
-                <div className="grid grid-cols-3 gap-2 xl:gap-3 w-full">
-                  {[
-                    { v: `${Math.max(1, new Date().getFullYear() - (parseInt(centerInfo?.founded || '2000') || 2000))}+`, l: 'سنة' },
-                    { v: `${Math.round((parseInt(centerInfo?.graduates || '50000') || 50000) / 1000)}K`, l: 'خريج' },
-                    { v: `${centerInfo?.successRate || '99'}%`, l: 'نجاح' },
-                  ].map(s => (
-                    <div key={s.l} className="text-center p-2 rounded-xl bg-white/5">
-                      <div className="text-amber-400 font-black text-base xl:text-lg leading-none">{s.v}</div>
-                      <div className="text-white/50 text-[10px] xl:text-xs mt-1">{s.l}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-400" fill="currentColor" />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 inset-x-0 pointer-events-none">
-        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-          <path d="M0 80L1440 80L1440 40C1200 80 960 0 720 20C480 40 240 80 0 40L0 80Z" className="hero-wave-fill"/>
+      {/* ── 6. Clean White Convex Curved Wave Divider (Jo Academy Alignment) ── */}
+      <div className="relative w-full z-20 pointer-events-none -mt-1 leading-none">
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="w-full h-8 sm:h-12 md:h-16 lg:h-20 block text-white fill-current"
+          aria-hidden="true"
+        >
+          <path d="M0,40 C360,110 1080,110 1440,40 L1440,120 L0,120 Z" fill="#FFFFFF" />
         </svg>
       </div>
     </section>

@@ -18,13 +18,14 @@ interface Teacher {
   instagram: string;
   bio: string;
   image: string;
+  imagePosition?: string;
   order: number;
   isActive: boolean;
 }
 
 const emptyTeacher: Teacher = {
   name: '', subject: '', grades: '', phone: '', whatsapp: '',
-  facebook: '', instagram: '', bio: '', image: '', order: 0, isActive: true,
+  facebook: '', instagram: '', bio: '', image: '', imagePosition: 'object-center', order: 0, isActive: true,
 };
 
 export default function AdminTeachersPage() {
@@ -215,7 +216,7 @@ export default function AdminTeachersPage() {
               <div className="text-center">
                 <div className="relative w-32 h-32 mx-auto mb-3">
                   {editingTeacher.image ? (
-                    <Image src={editingTeacher.image} alt="صورة الأستاذ" fill className="object-cover rounded-2xl" />
+                    <Image src={editingTeacher.image} alt="صورة الأستاذ" fill className={`object-cover rounded-2xl ${editingTeacher.imagePosition || 'object-center'}`} />
                   ) : (
                     <div className="w-full h-full bg-gray-100 rounded-2xl flex items-center justify-center">
                       <Users className="w-12 h-12 text-gray-300" />
@@ -227,6 +228,20 @@ export default function AdminTeachersPage() {
                   {uploading ? 'جاري الرفع...' : 'تغيير الصورة (مع قص ووزن)'}
                   <input type="file" accept="image/*" onChange={onFileSelect} className="hidden" disabled={uploading || isCropping} />
                 </label>
+                
+                {/* Image Position Selector */}
+                <div className="mt-4 flex flex-col items-center">
+                  <label className="text-xs font-medium text-gray-500 mb-1">وضعية الصورة في المربعات</label>
+                  <select 
+                    value={editingTeacher.imagePosition || 'object-center'}
+                    onChange={(e) => setEditingTeacher({...editingTeacher, imagePosition: e.target.value})}
+                    className="text-sm px-3 py-1.5 rounded-lg border border-gray-200 outline-none focus:border-primary-500 bg-white"
+                  >
+                    <option value="object-top">أعلى (تركيز على الرأس)</option>
+                    <option value="object-center">وسط (الطبيعي)</option>
+                    <option value="object-bottom">أسفل (تركيز على الجسم)</option>
+                  </select>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -240,9 +255,28 @@ export default function AdminTeachersPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">الصفوف (مفصولة بفاصلة)</label>
-                <input value={editingTeacher.grades ?? ''} onChange={(e) => setEditingTeacher({ ...editingTeacher, grades: e.target.value })} placeholder="مثال: عاشر,أول ثانوي,ثاني ثانوي" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none text-sm text-gray-900 bg-white" />
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">الصفوف</label>
+                <div className="flex flex-wrap gap-3">
+                  {["سادس", "سابع", "ثامن", "تاسع", "عاشر", "أول ثانوي", "توجيهي"].map(g => (
+                    <label key={g} className="flex items-center gap-1.5 cursor-pointer select-none bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-primary-300">
+                      <input 
+                        type="checkbox" 
+                        checked={(editingTeacher.grades || '').split(',').includes(g)}
+                        onChange={(e) => {
+                          const current = (editingTeacher.grades || '').split(',').filter(Boolean);
+                          if (e.target.checked) {
+                            setEditingTeacher({...editingTeacher, grades: [...current, g].join(',')});
+                          } else {
+                            setEditingTeacher({...editingTeacher, grades: current.filter(x => x !== g).join(',')});
+                          }
+                        }}
+                        className="w-4 h-4 text-primary-600 rounded border-gray-300 focus:ring-primary-500"
+                      />
+                      <span className="text-sm font-medium text-gray-700">{g}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">

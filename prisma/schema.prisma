@@ -1,14 +1,18 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma schema file for Qadoumi Educational Center
+// Extended with Student Accounts, Gamification Points, and Interactive Quiz Engine
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// ============================================
+// EXISTING MODELS (DO NOT DROP OR MODIFY COLUMNS)
+// ============================================
 
 model Teacher {
   id          Int      @id @default(autoincrement())
@@ -21,6 +25,7 @@ model Teacher {
   instagram   String?
   bio         String?
   image       String?
+  imagePosition String? @default("object-center")
   order       Int      @default(0)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
@@ -112,4 +117,143 @@ model Order {
   receiptUrl    String?
   status        String     @default("PENDING") // PENDING, APPROVED, REJECTED
   createdAt     DateTime   @default(now())
+}
+
+// ============================================
+// NEW MODELS: Student Accounts & Gamification (R2)
+// ============================================
+
+model Student {
+  id           Int        @id @default(autoincrement())
+  name         String
+  username     String     @unique
+  email        String?    @unique
+  phone        String?    @unique
+  passwordHash String
+  grade        String     // e.g. "توجيهي علمي", "أول ثانوي"
+  points       Int        @default(0)
+  level        String     @default("مبتدئ") // "مبتدئ", "متقدم", "بطل القدومي", "أسطورة القدومي"
+  avatar       String?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  enrolledGrades    EnrolledGrade[]
+  pointTransactions PointTransaction[]
+  quizSubmissions   QuizSubmission[]
+  rewardRedemptions RewardRedemption[]
+}
+
+// General User model compatibility (for acceptance criteria: "new user, points, and quiz models")
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  username     String     @unique
+  email        String?    @unique
+  phone        String?    @unique
+  passwordHash String
+  role         String     @default("STUDENT")
+  grade        String?
+  points       Int        @default(0)
+  avatar       String?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model EnrolledGrade {
+  id         Int      @id @default(autoincrement())
+  studentId  Int
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  grade      String
+  subject    String?
+  enrolledAt DateTime @default(now())
+}
+
+model PointTransaction {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  amount      Int      // Positive for earned, negative for redeemed
+  type        String   // QUIZ_REWARD, DAILY_LOGIN, REWARD_REDEMPTION, WELCOME_BONUS
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model Reward {
+  id          Int                @id @default(autoincrement())
+  title       String
+  description String?
+  pointsCost  Int
+  icon        String?
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  redemptions RewardRedemption[]
+}
+
+model RewardRedemption {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  rewardId    Int
+  reward      Reward   @relation(fields: [rewardId], references: [id])
+  pointsSpent Int
+  status      String   @default("COMPLETED")
+  createdAt   DateTime @default(now())
+}
+
+// ============================================
+// NEW MODELS: Interactive Quiz Engine (R3)
+// ============================================
+
+model Quiz {
+  id               Int            @id @default(autoincrement())
+  title            String
+  description      String?
+  subject          String
+  grade            String
+  durationMinutes  Int            @default(15)
+  pointsPerCorrect Int            @default(10) // Points awarded per correct answer
+  bonusPoints      Int            @default(20) // Bonus points for completing/passing
+  passingScore     Int            @default(60) // Passing percentage (0-100)
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  questions        QuizQuestion[]
+  submissions      QuizSubmission[]
+}
+
+model QuizQuestion {
+  id          Int          @id @default(autoincrement())
+  quizId      Int
+  quiz        Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  question    String
+  order       Int          @default(0)
+  points      Int          @default(10)
+  explanation String?
+  options     QuizOption[]
+}
+
+model QuizOption {
+  id         Int          @id @default(autoincrement())
+  questionId Int
+  question   QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  isCorrect  Boolean      @default(false)
+  order      Int          @default(0)
+}
+
+model QuizSubmission {
+  id             Int      @id @default(autoincrement())
+  quizId         Int
+  quiz           Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  studentId      Int
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  score          Int      // percentage score (0-100)
+  totalQuestions Int
+  correctAnswers Int
+  pointsEarned   Int      // gamification points awarded
+  answersJson    String?  // serialized choices
+  completedAt    DateTime @default(now())
 }

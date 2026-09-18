@@ -25,6 +25,15 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+.env.production
+*.db
+*.db-journal
+*.db.bak
+prisma/sqlite_dump.json
+prisma/export_sqlite.py
+prisma/import_to_neon.ts
+tests/
+.agents/
 
 # vercel
 .vercel

@@ -1,14 +1,14 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { BookOpen, ChevronLeft, Sparkles, BookA, GraduationCap, Microscope, Atom, BookMarked, Trophy, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, Sparkles, BookA, GraduationCap, Microscope, Atom, BookMarked, Trophy, HeartHandshake, ShieldCheck } from 'lucide-react';
 
 const gradeGroups = [
-  { title: 'الأول للثالث الأساسي', icon: BookA, color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', subjects: ['اللغة العربية', 'الرياضيات', 'العلوم', 'الانجليزية'] },
-  { title: 'الرابع إلى العاشر', icon: BookMarked, color: 'from-purple-500 to-pink-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'انجليزي', 'أحياء'] },
-  { title: 'الأول ثانوي', icon: Atom, color: 'from-green-500 to-emerald-500', bg: 'bg-green-500/10', border: 'border-green-500/20', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'أحياء', 'انجليزي'] },
-  { title: 'التوجيهي الأكاديمي', icon: GraduationCap, color: 'from-amber-500 to-orange-500', bg: 'bg-amber-500/10', border: 'border-amber-500/20', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'انجليزي', 'BETC'] },
-  { title: 'البرنامج المهني BTEC', icon: Microscope, color: 'from-red-500 to-rose-500', bg: 'bg-red-500/10', border: 'border-red-500/20', subjects: ['تخصص', 'رياضيات', 'فيزياء', 'كيمياء', 'أحياء', 'انجليزي'] },
+  { title: 'الأول للثالث الأساسي', icon: BookA, color: 'from-blue-500 to-cyan-500', iconColor: 'text-blue-500', bgColor: 'bg-blue-50', subjects: ['اللغة العربية', 'الرياضيات', 'العلوم', 'الانجليزية'] },
+  { title: 'الرابع إلى العاشر', icon: BookMarked, color: 'from-purple-500 to-pink-500', iconColor: 'text-purple-500', bgColor: 'bg-purple-50', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'انجليزي', 'أحياء'] },
+  { title: 'الأول ثانوي', icon: Atom, color: 'from-green-500 to-emerald-500', iconColor: 'text-green-500', bgColor: 'bg-green-50', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'أحياء', 'انجليزي'] },
+  { title: 'التوجيهي الأكاديمي', icon: GraduationCap, color: 'from-amber-500 to-orange-500', iconColor: 'text-amber-500', bgColor: 'bg-amber-50', subjects: ['عربي', 'رياضيات', 'فيزياء', 'كيمياء', 'انجليزي', 'BETC'] },
+  { title: 'البرنامج المهني BTEC', icon: Microscope, color: 'from-red-500 to-rose-500', iconColor: 'text-red-500', bgColor: 'bg-red-50', subjects: ['تخصص', 'رياضيات', 'فيزياء', 'كيمياء', 'أحياء', 'انجليزي'] },
 ];
 
 const perks = [
@@ -28,43 +28,40 @@ export default function CoursesSection() {
   }, []);
 
   return (
-    <section className="py-16 lg:py-24 bg-[#0a0e1a] relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `radial-gradient(circle at 25px 25px, white 2px, transparent 0)`,
-        backgroundSize: '50px 50px'
-      }} />
-
+    <section className="py-20 md:py-28 lg:py-28 bg-slate-50 relative overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-10 sm:mb-16">
-          <div className="section-label mx-auto w-fit text-xs sm:text-sm">المواد الدراسية</div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-4 mb-4">
-            ماذا <span className="gradient-text">ندرّس؟</span>
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="section-label mx-auto w-fit text-xs sm:text-sm mb-4">
+            المسارات والمواد الدراسية
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-navy-900 mb-4 tracking-tight">
+            ماذا <span className="gradient-text-cyan">ندرّس؟</span>
           </h2>
-          <p className="text-white/50 text-sm sm:text-base lg:text-lg max-w-xl mx-auto">
-            تغطية شاملة لجميع المواد في كل المراحل الدراسية
+          <p className="text-slate-500 text-sm sm:text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
+            تغطية شاملة ومكثفة لكافة المناهج الدراسية لجميع الصفوف والمراحل
           </p>
         </div>
 
         {/* Grade cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-12 sm:mb-16">
           {gradeGroups.map((g, i) => (
-            <div key={i} className={`card-premium rounded-2xl p-5 sm:p-6 border ${g.border}`}
+            <div key={i} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col"
               style={{ opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(20px)', transition: `all 0.6s cubic-bezier(0.4,0,0.2,1) ${i * 80}ms` }}>
               {/* Header */}
-              <div className="flex items-center gap-3 mb-4 sm:mb-5">
-                <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${g.bg} flex items-center justify-center text-xl sm:text-2xl`}>
-                  <g.icon className={`w-6 h-6 sm:w-7 sm:h-7 ${g.color.split(' ')[0].replace('from-', 'text-')}`} />
+              <div className="flex items-center gap-4 mb-5">
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full ${g.bgColor} flex items-center justify-center`}>
+                  <g.icon className={`w-6 h-6 ${g.iconColor}`} />
                 </div>
-                <div>
-                  <h3 className="text-white font-bold text-sm sm:text-[15px] leading-tight">{g.title}</h3>
-                </div>
+                <h3 className="text-[#0B1D3A] font-bold text-base sm:text-lg">{g.title}</h3>
               </div>
+              
               {/* Gradient bar */}
-              <div className={`h-0.5 rounded-full bg-gradient-to-r ${g.color} mb-4 opacity-50`} />
+              <div className={`h-1 w-full rounded-full bg-gradient-to-r ${g.color} mb-5 opacity-80`} />
+              
               {/* Subjects */}
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-2 mt-auto">
                 {g.subjects.map(s => (
-                  <span key={s} className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-full bg-white/5 text-white/60 border border-white/8 hover:bg-white/10 transition-colors whitespace-nowrap">
+                  <span key={s} className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 font-medium hover:bg-slate-200 transition-colors">
                     {s}
                   </span>
                 ))}
@@ -74,32 +71,36 @@ export default function CoursesSection() {
         </div>
 
         {/* Pricing banner */}
-        <div className="relative rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-amber-500/20" />
-          <div className="absolute inset-0 border border-amber-500/20 rounded-3xl" />
-          <div className="relative p-6 sm:p-10 text-center">
-            <div className="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/20 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 mb-4 sm:mb-5">
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 flex-shrink-0" />
-              <span className="text-amber-400 font-semibold text-xs sm:text-sm">عروض وخصومات</span>
+        <div className="relative rounded-3xl overflow-hidden bg-cyan-50/70 border border-cyan-200/80 shadow-sm">
+          <div className="relative p-8 sm:p-12 text-center">
+            <div className="section-label mx-auto w-fit text-xs sm:text-sm mb-4">
+              <Sparkles className="w-4 h-4 text-cyan-accent flex-shrink-0" />
+              <span>عروض وخصومات مميزة</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-2 sm:mb-3">
-              أسعار في <span className="gradient-text">متناول الجميع</span>
+            
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-navy-900 mb-4 tracking-tight">
+              أسعار في <span className="gradient-text-cyan">متناول الجميع</span>
             </h3>
-            <p className="text-white/50 mb-6 sm:mb-8 text-sm sm:text-base">نؤمن بأن التعليم الجيد حق للجميع</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 mb-6 sm:mb-8 max-w-3xl mx-auto">
+            
+            <p className="text-slate-500 mb-10 sm:mb-12 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              نؤمن بأن التعليم الجيد حق لكل طالب، ونوفر باقات وخصومات تشجيعية لكافة المراحل
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 max-w-4xl mx-auto">
               {perks.map(p => (
-                <div key={p.title} className="glass rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4 text-center">
-                  <div className="text-2xl sm:text-3xl mb-1 sm:mb-2 flex justify-center text-amber-400">
-                    <p.icon className="w-8 h-8" />
+                <div key={p.title} className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+                  <div className="text-3xl mb-4 flex justify-center text-[#FFB800]">
+                    <p.icon className="w-10 h-10" />
                   </div>
-                  <div className="text-white font-bold text-xs sm:text-sm">{p.title}</div>
-                  <div className="text-white/40 text-[10px] sm:text-xs mt-1">{p.desc}</div>
+                  <h4 className="text-navy-900 font-bold text-base sm:text-lg mb-2">{p.title}</h4>
+                  <p className="text-slate-500 text-sm">{p.desc}</p>
                 </div>
               ))}
             </div>
-            <Link href="/contact" className="btn-gold inline-flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto">
-              <span>استفسر عن الأسعار</span>
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            
+            <Link href="/contact" className="inline-flex items-center justify-center gap-2 text-base bg-cyan-accent hover:bg-cyan-600 text-white px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-cyan-accent/25 hover:-translate-y-0.5 transition-all font-bold shadow-md shadow-cyan-accent/20 w-full sm:w-auto">
+              <span>استفسر عن الأسعار والتسجيل</span>
+              <ChevronLeft className="w-5 h-5" />
             </Link>
           </div>
         </div>

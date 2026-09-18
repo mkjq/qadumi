@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import type { CallBackProps, Step, TooltipRenderProps } from 'react-joyride';
+import type { Step, TooltipRenderProps, EventData } from 'react-joyride';
 import { STATUS } from 'react-joyride';
 import dynamic from 'next/dynamic';
 
@@ -16,35 +16,34 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'القائمة الجانبية',
       content: 'من هنا يمكنك التنقل بين جميع أقسام لوحة التحكم الخاصة بالمركز بسرعة وسهولة.',
       placement: 'left',
-      disableBeacon: true,
     },
     {
       target: '#tour-dashboard-stats',
       title: 'إحصائيات المركز',
       content: 'نظرة سريعة على أهم الأرقام: عدد الأساتذة، الرسائل، والمبيعات الإجمالية.',
       placement: 'bottom',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-dashboard-charts',
       title: 'الرسوم البيانية للمبيعات',
       content: 'راقب أداء مبيعاتك اليومية وعدد الطلبات الواردة خلال الأيام السبعة الماضية لتتخذ قرارات أفضل.',
       placement: 'top',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-dashboard-quick',
       title: 'الوصول السريع',
       content: 'اختصارات مباشرة لأهم أقسام الإدارة لتوفر وقتك وجهدك.',
       placement: 'top',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-user-info',
       title: 'معلومات حسابك',
       content: 'هنا يظهر حسابك الحالي، وبجانبه زر إعادة هذا الشرح في حال رغبت بتذكره لاحقاً.',
       placement: 'bottom',
-      disableBeacon: true,
+      skipBeacon: true,
     }
   ],
   '/admin/teachers': [
@@ -53,14 +52,14 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'إضافة أستاذ جديد',
       content: 'اضغط هنا لفتح نموذج إضافة أستاذ جديد. يمكنك إدخال كافة تفاصيله وصورته وحسابات التواصل الخاصة به.',
       placement: 'left',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-teachers-list',
       title: 'قائمة الأساتذة',
       content: 'هنا يظهر جميع الأساتذة المسجلين. يمكنك تعديل بياناتهم، حذفهم، أو التحكم بظهورهم للطلاب بكل سهولة.',
       placement: 'top',
-      disableBeacon: true,
+      skipBeacon: true,
     }
   ],
   '/admin/orders': [
@@ -69,14 +68,14 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'البحث المتقدم',
       content: 'يمكنك البحث عن أي طلب بسهولة باستخدام رقم هاتف الطالب، اسمه، أو حتى اسم البطاقة المطلوبة.',
       placement: 'bottom',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-orders-table',
       title: 'جدول الطلبات',
       content: 'هنا تجد كافة الطلبات. يمكنك مراجعة الإيصالات، ومن ثم الموافقة على الطلب ليتم تفعيله أو رفضه.',
       placement: 'top',
-      disableBeacon: true,
+      skipBeacon: true,
     }
   ],
   '/admin/cards': [
@@ -85,21 +84,21 @@ const ALL_STEPS: Record<string, Step[]> = {
       title: 'إضافة بطاقة جديدة',
       content: 'من هنا يمكنك طرح بطاقة جديدة للبيع، وتحديد سعرها واسم الأستاذ الخاص بها بكل سهولة.',
       placement: 'left',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-cards-search',
       title: 'البحث السريع',
       content: 'ابحث هنا لتجد أي بطاقة مسجلة في المتجر بشكل فوري وسريع.',
       placement: 'bottom',
-      disableBeacon: true,
+      skipBeacon: true,
     },
     {
       target: '#tour-cards-table',
       title: 'قائمة البطاقات',
       content: 'تستطيع تعديل سعر البطاقة، تعطيل بيعها، أو إيقافها تماماً من خلال هذه القائمة.',
       placement: 'top',
-      disableBeacon: true,
+      skipBeacon: true,
     }
   ],
 };
@@ -110,14 +109,14 @@ const DEFAULT_STEPS: Step[] = [
     title: 'تفعيل الشرح المخصص',
     content: 'اضغط هنا في أي صفحة وسأقوم بشرح عناصرها لك خطوة بخطوة.',
     placement: 'bottom',
-    disableBeacon: true,
+    skipBeacon: true,
   },
   {
     target: '#tour-user-info',
     title: 'حسابك',
     content: 'من هنا يمكنك معرفة الحساب الذي تستخدمه حالياً في لوحة التحكم.',
     placement: 'bottom',
-    disableBeacon: true,
+    skipBeacon: true,
   }
 ];
 
@@ -188,7 +187,7 @@ export default function TutorialTour() {
     }
   }, [pathname]);
 
-  const handleJoyrideCallback = (data: CallBackProps) => {
+  const handleJoyrideCallback = (data: EventData) => {
     const { status } = data;
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
     
@@ -232,7 +231,7 @@ export default function TutorialTour() {
       steps={steps.length > 0 ? steps : DEFAULT_STEPS}
       tooltipComponent={CustomTooltip}
       disableOverlayClose={false}
-      disableBeacon={true}
+      skipBeacon={true}
       styles={{
         options: {
           zIndex: 10000,

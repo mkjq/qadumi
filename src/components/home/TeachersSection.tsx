@@ -11,10 +11,10 @@ interface Teacher {
   instagram: string | null; bio: string | null; image: string | null;
 }
 
-const subjectColors: Record<string, { bg: string; text: string; glow: string }> = {
-  'اللغة العربية': { bg: 'from-amber-500/20 to-amber-600/10', text: 'text-amber-400', glow: 'rgba(245,158,11,0.3)' },
-  'الرياضيات':    { bg: 'from-blue-500/20 to-blue-600/10',   text: 'text-blue-400',  glow: 'rgba(59,130,246,0.3)' },
-  'اللغة الإنجليزية': { bg: 'from-green-500/20 to-green-600/10', text: 'text-green-400', glow: 'rgba(34,197,94,0.3)' },
+const subjectColors: Record<string, { bg: string; text: string }> = {
+  'اللغة العربية': { bg: 'bg-amber-100', text: 'text-amber-700' },
+  'الرياضيات': { bg: 'bg-blue-100', text: 'text-blue-700' },
+  'اللغة الإنجليزية': { bg: 'bg-green-100', text: 'text-green-700' },
 };
 
 export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
@@ -28,66 +28,61 @@ export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
   }, []);
 
   return (
-    <section className="py-16 lg:py-24 section-bg-light relative overflow-hidden" ref={ref}>
-      {/* BG blobs */}
-      <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-amber-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-blue-500/5 rounded-full blur-3xl" />
-
+    <section className="py-20 md:py-28 lg:py-28 bg-white relative overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-10 sm:mb-16">
-          <div className="section-label mx-auto w-fit text-xs sm:text-sm">الكادر التعليمي</div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-4 mb-4">
-            أساتذتنا <span className="gradient-text">المتميزون</span>
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="section-label mx-auto w-fit text-xs sm:text-sm mb-4">
+            الكادر التعليمي
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-navy-900 mb-4 tracking-tight">
+            أساتذتنا <span className="gradient-text-cyan">المتميزون</span>
           </h2>
-          <p className="text-white/50 text-sm sm:text-base lg:text-lg max-w-xl mx-auto">
+          <p className="text-slate-500 text-sm sm:text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
             نخبة من الأساتذة المتخصصين ذوي الخبرة العالية يضمنون لك التفوق والنجاح
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {teachers.map((teacher, i) => {
-            const colors = subjectColors[teacher.subject] || { bg: 'from-purple-500/20 to-purple-600/10', text: 'text-purple-400', glow: 'rgba(168,85,247,0.3)' };
+            const colors = subjectColors[teacher.subject] || { bg: 'bg-purple-100', text: 'text-purple-700' };
             return (
-              <div key={teacher.id} className="teacher-card"
+              <div key={teacher.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col"
                 style={{ transitionDelay: `${(i % 3) * 100}ms`, opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(20px)', transition: 'all 0.6s cubic-bezier(0.4,0,0.2,1)' }}>
 
                 {/* Image */}
-                <div className="teacher-img-wrap h-56 sm:h-64 lg:h-[300px]">
+                <div className="relative h-56 sm:h-64 lg:h-72 w-full bg-slate-50">
                   {teacher.image ? (
                     <Image src={teacher.image} alt={teacher.name} fill className="object-cover object-top" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-white/5">
-                      <GraduationCap className="w-16 h-16 sm:w-20 sm:h-20 text-white/20" />
+                    <div className="w-full h-full flex items-center justify-center bg-slate-100">
+                      <GraduationCap className="w-16 h-16 sm:w-20 sm:h-20 text-slate-300" />
                     </div>
                   )}
                   {/* Gradient overlay */}
-                  <div className="teacher-img-overlay absolute inset-0" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, white 0%, rgba(255,255,255,0.2) 40%, transparent 100%)' }} />
 
                   {/* Subject badge */}
-                  <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r ${colors.bg} backdrop-blur border border-white/10 text-xs sm:text-sm font-bold ${colors.text}`}>
+                  <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 px-3 py-1 rounded-full ${colors.bg} ${colors.text} text-xs sm:text-sm font-bold shadow-sm`}>
                     {teacher.subject}
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 sm:p-6">
+                <div className="p-5 sm:p-6 flex-1 flex flex-col relative z-10 -mt-6">
                   {/* Name + rating */}
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3 gap-2">
-                    <div>
-                      <h3 className="text-white font-black text-lg sm:text-xl">أ. {teacher.name}</h3>
-                      <div className="flex items-center gap-1 mt-1">
-                        {[...Array(5)].map((_, j) => (
-                          <Star key={j} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" fill="currentColor" />
-                        ))}
-                        <span className="text-white/40 text-[10px] sm:text-xs mr-1">ممتاز</span>
-                      </div>
+                  <div className="flex flex-col mb-3">
+                    <h3 className="text-[#0B1D3A] font-black text-lg sm:text-xl">أ. {teacher.name}</h3>
+                    <div className="flex items-center gap-1 mt-2">
+                      {[...Array(5)].map((_, j) => (
+                        <Star key={j} className="w-4 h-4 text-[#FFB800]" fill="currentColor" />
+                      ))}
                     </div>
                   </div>
 
                   {/* Grades */}
-                  <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-4">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {teacher.grades.split(',').map(g => (
-                      <span key={g} className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-white/60 border border-white/8 whitespace-nowrap">
+                      <span key={g} className="text-[10px] sm:text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-medium whitespace-nowrap">
                         {g.trim()}
                       </span>
                     ))}
@@ -95,37 +90,37 @@ export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
 
                   {/* Bio */}
                   {teacher.bio && (
-                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 line-clamp-2">{teacher.bio}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-5 line-clamp-2 flex-1">{teacher.bio}</p>
                   )}
 
                   {/* Divider */}
-                  <div className="h-px bg-white/5 mb-3 sm:mb-4" />
+                  <div className="h-px bg-slate-100 w-full my-4" />
 
                   {/* Social links */}
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  <div className="flex flex-wrap gap-2 mt-auto">
                     {teacher.whatsapp && (
                       <a href={whatsappLink(teacher.whatsapp, `أهلًا أستاذ ${teacher.name}، أود الاستفسار`)}
                         target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-green-500/10 text-green-400 border border-green-500/20 hover:bg-green-500/20 transition-all text-[10px] sm:text-xs font-semibold">
-                        <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" /> واتساب
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-600 hover:bg-green-100 transition-colors text-xs font-semibold">
+                        <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" /> واتساب
                       </a>
                     )}
                     {teacher.phone && (
                       <a href={`tel:${teacher.phone}`}
-                        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 transition-all text-[10px] sm:text-xs font-semibold">
-                        <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" /> اتصال
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors text-xs font-semibold">
+                        <Phone className="w-3.5 h-3.5 flex-shrink-0" /> اتصال
                       </a>
                     )}
                     {teacher.facebook && (
                       <a href={teacher.facebook} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-[#1877F2]/10 text-[#1877F2] border border-[#1877F2]/20 hover:bg-[#1877F2]/20 transition-all text-[10px] sm:text-xs font-semibold">
-                        <Facebook className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" /> فيسبوك
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors text-xs font-semibold">
+                        <Facebook className="w-3.5 h-3.5 flex-shrink-0" /> فيسبوك
                       </a>
                     )}
                     {teacher.instagram && (
                       <a href={teacher.instagram} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/20 hover:bg-pink-500/20 transition-all text-[10px] sm:text-xs font-semibold">
-                        <Instagram className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" /> إنستغرام
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100 transition-colors text-xs font-semibold">
+                        <Instagram className="w-3.5 h-3.5 flex-shrink-0" /> إنستغرام
                       </a>
                     )}
                   </div>
@@ -135,10 +130,10 @@ export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
           })}
         </div>
 
-        <div className="text-center mt-10 sm:mt-12">
-          <Link href="/teachers" className="btn-outline-white inline-flex items-center justify-center gap-2 text-sm sm:text-base w-full sm:w-auto">
-            <span>عرض جميع التفاصيل</span>
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        <div className="text-center mt-12 sm:mt-16">
+          <Link href="/teachers" className="inline-flex items-center justify-center gap-2 text-sm sm:text-base bg-cyan-accent hover:bg-cyan-600 text-white px-8 py-3.5 rounded-full font-bold shadow-lg shadow-cyan-accent/20 hover:shadow-cyan-accent/30 hover:-translate-y-0.5 transition-all w-full sm:w-auto">
+            <span>عرض جميع المعلمين والتفاصيل</span>
+            <ChevronLeft className="w-5 h-5" />
           </Link>
         </div>
       </div>

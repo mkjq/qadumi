@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import MobileBottomNav from '@/components/MobileBottomNav';
 
 export default function PublicLayout({
   children,
@@ -9,8 +10,9 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      <main className="pt-16 md:pt-[68px]">{children}</main>
+      <main>{children}</main>
       <Footer />
+      <MobileBottomNav />
     </>
   );
 }
