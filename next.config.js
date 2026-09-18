@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 if (!process.env.DATABASE_URL) {
-  process.env.DATABASE_URL = 'file:./prisma/dev.db';
+  process.env.DATABASE_URL = 'postgresql://neondb_owner:npg_sGz4abuSR7BA@ep-little-poetry-b1aatcpp-pooler.c-5.eu-central-1.aws.neon.tech/neondb?sslmode=require';
 }
 if (!process.env.NEXTAUTH_URL) {
   process.env.NEXTAUTH_URL = process.env.VERCEL_URL 
@@ -16,11 +16,6 @@ const nextConfig = {
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-  },
-  experimental: {
-    outputFileTracingIncludes: {
-      '/**': ['./prisma/dev.db', './dev.db'],
-    },
   },
   images: {
     domains: ['localhost'],
