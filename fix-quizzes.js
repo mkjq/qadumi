@@ -1,0 +1,46 @@
+const fs = require('fs');
+const file = 'src/app/(public)/quizzes/page.tsx';
+let code = fs.readFileSync(file, 'utf8');
+
+// Replace subjects list
+code = code.replace(/const subjectsList = \[\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*\];/g, 
+  `const subjectsList = [
+  'الكل',
+  'الرياضيات',
+  'الفيزياء',
+  'اللغة العربية',
+  'الإنجليزية',
+  'التربية الإسلامية',
+];`);
+
+// Replace grades list
+code = code.replace(/const gradesList = \[\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*'[^']*',\s*\];/g, 
+  `const gradesList = [
+  'الكل',
+  'ثاني ثانوي',
+  'أول ثانوي',
+  'بيتك',
+  'عاشر',
+  'تاسع',
+  'ثامن',
+  'سابع',
+  'سادس',
+  'خامس',
+  'رابع',
+  'ثالث',
+  'ثاني',
+  'أول'
+];`);
+
+// Fix other mojibake UI text
+code = code.replace(/'????'/g, "'الكل'");
+code = code.replace(/>???????</g, ">الاختبارات<");
+code = code.replace(/>?????? ?????????? ?? ????? ???????</g, ">الاختبارات المتوفرة في المنصة التعليمية<");
+code = code.replace(/>??? ???????</g, ">كل المواد<");
+code = code.replace(/>??? ???????</g, ">كل الصفوف<");
+code = code.replace(/>????? ?? ??????????\.\.\.</g, ">ابحث عن اختبار...<");
+code = code.replace(/>??? ???? ?????????/</g, ">لا توجد اختبارات<");
+code = code.replace(/>?? ??? ???????? ??????? ?????? ????? ???????\.</g, ">لم يتم العثور على اختبارات مطابقة لخيارات البحث الحالية.<");
+code = code.replace(/>?????? ???? ?? ???????\.\.\.</g, ">جاري البحث عن الاختبارات...<");
+
+fs.writeFileSync(file, code, 'utf8');
