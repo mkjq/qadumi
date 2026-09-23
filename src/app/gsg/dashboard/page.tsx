@@ -36,7 +36,7 @@ export default function DashboardPage() {
 
   const quickLinks = [
     {
-      href: '/admin/teachers',
+      href: '/gsg/teachers',
       icon: Users,
       title: 'إدارة الأساتذة',
       desc: 'إضافة، تعديل، حذف الأساتذة',
@@ -45,7 +45,7 @@ export default function DashboardPage() {
       label: 'أستاذ',
     },
     {
-      href: '/admin/messages',
+      href: '/gsg/messages',
       icon: MessageSquare,
       title: 'الرسائل الواردة',
       desc: 'رسائل التواصل من الطلاب',
@@ -55,7 +55,7 @@ export default function DashboardPage() {
       badge: stats?.unreadMessages ? stats.unreadMessages : undefined,
     },
     {
-      href: '/admin/orders',
+      href: '/gsg/orders',
       icon: ShoppingCart,
       title: 'الطلبات والمبيعات',
       desc: 'إدارة طلبات البطاقات',

@@ -9,10 +9,9 @@ function processDir(dir) {
       processDir(fullPath);
     } else if (file === 'route.ts' || file === 'route.tsx' || (dir === path.join(process.cwd(), 'src', 'app') && file === 'layout.tsx')) {
       let content = fs.readFileSync(fullPath, 'utf8');
-      if (content.startsWith('export const runtime = \'edge\';\n')) {
-        content = content.replace('export const runtime = \'edge\';\n', '');
+      if (!content.includes('export const runtime = \'edge\'') && !content.includes('export const runtime = "edge"')) {
+        content = 'export const runtime = \'edge\';\n' + content;
         fs.writeFileSync(fullPath, content);
-        console.log('Reverted ' + fullPath);
       }
     }
   }

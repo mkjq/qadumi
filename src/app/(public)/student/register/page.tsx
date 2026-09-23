@@ -1,32 +1,50 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, FormEvent, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { AlertCircle, CheckCircle2, UserPlus, Gift } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Gift, AlertCircle, CheckCircle2, UserPlus, X, Check } from 'lucide-react';
 
 const GRADE_OPTIONS = [
   'توجيهي علمي',
   'توجيهي أدبي',
-  'توجيهي (مشترك)',
   'أول ثانوي علمي',
   'أول ثانوي أدبي',
-  'الصف العاشر',
-  'الصفوف الأساسية (7-9)',
-  'BTEC التعليم المهني',
+  'العاشر',
+  'التاسع',
+  'الثامن',
 ];
 
-export default function StudentRegisterPage() {
+function StudentRegisterContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('returnUrl');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [grade, setGrade] = useState(GRADE_OPTIONS[0]);
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Password validation states
+  const [hasMinLength, setHasMinLength] = useState(false);
+  const [hasUpper, setHasUpper] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasSpecial, setHasSpecial] = useState(false);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+
+  useEffect(() => {
+    setHasMinLength(password.length >= 8);
+    setHasUpper(/[A-Z]/.test(password));
+    setHasNumber(/[0-9]/.test(password));
+    setHasSpecial(/[@$!%*?&#^()_\-+=<>{}\[\]~`|:;,.]/.test(password));
+    setPasswordsMatch(password === confirmPassword && password.length > 0);
+  }, [password, confirmPassword]);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -40,13 +58,13 @@ export default function StudentRegisterPage() {
       return;
     }
 
-    if (!password || password.length < 6) {
-      setError('كلمة المرور يجب أن لا تقل عن 6 أحرف أو أرقام');
+    if (!hasMinLength || !hasUpper || !hasNumber || !hasSpecial) {
+      setError('يرجى التأكد من استيفاء جميع شروط كلمة المرور');
       return;
     }
-
-    if (!grade) {
-      setError('يرجى اختيار المرحلة أو الصف الدراسي');
+    
+    if (!passwordsMatch) {
+      setError('كلمتي المرور غير متطابقتين');
       return;
     }
 
@@ -67,9 +85,7 @@ export default function StudentRegisterPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'فشل إنشاء الحساب، يرجى المحاولة مجدداً');
-        setLoading(false);
-        return;
+        throw new Error(data.error || 'فشل إنشاء الحساب، يرجى المحاولة مجدداً');
       }
 
       setSuccess(true);
@@ -78,14 +94,21 @@ export default function StudentRegisterPage() {
       }
 
       setTimeout(() => {
-        router.push('/student/dashboard');
+        router.push(returnUrl || '/student/dashboard');
         router.refresh();
       }, 700);
-    } catch {
-      setError('حدث خطأ في الاتصال بالخادم، يرجى المحاولة لاحقاً');
+    } catch (err: any) {
+      setError(err.message || 'حدث خطأ في الاتصال بالخادم، يرجى المحاولة لاحقاً');
       setLoading(false);
     }
   };
+
+  const ConditionItem = ({ met, text }: { met: boolean; text: string }) => (
+    <div className={`flex items-center gap-1.5 text-xs font-bold transition-colors ${met ? 'text-green-700' : 'text-slate-500'}`}>
+      {met ? <Check size={14} className="text-green-600" /> : <X size={14} />}
+      <span>{text}</span>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#f3f4f6] pt-32 pb-20 px-4 flex items-center justify-center font-arabic" dir="rtl">
@@ -110,15 +133,15 @@ export default function StudentRegisterPage() {
           {/* Feedback Messages */}
           {error && (
             <div className="w-full p-3 bg-red-100 border-2 border-red-900 text-red-900 font-bold text-sm flex items-center gap-2 rounded-[5px] shadow-[2px_2px_0px_#7f1d1d]">
-              <AlertCircle size={18} />
+              <AlertCircle size={18} className="shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {success && (
             <div className="w-full p-3 bg-green-100 border-2 border-green-900 text-green-900 font-bold text-sm flex items-center gap-2 rounded-[5px] shadow-[2px_2px_0px_#14532d]">
-              <CheckCircle2 size={18} />
-              <span>تم إنشاء الحساب بنجاح! جاري التحويل...</span>
+              <CheckCircle2 size={18} className="shrink-0" />
+              <span>تم إنشاء الحساب بنجاح! جاري التوجيه...</span>
             </div>
           )}
 
@@ -188,12 +211,40 @@ export default function StudentRegisterPage() {
               required
               className="w-full h-[45px] rounded-[5px] border-2 border-[#323232] bg-white shadow-[4px_4px_0px_#323232] text-[15px] font-bold text-[#323232] px-3 outline-none focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-[2px_2px_0px_#323232] transition-all text-right placeholder:text-slate-400 placeholder:font-medium disabled:opacity-70"
             />
+            
+            {/* Password Conditions */}
+            <div className="mt-2.5 flex flex-col gap-1.5 bg-[#e5e7eb] p-2.5 rounded-[5px] border border-[#a1a1aa]">
+              <ConditionItem met={hasMinLength} text="8 أحرف أو أكثر" />
+              <ConditionItem met={hasUpper} text="يحتوي على حرف كبير واحد على الأقل (A-Z)" />
+              <ConditionItem met={hasNumber} text="يحتوي على رقم واحد على الأقل (0-9)" />
+              <ConditionItem met={hasSpecial} text="يحتوي على رمز خاص (@$!%*?&#...)" />
+            </div>
+          </div>
+
+          {/* Confirm Password Input */}
+          <div className="w-full">
+            <label className="block text-sm font-black text-[#323232] mb-1.5">تأكيد كلمة المرور</label>
+            <input
+              type="password"
+              dir="ltr"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="••••••••"
+              disabled={loading || success}
+              required
+              className="w-full h-[45px] rounded-[5px] border-2 border-[#323232] bg-white shadow-[4px_4px_0px_#323232] text-[15px] font-bold text-[#323232] px-3 outline-none focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-[2px_2px_0px_#323232] transition-all text-right placeholder:text-slate-400 placeholder:font-medium disabled:opacity-70"
+            />
+            {confirmPassword.length > 0 && (
+              <div className="mt-2.5 bg-[#e5e7eb] p-2 rounded-[5px] border border-[#a1a1aa]">
+                <ConditionItem met={passwordsMatch} text="كلمتا المرور متطابقتان" />
+              </div>
+            )}
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading || success}
+            disabled={loading || success || !hasMinLength || !hasUpper || !hasNumber || !hasSpecial || !passwordsMatch}
             className="group relative overflow-hidden z-10 w-full h-[45px] mt-2 rounded-[5px] border-2 border-[#323232] bg-white shadow-[4px_4px_0px_#323232] flex items-center justify-center gap-2 text-[16px] font-bold text-[#323232] cursor-pointer hover:text-[#e8e8e8] transition-colors duration-300 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#323232] disabled:opacity-70 disabled:cursor-not-allowed"
           >
             <div className="absolute top-0 right-0 h-full w-0 bg-[#212121] -z-10 shadow-[4px_8px_19px_-3px_rgba(0,0,0,0.27)] transition-all duration-300 group-hover:w-full group-disabled:hidden" />
@@ -228,5 +279,13 @@ export default function StudentRegisterPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function StudentRegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin" /></div>}>
+      <StudentRegisterContent />
+    </Suspense>
   );
 }

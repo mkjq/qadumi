@@ -100,6 +100,53 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
     };
   }, [answers, onSubmit]);
 
+  // Anti-Cheat: Block right-click, keyboard shortcuts, and DevTools
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      setCheatWarnings((prev) => {
+        const newWarnings = prev + 1;
+        if (newWarnings >= 3) {
+          toast.error('تم إنهاء الاختبار بسبب محاولات غش متكررة.', { duration: 5000 });
+          onSubmit(answers);
+        } else {
+          toast.error(`تحذير: يمنع استخدام القائمة المنبثقة أثناء الاختبار! (${newWarnings}/3)`, { duration: 3000, icon: '🚫' });
+        }
+        return newWarnings;
+      });
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Block: Ctrl+C, Ctrl+V, Ctrl+A, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12
+      const blocked =
+        (e.ctrlKey && ['c', 'v', 'a', 'u'].includes(e.key.toLowerCase())) ||
+        (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase())) ||
+        e.key === 'F12';
+
+      if (blocked) {
+        e.preventDefault();
+        e.stopPropagation();
+        setCheatWarnings((prev) => {
+          const newWarnings = prev + 1;
+          if (newWarnings >= 3) {
+            toast.error('تم إنهاء الاختبار بسبب محاولات غش متكررة.', { duration: 5000 });
+            onSubmit(answers);
+          } else {
+            toast.error(`تحذير مكافحة الغش: اختصارات لوحة المفاتيح ممنوعة! (${newWarnings}/3)`, { duration: 3000, icon: '⛔' });
+          }
+          return newWarnings;
+        });
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [answers, onSubmit]);
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;

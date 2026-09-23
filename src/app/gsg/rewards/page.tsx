@@ -18,8 +18,17 @@ export default function AdminRewardsPage() {
 
   const loadRewards = () => {
     startTransition(async () => {
-      const data = await getRewards();
-      setRewards(data);
+      try {
+        const data = await getRewards();
+        if (Array.isArray(data)) {
+          setRewards(data);
+        } else {
+          setRewards([]);
+        }
+      } catch (err) {
+        console.error('Error loading rewards:', err);
+        setRewards([]);
+      }
     });
   };
 

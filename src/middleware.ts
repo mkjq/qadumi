@@ -26,6 +26,7 @@ export async function middleware(request: NextRequest) {
     { path: '/api/materials', protectedMethods: ['POST', 'PUT', 'DELETE', 'PATCH'] },
     { path: '/api/center', protectedMethods: ['POST', 'PUT', 'DELETE', 'PATCH'] },
     { path: '/api/admins', protectedMethods: ['*'] },
+    { path: '/api/gsgs', protectedMethods: ['*'] },
     { path: '/api/upload', protectedMethods: ['*'] },
     { path: '/api/upload-doc', protectedMethods: ['*'] },
   ];
@@ -47,8 +48,15 @@ export async function middleware(request: NextRequest) {
   }
 
   if (isProtected) {
-    // Verify the JWT token
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    const secret = process.env.NEXTAUTH_SECRET || 'qadoumi-secret-key-2025-very-secure';
+    // Verify the JWT token, checking standard and secure cookie names
+    let token = await getToken({ req: request, secret });
+    if (!token) {
+      token = await getToken({ req: request, secret, cookieName: '__Secure-next-auth.session-token' });
+    }
+    if (!token) {
+      token = await getToken({ req: request, secret, cookieName: 'next-auth.session-token' });
+    }
     
     if (!token) {
       return NextResponse.json(

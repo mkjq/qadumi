@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { verifyPassword, signStudentToken, getPrestigeTier } from '@/lib/studentAuth';
 
+
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -58,11 +60,12 @@ export async function POST(request: Request) {
       });
     }
 
-    const token = signStudentToken({
+    // 4. Generate secure session token
+    const token = await signStudentToken({
       studentId: student.id,
       name: student.name,
-      phone: student.phone || cleanPhone,
-      grade: student.grade,
+      phone: student.phone || '',
+      grade: student.grade || '',
     });
 
     const response = NextResponse.json({

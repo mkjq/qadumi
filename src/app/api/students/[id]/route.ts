@@ -5,34 +5,35 @@ export const dynamic = 'force-dynamic';
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
+    const id = parseInt(params.id);
     const body = await request.json();
-    const card = await prisma.courseCard.update({
-      where: { id: parseInt(params.id) },
+
+    const student = await prisma.student.update({
+      where: { id },
       data: {
-        title: body.title,
-        subject: body.subject,
+        points: parseInt(body.points) || 0,
+        level: body.level,
         grade: body.grade,
-        teacherName: body.teacherName,
-        price: parseFloat(body.price),
-        imageUrl: body.imageUrl,
         isActive: body.isActive,
       },
     });
-    return NextResponse.json(card);
+
+    return NextResponse.json(student);
   } catch (error: any) {
-    console.error('[API cards PUT] Error:', error);
+    console.error('[API students PUT] Error:', error);
     return NextResponse.json({ error: error?.message || 'Update failed' }, { status: 500 });
   }
 }
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
-    await prisma.courseCard.delete({
-      where: { id: parseInt(params.id) },
+    const id = parseInt(params.id);
+    await prisma.student.delete({
+      where: { id },
     });
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error('[API cards DELETE] Error:', error);
+    console.error('[API students DELETE] Error:', error);
     return NextResponse.json({ error: error?.message || 'Delete failed' }, { status: 500 });
   }
 }

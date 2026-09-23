@@ -18,8 +18,17 @@ export default function AdminQuizzesPage() {
 
   const loadQuizzes = () => {
     startTransition(async () => {
-      const data = await getQuizzes();
-      setQuizzes(data);
+      try {
+        const data = await getQuizzes();
+        if (Array.isArray(data)) {
+          setQuizzes(data);
+        } else {
+          setQuizzes([]);
+        }
+      } catch (err) {
+        console.error('Error loading quizzes:', err);
+        setQuizzes([]);
+      }
     });
   };
 

@@ -21,10 +21,10 @@ export async function saveStudent(data: any) {
       }
     });
   }
-  revalidatePath('/admin/students');
+  revalidatePath('/gsg/students');
 }
 
 export async function deleteStudent(id: number) {
   await prisma.student.delete({ where: { id } });
-  revalidatePath('/admin/students');
+  revalidatePath('/gsg/students');
 }

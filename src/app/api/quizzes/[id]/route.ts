@@ -1,6 +1,16 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
+/** Fisher-Yates shuffle — returns a new shuffled array */
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export const dynamic = 'force-dynamic';
 
 export async function GET(
@@ -40,17 +50,21 @@ export async function GET(
     // CRITICAL ANTI-CHEAT REQUIREMENT:
     // Omit `isCorrect` from options served to client to prevent client-side inspection.
     // Also omit pedagogical explanation until submission.
+    // Shuffle options within each question, then shuffle the questions order
     const maskedQuestions = quiz.questions.map((q) => ({
       id: q.id,
       question: q.question,
       points: q.points,
       order: q.order,
-      options: q.options.map((opt) => ({
+      options: shuffleArray(q.options.map((opt) => ({
         id: opt.id,
         text: opt.text,
         order: opt.order,
-      })),
+      }))),
     }));
+
+    // Shuffle the questions order for anti-cheat
+    const shuffledQuestions = shuffleArray(maskedQuestions);
 
     return NextResponse.json({
       success: true,
@@ -65,7 +79,7 @@ export async function GET(
         bonusPoints: quiz.bonusPoints,
         passingScore: quiz.passingScore,
         questionCount: quiz.questions.length,
-        questions: maskedQuestions,
+        questions: shuffledQuestions,
       },
     });
   } catch (error) {

@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 
 export async function deleteQuiz(id: number) {
   await prisma.quiz.delete({ where: { id } });
-  revalidatePath('/admin/quizzes');
+  revalidatePath('/gsg/quizzes');
   revalidatePath('/quizzes');
 }
 
@@ -83,6 +83,6 @@ export async function saveQuiz(data: any) {
     });
   }
 
-  revalidatePath('/admin/quizzes');
+  revalidatePath('/gsg/quizzes');
   revalidatePath('/quizzes');
 }

@@ -14,6 +14,7 @@ export interface QuizCelebrationProps {
   pointsEarned: number;
   newTotalPoints: number;
   level: string;
+  isFirstAttempt?: boolean;
   onReviewClick: () => void;
   onRetakeClick: () => void;
 }
@@ -25,6 +26,7 @@ export default function QuizCelebration({
   pointsEarned,
   newTotalPoints,
   level,
+  isFirstAttempt = true,
   onReviewClick,
   onRetakeClick,
 }: QuizCelebrationProps) {
@@ -194,13 +196,24 @@ export default function QuizCelebration({
 
           {/* Stat 2: Points Earned */}
           <div className="flex flex-col items-center justify-center rounded-2xl bg-white/5 border border-white/10 p-4">
-            <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-amber-500/20 text-amber-400 ring-2 ring-amber-500/20">
+            <div className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full ${isFirstAttempt ? 'bg-amber-500/20 text-amber-400 ring-2 ring-amber-500/20' : 'bg-slate-500/20 text-slate-400'}`}>
               <Star className="w-5 h-5" />
             </div>
-            <div className="text-xl sm:text-2xl font-black text-white">
-              +{pointsEarned}
-            </div>
-            <div className="text-xs font-bold text-amber-400 mt-1">نقاط مكتسبة</div>
+            {isFirstAttempt ? (
+              <>
+                <div className="text-xl sm:text-2xl font-black text-white">
+                  +{pointsEarned}
+                </div>
+                <div className="text-xs font-bold text-amber-400 mt-1">نقاط مكتسبة</div>
+              </>
+            ) : (
+              <>
+                <div className="text-sm font-bold text-slate-400">
+                  تم التسجيل
+                </div>
+                <div className="text-[10px] font-bold text-slate-500 mt-1">النقاط تُحتسب بالمحاولة الأولى فقط</div>
+              </>
+            )}
           </div>
         </motion.div>
 

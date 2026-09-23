@@ -80,13 +80,21 @@ export default async function TeacherProfilePage({ params }: TeacherProfileProps
             {/* Teacher Avatar Image */}
             <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden bg-slate-800 border-4 border-white/10 shadow-2xl flex-shrink-0">
               {teacher.image ? (
-                <Image
-                  src={teacher.image}
-                  alt={teacher.name}
-                  fill
-                  priority
-                  className={`object-cover ${teacher.imagePosition || 'object-center'}`}
-                />
+                teacher.image.startsWith('data:') ? (
+                  <img
+                    src={teacher.image}
+                    alt={teacher.name}
+                    className={`absolute inset-0 w-full h-full object-cover ${teacher.imagePosition || 'object-center'}`}
+                  />
+                ) : (
+                  <Image
+                    src={teacher.image}
+                    alt={teacher.name}
+                    fill
+                    priority
+                    className={`object-cover ${teacher.imagePosition || 'object-center'}`}
+                  />
+                )
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-cyan-accent-500 text-white font-black text-4xl">
                   {teacher.name.charAt(0)}

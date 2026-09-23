@@ -52,7 +52,15 @@ export default function AdminTeachersPage() {
     try {
       const res = await fetch('/api/teachers?admin=true');
       const data = await res.json();
-      setTeachers(data);
+      if (Array.isArray(data)) {
+        setTeachers(data);
+      } else {
+        console.warn('Teachers API returned non-array:', data);
+        setTeachers([]);
+      }
+    } catch (err) {
+      console.error('Error fetching teachers:', err);
+      setTeachers([]);
     } finally {
       setLoading(false);
     }
@@ -76,13 +84,16 @@ export default function AdminTeachersPage() {
       const croppedBlob = await getCroppedImg(cropImage, croppedAreaPixels);
       if (!croppedBlob) throw new Error('Crop failed');
 
-      const formData = new FormData();
-      formData.append('file', croppedBlob, 'cropped.jpg');
+      // Convert cropped blob to Base64 Data URL (works on Cloudflare Workers without filesystem)
+      const reader = new FileReader();
+      const base64Url = await new Promise<string>((resolve, reject) => {
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(croppedBlob);
+      });
 
-      const res = await fetch('/api/upload', { method: 'POST', body: formData });
-      const data = await res.json();
-      setEditingTeacher({ ...editingTeacher, image: data.url });
-      toast.success('تم رفع الصورة بنجاح');
+      setEditingTeacher({ ...editingTeacher, image: base64Url });
+      toast.success('تم تحميل الصورة بنجاح');
       
       setCropImage(null);
       setZoom(1);
@@ -169,7 +180,11 @@ export default function AdminTeachersPage() {
             <div key={teacher.id} className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="relative h-48 bg-gray-100">
                 {teacher.image ? (
-                  <Image src={teacher.image} alt={teacher.name} fill className="object-cover object-top" />
+                  teacher.image.startsWith('data:') ? (
+                    <img src={teacher.image} alt={teacher.name} className="absolute inset-0 w-full h-full object-cover object-top" />
+                  ) : (
+                    <Image src={teacher.image} alt={teacher.name} fill className="object-cover object-top" />
+                  )
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
                     <Users className="w-12 h-12 text-gray-300" />
@@ -216,7 +231,11 @@ export default function AdminTeachersPage() {
               <div className="text-center">
                 <div className="relative w-32 h-32 mx-auto mb-3">
                   {editingTeacher.image ? (
-                    <Image src={editingTeacher.image} alt="صورة الأستاذ" fill className={`object-cover rounded-2xl ${editingTeacher.imagePosition || 'object-center'}`} />
+                    editingTeacher.image.startsWith('data:') ? (
+                      <img src={editingTeacher.image} alt="صورة الأستاذ" className={`absolute inset-0 w-full h-full object-cover rounded-2xl ${editingTeacher.imagePosition || 'object-center'}`} />
+                    ) : (
+                      <Image src={editingTeacher.image} alt="صورة الأستاذ" fill className={`object-cover rounded-2xl ${editingTeacher.imagePosition || 'object-center'}`} />
+                    )
                   ) : (
                     <div className="w-full h-full bg-gray-100 rounded-2xl flex items-center justify-center">
                       <Users className="w-12 h-12 text-gray-300" />

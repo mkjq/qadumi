@@ -7,12 +7,12 @@ async function main() {
   console.log('🌱 بدء إدخال البيانات الأولية...');
 
   // Admin
-  const passwordHash = await bcrypt.hash('qadoumi2025', 12);
+  const passwordHash = await bcrypt.hash('AISAQ)&*%^TGHA', 12);
   await prisma.admin.upsert({
-    where: { username: 'admin' },
+    where: { username: 'yousef' },
     update: {},
     create: {
-      username: 'admin',
+      username: 'yousef',
       passwordHash,
     },
   });
@@ -172,8 +172,8 @@ async function main() {
   }
   console.log('✅ تم إدخال الدوسيات والمواد التعليمية النموذجية');
 
-  console.log('🎉 انتهى إدخال البيانات بنجاح!');
-  console.log('🔑 بيانات تسجيل الدخول: admin / qadoumi2025');
+  console.log('🎉 تم إدخال البيانات بنجاح!');
+  console.log('👉 بيانات الدخول كمسؤول: yousef / AISAQ)&*%^TGHA');
 }
 
 main()

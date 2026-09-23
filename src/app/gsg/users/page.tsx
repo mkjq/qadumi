@@ -45,12 +45,18 @@ export default function AdminUsersPage() {
       const res = await fetch('/api/admins');
       if (!res.ok) {
         toast.error('لا تملك صلاحية للوصول لهذه الصفحة');
+        setUsers([]);
         setLoading(false);
         return;
       }
       const data = await res.json();
-      setUsers(data);
+      if (Array.isArray(data)) {
+        setUsers(data);
+      } else {
+        setUsers([]);
+      }
     } catch {
+      setUsers([]);
       toast.error('حدث خطأ أثناء جلب البيانات');
     } finally {
       setLoading(false);

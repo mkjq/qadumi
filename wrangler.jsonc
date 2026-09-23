@@ -1,7 +1,6 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "qadumi",
   "main": ".open-next/worker.js",
+  "name": "qadoumi",
   "compatibility_date": "2026-09-18",
   "compatibility_flags": [
     "nodejs_compat"
@@ -9,5 +8,11 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "DATABASE_URL": "postgresql://neondb_owner:npg_sGz4abuSR7BA@ep-little-poetry-b1aatcpp-pooler.c-5.eu-central-1.aws.neon.tech/neondb?sslmode=require",
+    "NEXTAUTH_SECRET": "qadoumi-secret-key-2025-very-secure",
+    "NEXTAUTH_URL": "https://qadoumi.hakareo11.workers.dev",
+    "JWT_SECRET": "qadoumi-secret-key-2025-very-secure"
   }
 }

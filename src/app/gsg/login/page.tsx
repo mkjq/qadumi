@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
       toast.error('اسم المستخدم أو كلمة المرور غير صحيحة');
     } else {
       toast.success('مرحبًا بك في لوحة التحكم!');
-      router.push('/admin/dashboard');
+      router.push('/gsg/dashboard');
     }
   };
 

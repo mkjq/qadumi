@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { revalidatePath } from 'next/cache';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
@@ -12,8 +13,9 @@ export async function GET(request: Request) {
       orderBy: { order: 'asc' },
     });
     return NextResponse.json(teachers);
-  } catch {
-    return NextResponse.json({ error: 'Failed to fetch teachers' }, { status: 500 });
+  } catch (error) {
+    console.error('[API teachers GET] Error:', error);
+    return NextResponse.json([], { status: 200 });
   }
 }
 
@@ -21,9 +23,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const teacher = await prisma.teacher.create({ data: body });
-    revalidatePath('/', 'layout');
     return NextResponse.json(teacher, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: 'Failed to create teacher' }, { status: 500 });
+  } catch (error: any) {
+    console.error('[API teachers POST] Error:', error);
+    return NextResponse.json({ error: error?.message || 'Failed to create teacher' }, { status: 500 });
   }
 }

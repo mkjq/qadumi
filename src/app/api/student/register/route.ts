@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { hashPassword, signStudentToken } from '@/lib/studentAuth';
 
+
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -24,9 +26,14 @@ export async function POST(request: Request) {
 
     const cleanPhone = phone.trim().replace(/\s+/g, '');
 
-    if (!password || typeof password !== 'string' || password.length < 6) {
+    const hasMinLen = password && typeof password === 'string' && password.length >= 8;
+    const hasUpper = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecial = /[@$!%*?&#^()_\-+=<>{}\[\]~`|:;,.]/.test(password);
+
+    if (!hasMinLen || !hasUpper || !hasNumber || !hasSpecial) {
       return NextResponse.json(
-        { error: 'كلمة المرور يجب أن لا تقل عن 6 أحرف أو أرقام' },
+        { error: 'كلمة المرور يجب أن لا تقل عن 8 خانات وتحتوي على حرف كبير ورقم ورمز خاص (@$!#)' },
         { status: 400 }
       );
     }
@@ -121,7 +128,7 @@ export async function POST(request: Request) {
     });
 
     // 5. Generate secure session token
-    const token = signStudentToken({
+    const token = await signStudentToken({
       studentId: result.id,
       name: result.name,
       phone: result.phone || cleanPhone,
@@ -155,10 +162,10 @@ export async function POST(request: Request) {
     });
 
     return response;
-  } catch (error) {
+  } catch (error: any) {
     console.error('[API student/register] Error:', error);
     return NextResponse.json(
-      { error: 'حدث خطأ غير متوقع أثناء تسجيل الحساب' },
+      { error: error?.message || 'حدث خطأ غير متوقع أثناء تسجيل الحساب' },
       { status: 500 }
     );
   }

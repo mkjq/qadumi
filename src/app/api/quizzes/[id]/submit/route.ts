@@ -55,6 +55,15 @@ export async function POST(
       );
     }
 
+    // Check for previous submissions (first attempt check)
+    const previousSubmission = await prisma.quizSubmission.findFirst({
+      where: {
+        quizId: quizId,
+        studentId: student.id,
+      },
+    });
+    const isFirstAttempt = !previousSubmission;
+
     // 2. Fetch quiz with questions and correct options
     const quiz = await prisma.quiz.findUnique({
       where: { id: quizId },
@@ -115,6 +124,9 @@ export async function POST(
     const bonus = scorePercentage >= (quiz.passingScore || 60) ? (quiz.bonusPoints || 20) : 0;
     const pointsEarned = (correctAnswers * pointsPerCorrect) + (correctAnswers > 0 ? bonus : 0);
 
+    // Only award points on first attempt to prevent exploitation
+    const actualPointsEarned = isFirstAttempt ? pointsEarned : 0;
+
     // 4. Atomic database transaction
     const submissionResult = await prisma.$transaction(async (tx) => {
       const sub = await tx.quizSubmission.create({
@@ -124,18 +136,18 @@ export async function POST(
           score: scorePercentage,
           totalQuestions,
           correctAnswers,
-          pointsEarned,
+          pointsEarned: actualPointsEarned,
           answersJson: JSON.stringify(answers),
         },
       });
 
-      if (pointsEarned > 0) {
+      if (actualPointsEarned > 0) {
         await tx.pointTransaction.create({
           data: {
             studentId: student.id,
-            amount: pointsEarned,
+            amount: actualPointsEarned,
             type: 'QUIZ_REWARD',
-            description: `إكمال اختبار ${quiz.title} بنجاح (+${pointsEarned} نقطة)`,
+            description: `إكمال اختبار ${quiz.title} بنجاح (+${actualPointsEarned} نقطة)`,
           },
         });
       }
@@ -143,7 +155,7 @@ export async function POST(
       const updatedStudent = await tx.student.update({
         where: { id: student.id },
         data: {
-          points: { increment: pointsEarned },
+          points: { increment: actualPointsEarned },
         },
       });
 
@@ -164,7 +176,8 @@ export async function POST(
       score: scorePercentage,
       correctAnswers,
       totalQuestions,
-      pointsEarned,
+      pointsEarned: actualPointsEarned,
+      isFirstAttempt,
       newTotalPoints: submissionResult.updatedStudent.points,
       level: submissionResult.updatedTier.level,
       review,

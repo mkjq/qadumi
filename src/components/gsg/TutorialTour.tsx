@@ -10,7 +10,7 @@ const JoyrideNoSSR = dynamic(() => import('./JoyrideWrapper'), { ssr: false });
 
 // Define the steps for each page contextually
 const ALL_STEPS: Record<string, Step[]> = {
-  '/admin/dashboard': [
+  '/gsg/dashboard': [
     {
       target: '#tour-sidebar',
       title: 'القائمة الجانبية',
@@ -46,7 +46,7 @@ const ALL_STEPS: Record<string, Step[]> = {
       skipBeacon: true,
     }
   ],
-  '/admin/teachers': [
+  '/gsg/teachers': [
     {
       target: '#tour-add-teacher',
       title: 'إضافة أستاذ جديد',
@@ -62,7 +62,7 @@ const ALL_STEPS: Record<string, Step[]> = {
       skipBeacon: true,
     }
   ],
-  '/admin/orders': [
+  '/gsg/orders': [
     {
       target: '#tour-orders-search',
       title: 'البحث المتقدم',
@@ -78,7 +78,7 @@ const ALL_STEPS: Record<string, Step[]> = {
       skipBeacon: true,
     }
   ],
-  '/admin/cards': [
+  '/gsg/cards': [
     {
       target: '#tour-add-card',
       title: 'إضافة بطاقة جديدة',

@@ -22,22 +22,22 @@ import {
   UserCog,
   HelpCircle,
 } from 'lucide-react';
-import TutorialTour, { startTutorial } from '@/components/admin/TutorialTour';
+import TutorialTour, { startTutorial } from '@/components/gsg/TutorialTour';
 import DynamicLogo from '@/components/DynamicLogo';
 
 const navItems = [
-  { href: '/admin/dashboard', label: 'لوحة القيادة', icon: LayoutDashboard },
-  { href: '/admin/teachers', label: 'إدارة الأساتذة', icon: Users, perm: 'TEACHERS' },
-  { href: '/admin/cards', label: 'متجر البطاقات', icon: CreditCard, perm: 'CARDS' },
-  { href: '/admin/orders', label: 'الطلبات والمبيعات', icon: ShoppingCart, perm: 'ORDERS' },
-  { href: '/admin/materials', label: 'الدوسيات والملفات', icon: FileText, perm: 'MATERIALS' },
-  { href: '/admin/messages', label: 'الرسائل', icon: MessageSquare, perm: 'MESSAGES' },
-  { href: '/admin/reviews', label: 'التقييمات', icon: Star, perm: 'REVIEWS' },
-  { href: '/admin/settings', label: 'إعدادات المركز', icon: Settings, perm: 'SETTINGS' },
-  { href: '/admin/quizzes', label: 'بنك الامتحانات', icon: FileText, perm: 'QUIZZES' },
-  { href: '/admin/rewards', label: 'المكافآت والجوائز', icon: Star, perm: 'REWARDS' },
-  { href: '/admin/students', label: 'إدارة الطلاب والنقاط', icon: Users, perm: 'STUDENTS' },
-  { href: '/admin/users', label: 'المشرفين والصلاحيات', icon: UserCog, perm: 'USERS', superAdminOnly: true },
+  { href: '/gsg/dashboard', label: 'لوحة القيادة', icon: LayoutDashboard },
+  { href: '/gsg/teachers', label: 'إدارة الأساتذة', icon: Users, perm: 'TEACHERS' },
+  { href: '/gsg/cards', label: 'متجر البطاقات', icon: CreditCard, perm: 'CARDS' },
+  { href: '/gsg/orders', label: 'الطلبات والمبيعات', icon: ShoppingCart, perm: 'ORDERS' },
+  { href: '/gsg/materials', label: 'الدوسيات والملفات', icon: FileText, perm: 'MATERIALS' },
+  { href: '/gsg/messages', label: 'الرسائل', icon: MessageSquare, perm: 'MESSAGES' },
+  { href: '/gsg/reviews', label: 'التقييمات', icon: Star, perm: 'REVIEWS' },
+  { href: '/gsg/settings', label: 'إعدادات المركز', icon: Settings, perm: 'SETTINGS' },
+  { href: '/gsg/quizzes', label: 'بنك الامتحانات', icon: FileText, perm: 'QUIZZES' },
+  { href: '/gsg/rewards', label: 'المكافآت والجوائز', icon: Star, perm: 'REWARDS' },
+  { href: '/gsg/students', label: 'إدارة الطلاب والنقاط', icon: Users, perm: 'STUDENTS' },
+  { href: '/gsg/users', label: 'المشرفين والصلاحيات', icon: UserCog, perm: 'USERS', superAdminOnly: true },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -47,12 +47,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (status === 'unauthenticated' && pathname !== '/admin/login') {
-      router.push('/admin/login');
+    if (status === 'unauthenticated' && pathname !== '/gsg/login') {
+      router.push('/gsg/login');
     }
   }, [status, router, pathname]);
 
-  if (pathname === '/admin/login') return <>{children}</>;
+  if (pathname === '/gsg/login') return <>{children}</>;
   if (status === 'loading') return (
     <div className="min-h-screen gradient-bg flex items-center justify-center">
       <div className="w-8 h-8 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -128,7 +128,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
             <button
               id="tour-logout"
-              onClick={() => signOut({ callbackUrl: '/admin/login' })}
+              onClick={() => signOut({ callbackUrl: '/gsg/login' })}
               className="w-full flex items-center gap-3 px-4 py-2 rounded-xl text-red-400 hover:bg-red-900/30 hover:text-red-300 transition-all text-sm"
             >
               <LogOut className="w-4 h-4" />

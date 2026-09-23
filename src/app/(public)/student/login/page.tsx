@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { LogIn, AlertCircle, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { whatsappLink } from '@/lib/utils';
 
-export default function StudentLoginPage() {
+function StudentLoginContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get('returnUrl');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -54,7 +56,7 @@ export default function StudentLoginPage() {
       }
 
       setTimeout(() => {
-        router.push('/student/dashboard');
+        router.push(returnUrl || '/student/dashboard');
         router.refresh();
       }, 600);
     } catch {
@@ -166,5 +168,13 @@ export default function StudentLoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function StudentLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin" /></div>}>
+      <StudentLoginContent />
+    </Suspense>
   );
 }

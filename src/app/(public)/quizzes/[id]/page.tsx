@@ -10,7 +10,7 @@ import QuizCelebration from '@/components/quizzes/QuizCelebration';
 import QuizReview, { ReviewItem } from '@/components/quizzes/QuizReview';
 import OrganicBlob from '@/components/ui/OrganicBlob';
 
-type QuizViewMode = 'taking' | 'celebrating' | 'review';
+type QuizViewMode = 'auth-required' | 'taking' | 'celebrating' | 'review';
 
 interface SubmissionResult {
   score: number;
@@ -20,6 +20,7 @@ interface SubmissionResult {
   newTotalPoints: number;
   level: string;
   review: ReviewItem[];
+  isFirstAttempt: boolean;
 }
 
 export default function QuizDetailPage() {
@@ -30,10 +31,11 @@ export default function QuizDetailPage() {
   const [quiz, setQuiz] = useState<QuizData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<QuizViewMode>('taking');
+  const [viewMode, setViewMode] = useState<QuizViewMode>('auth-required');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
   const [studentId, setStudentId] = useState<number | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
 
   // 1. Fetch current student identity (from cookie session via /api/student/me)
   useEffect(() => {
@@ -44,10 +46,13 @@ export default function QuizDetailPage() {
           const data = await res.json();
           if (data.authenticated && data.student) {
             setStudentId(data.student.id);
+            setViewMode('taking');
           }
         }
       } catch {
-        // Non-fatal, studentId might be inferred from cookie on backend
+        // Non-fatal
+      } finally {
+        setAuthChecked(true);
       }
     }
     checkStudent();
@@ -122,6 +127,7 @@ export default function QuizDetailPage() {
         newTotalPoints: data.newTotalPoints,
         level: data.level || 'مبتدئ',
         review: enrichedReview,
+        isFirstAttempt: data.isFirstAttempt !== false,
       });
 
       setViewMode('celebrating');
@@ -172,6 +178,41 @@ export default function QuizDetailPage() {
       {/* Main Content */}
       {!loading && !error && quiz && (
         <>
+          {viewMode === 'auth-required' && authChecked && (
+            <div className="mx-auto max-w-lg px-4 py-16 text-center" dir="rtl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-3xl border border-white/10 bg-[#091C3B]/90 p-10 shadow-2xl backdrop-blur-xl"
+              >
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 ring-4 ring-cyan-500/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                </div>
+                <h2 className="text-2xl font-black text-white mb-3">سجّل حسابك أولاً!</h2>
+                <p className="text-base text-slate-300 mb-8 leading-relaxed">
+                  لبدء الاختبار وجمع النقاط، يجب عليك إنشاء حساب أو تسجيل الدخول أولاً.
+                  سيتم حفظ نقاطك وتقدمك تلقائياً.
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href={`/student/register?returnUrl=${encodeURIComponent(`/quizzes/${quizId}`)}`}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-600 to-cyan-500 px-6 py-4 text-sm font-bold text-white shadow-lg transition hover:scale-[1.02] active:scale-95"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                    <span>إنشاء حساب جديد</span>
+                  </Link>
+                  <Link
+                    href={`/student/login?returnUrl=${encodeURIComponent(`/quizzes/${quizId}`)}`}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-bold text-slate-300 transition hover:bg-white/10 hover:text-white active:scale-95"
+                  >
+                    <span>تسجيل الدخول</span>
+                  </Link>
+                </div>
+                <p className="text-xs text-slate-400 mt-6">🎁 هدية الانضمام: 20 نقطة مجانية عند إنشاء حساب جديد!</p>
+              </motion.div>
+            </div>
+          )}
+
           {viewMode === 'taking' && (
             <QuizRunner
               quiz={quiz}
@@ -188,6 +229,7 @@ export default function QuizDetailPage() {
               pointsEarned={submissionResult.pointsEarned}
               newTotalPoints={submissionResult.newTotalPoints}
               level={submissionResult.level}
+              isFirstAttempt={submissionResult.isFirstAttempt}
               onReviewClick={() => setViewMode('review')}
               onRetakeClick={handleRetake}
             />

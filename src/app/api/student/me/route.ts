@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getStudentFromRequest, getPrestigeTier } from '@/lib/studentAuth';
 
+
+
 export async function GET(request: Request) {
   try {
     const session = await getStudentFromRequest(request);

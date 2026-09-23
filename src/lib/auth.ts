@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: '/admin/login',
+    signIn: '/gsg/login',
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -60,5 +60,5 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'qadoumi-secret-key-2025-very-secure',
 };

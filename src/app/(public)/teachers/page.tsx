@@ -55,12 +55,20 @@ export default async function TeachersPage() {
                 {/* Image */}
                 <div className="relative h-64 sm:h-72 bg-gradient-to-br from-primary-900 to-primary-800 overflow-hidden">
                   {teacher.image ? (
-                    <Image
-                      src={teacher.image}
-                      alt={teacher.name}
-                      fill
-                      className={`object-cover group-hover:scale-105 transition-transform duration-500 ${teacher.imagePosition || 'object-center'}`}
-                    />
+                    teacher.image.startsWith('data:') ? (
+                      <img
+                        src={teacher.image}
+                        alt={teacher.name}
+                        className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${teacher.imagePosition || 'object-center'}`}
+                      />
+                    ) : (
+                      <Image
+                        src={teacher.image}
+                        alt={teacher.name}
+                        fill
+                        className={`object-cover group-hover:scale-105 transition-transform duration-500 ${teacher.imagePosition || 'object-center'}`}
+                      />
+                    )
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-primary-900/30">
                       <GraduationCap className="w-20 h-20 text-white/20" />

@@ -33,8 +33,13 @@ export default function OrdersAdminPage() {
     try {
       const res = await fetch('/api/orders');
       const data = await res.json();
-      setOrders(data);
+      if (Array.isArray(data)) {
+        setOrders(data);
+      } else {
+        setOrders([]);
+      }
     } catch {
+      setOrders([]);
       toast.error('حدث خطأ أثناء جلب الطلبات');
     } finally {
       setLoading(false);
@@ -58,8 +63,10 @@ export default function OrdersAdminPage() {
     }
   };
 
-  const filteredOrders = orders.filter(o => 
-    o.customerName.includes(search) || o.phone.includes(search) || o.courseCard.title.includes(search)
+  const filteredOrders = (Array.isArray(orders) ? orders : []).filter(o => 
+    (o.customerName || '').includes(search) || 
+    (o.phone || '').includes(search) || 
+    (o.courseCard?.title || '').includes(search)
   );
 
   const getStatusBadge = (status: string) => {

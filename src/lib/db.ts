@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client/wasm';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import ws from 'ws';
 
-if (typeof WebSocket === 'undefined') {
-  neonConfig.webSocketConstructor = ws;
+if (typeof WebSocket !== 'undefined') {
+  neonConfig.webSocketConstructor = WebSocket;
 }
+neonConfig.poolQueryViaFetch = true;
 
 const connectionString =
   process.env.DATABASE_URL ||

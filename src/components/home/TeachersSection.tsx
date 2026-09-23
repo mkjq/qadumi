@@ -52,7 +52,11 @@ export default function TeachersSection({ teachers }: { teachers: Teacher[] }) {
                 {/* Image */}
                 <div className="relative h-56 sm:h-64 lg:h-72 w-full bg-slate-50">
                   {teacher.image ? (
-                    <Image src={teacher.image} alt={teacher.name} fill className="object-cover object-top" />
+                    teacher.image.startsWith('data:') ? (
+                      <img src={teacher.image} alt={teacher.name} className="absolute inset-0 w-full h-full object-cover object-top" />
+                    ) : (
+                      <Image src={teacher.image} alt={teacher.name} fill className="object-cover object-top" />
+                    )
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-slate-100">
                       <GraduationCap className="w-16 h-16 sm:w-20 sm:h-20 text-slate-300" />

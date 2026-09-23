@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useTransition } from 'react';
-import { Edit, Trash2, X, Save, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Edit, Trash2, X, Save, Users, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { getStudents, saveStudent, deleteStudent } from './actions';
 
 export default function AdminStudentsPage() {
   const [students, setStudents] = useState<any[]>([]);
-  const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingStudent, setEditingStudent] = useState<any>(null);
   const [saving, setSaving] = useState(false);
@@ -16,19 +15,34 @@ export default function AdminStudentsPage() {
     loadStudents();
   }, []);
 
-  const loadStudents = () => {
-    startTransition(async () => {
-      const data = await getStudents();
-      setStudents(data);
-    });
+  const loadStudents = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/students');
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setStudents(data);
+      } else {
+        setStudents([]);
+      }
+    } catch (e) {
+      console.error('Error loading students:', e);
+      toast.error('حدث خطأ أثناء تحميل بيانات الطلاب');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async (id: number) => {
     if (!confirm('هل أنت متأكد من حذف هذا الطالب نهائياً؟')) return;
     try {
-      await deleteStudent(id);
-      toast.success('تم الحذف بنجاح');
-      loadStudents();
+      const res = await fetch(`/api/students/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        toast.success('تم الحذف بنجاح');
+        loadStudents();
+      } else {
+        toast.error('حدث خطأ أثناء الحذف');
+      }
     } catch (e) {
       toast.error('حدث خطأ أثناء الحذف');
     }
@@ -43,10 +57,19 @@ export default function AdminStudentsPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      await saveStudent(editingStudent);
-      toast.success('تم الحفظ بنجاح');
-      setShowForm(false);
-      loadStudents();
+      const res = await fetch(`/api/students/${editingStudent.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editingStudent),
+      });
+
+      if (res.ok) {
+        toast.success('تم الحفظ بنجاح');
+        setShowForm(false);
+        loadStudents();
+      } else {
+        toast.error('حدث خطأ أثناء الحفظ');
+      }
     } catch (e) {
       toast.error('حدث خطأ أثناء الحفظ');
     } finally {
@@ -59,8 +82,15 @@ export default function AdminStudentsPage() {
       <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">إدارة الطلاب والنقاط</h1>
-          <p className="text-gray-500 text-sm mt-1">يمكنك تعديل نقاط ومستويات الطلاب من هنا</p>
+          <p className="text-gray-500 text-sm mt-1">يمكنك تعديل نقاط ومستويات الطلاب من هنا ({students.length} طالب)</p>
         </div>
+        <button
+          onClick={loadStudents}
+          className="flex items-center gap-2 text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-xl text-sm font-medium transition"
+        >
+          <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+          <span>تحديث</span>
+        </button>
       </div>
 
       {showForm && (
@@ -76,18 +106,18 @@ export default function AdminStudentsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">رصيد النقاط</label>
-                <input required type="number" min="0" value={editingStudent?.points} onChange={(e) => setEditingStudent({...editingStudent, points: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
+                <input required type="number" min="0" value={editingStudent?.points ?? ''} onChange={(e) => setEditingStudent({...editingStudent, points: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">المستوى (اللقب)</label>
-                <input required type="text" value={editingStudent?.level} onChange={(e) => setEditingStudent({...editingStudent, level: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
+                <input required type="text" value={editingStudent?.level ?? ''} onChange={(e) => setEditingStudent({...editingStudent, level: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">الصف الأكاديمي</label>
-                <input required type="text" value={editingStudent?.grade} onChange={(e) => setEditingStudent({...editingStudent, grade: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
+                <input required type="text" value={editingStudent?.grade ?? ''} onChange={(e) => setEditingStudent({...editingStudent, grade: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
               </div>
               <div className="flex items-center gap-3 mt-8">
-                <input type="checkbox" checked={editingStudent?.isActive} onChange={(e) => setEditingStudent({...editingStudent, isActive: e.target.checked})} className="w-5 h-5 rounded accent-gray-900" id="isActive" />
+                <input type="checkbox" checked={editingStudent?.isActive ?? true} onChange={(e) => setEditingStudent({...editingStudent, isActive: e.target.checked})} className="w-5 h-5 rounded accent-gray-900" id="isActive" />
                 <label htmlFor="isActive" className="font-bold text-gray-700 cursor-pointer">حساب مفعل</label>
               </div>
             </div>
@@ -120,7 +150,7 @@ export default function AdminStudentsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {isPending ? (
+                {loading ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-8 text-center text-gray-500">جاري التحميل...</td>
                   </tr>

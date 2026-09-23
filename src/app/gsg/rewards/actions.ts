@@ -11,7 +11,7 @@ export async function getRewards() {
 
 export async function deleteReward(id: number) {
   await prisma.reward.delete({ where: { id } });
-  revalidatePath('/admin/rewards');
+  revalidatePath('/gsg/rewards');
 }
 
 export async function saveReward(data: any) {
@@ -37,5 +37,5 @@ export async function saveReward(data: any) {
       }
     });
   }
-  revalidatePath('/admin/rewards');
+  revalidatePath('/gsg/rewards');
 }
