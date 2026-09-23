@@ -48,7 +48,7 @@ export default async function AboutPage() {
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-accent-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto relative z-10">
+        <div className="max-w-4xl mx-auto relative z-10 animate-fade-in-up">
 
 
           <h1 className="text-3xl sm:text-5xl font-black mb-4 tracking-tight text-white">
@@ -64,16 +64,16 @@ export default async function AboutPage() {
       {/* ── 2. Story Section ── */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-16">
+          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-16 hover:bg-white/10 transition-colors duration-500 animate-fade-in-up">
             <div className="max-w-3xl mx-auto text-center">
               <span className="badge-gold mb-4">مسيرة ربع قرن</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-navy-900 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-6">
                 أكثر من 25 عاماً في خدمة طلبتنا
               </h2>
-              <p className="text-slate-600 leading-relaxed text-base sm:text-lg mb-4">
+              <p className="text-slate-300 leading-relaxed text-base sm:text-lg mb-4">
                 {centerInfo.about || 'مركز القدومي الثقافي من أعرق المراكز التعليمية في العاصمة عمّان، ويحظى بثقة آلاف الأهالي والطلبة في مناطق ضاحية الأمير حسن، جبل النزهة، ضاحية الأقصى، طبربور والمناطق المحيطة.'}
               </p>
-              <p className="text-slate-600 leading-relaxed text-base sm:text-lg">
+              <p className="text-slate-300 leading-relaxed text-base sm:text-lg">
                 بفضل الله تعالى، خرّج المركز ما يزيد عن 50 ألف طالب وطالبة، تفوقوا في امتحانات الثانوية العامة وأصبحوا أطباء ومهندسين ومعلمين وقادة في مختلف المجالات، ونسعد بأن تكون أنت قصة النجاح القادمة.
               </p>
             </div>
@@ -87,11 +87,11 @@ export default async function AboutPage() {
               { icon: GraduationCap, value: '+25', label: 'سنة خبرة وتدريس', color: 'from-emerald-500 to-teal-500' },
               { icon: MapPin, value: '4+', label: 'مناطق رئيسية في عمان', color: 'from-purple-500 to-indigo-500' },
             ].map((stat, i) => (
-              <div key={i} className="bg-white/5 rounded-2xl p-6 text-center border border-white/10 shadow-sm hover:border-amber-400/60 transition-all">
+              <div key={i} className="bg-white/5 rounded-2xl p-6 text-center border border-white/10 shadow-sm hover:border-cyan-400/60 hover:-translate-y-2 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
                 <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} text-white rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md`}>
                   <stat.icon className="w-6 h-6" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-navy-900 mb-1">{stat.value}</div>
+                <div className="text-2xl sm:text-3xl font-black text-white mb-1">{stat.value}</div>
                 <div className="text-slate-500 text-xs sm:text-sm font-semibold">{stat.label}</div>
               </div>
             ))}
@@ -100,30 +100,30 @@ export default async function AboutPage() {
           {/* Pillars of Excellence */}
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-20">
             {values.map((val, i) => (
-              <div key={i} className="bg-white/5 rounded-3xl p-7 border border-white/10 shadow-sm hover:shadow-md hover:border-amber-400 transition-all text-center">
+              <div key={i} className="bg-white/5 rounded-3xl p-7 border border-white/10 shadow-sm hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-2 hover:border-amber-400 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: `${i * 150}ms` }}>
                 <div className="w-14 h-14 bg-amber-50 rounded-2xl border border-amber-200 flex items-center justify-center mx-auto mb-5 text-amber-600">
                   <val.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-navy-900 mb-3">{val.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{val.desc}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{val.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{val.desc}</p>
               </div>
             ))}
           </div>
 
           {/* Timeline */}
-          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-20">
+          <div className="bg-white/5 rounded-3xl p-8 sm:p-12 border border-white/10 shadow-sm mb-20 hover:border-amber-500/30 transition-colors duration-500 animate-fade-in-up">
             <div className="text-center mb-10">
               <span className="badge-gold mb-3">محطات الفخر</span>
-              <h2 className="text-2xl sm:text-3xl font-black text-navy-900">محطات في تاريخ المركز</h2>
+              <h2 className="text-2xl sm:text-3xl font-black text-white">محطات في تاريخ المركز</h2>
             </div>
             <div className="max-w-2xl mx-auto">
               <div className="relative border-r-2 border-amber-300 pr-6 space-y-8">
                 {milestones.map((m, i) => (
-                  <div key={i} className="relative">
+                  <div key={i} className="relative group hover:scale-[1.02] transition-transform duration-300">
                     {/* Golden Dot */}
-                    <div className="absolute -right-[31px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow" />
+                    <div className="absolute -right-[31px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow group-hover:scale-125 transition-transform duration-300" />
                     <div className="text-sm font-black text-amber-600 mb-1">{m.year}م</div>
-                    <div className="text-base font-bold text-navy-900">{m.text}</div>
+                    <div className="text-base font-bold text-white">{m.text}</div>
                   </div>
                 ))}
               </div>
@@ -131,7 +131,7 @@ export default async function AboutPage() {
           </div>
 
           {/* Location & Call to Action */}
-          <div className="bg-gradient-to-br from-navy-900 to-navy-950 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden border border-white/10 shadow-xl">
+          <div className="bg-gradient-to-br from-navy-900 to-navy-950 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden border border-white/10 shadow-xl animate-fade-in-up hover:shadow-cyan-500/10 hover:-translate-y-1 transition-all duration-500">
             <h2 className="text-2xl sm:text-3xl font-black mb-3">موقع المركز</h2>
             <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8">
               نرحب بطلابنا الأعزاء في مقرنا الرئيسي والوحيد المجهز بأحدث الوسائل التعليمية:
