@@ -129,7 +129,7 @@ export default function GradesDirectoryPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] text-white transition-colors">
+    <div className="dark min-h-screen bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] text-white transition-colors">
       <title>دليل الصفوف المدرسية والمناهج | مركز القدومي الثقافي</title>
       <meta
         name="description"
