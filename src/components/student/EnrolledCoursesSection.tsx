@@ -514,7 +514,7 @@ export default function EnrolledCoursesSection({
           </Link>
           <Link
             href="/quizzes"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600-white shadow-sm transition hover:bg-cyan-700"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600 text-white font-bold px-3.5 py-2 text-xs shadow-sm transition hover:bg-cyan-700"
           >
             <Star className="w-3.5 h-3.5" />
             <span>جميع الاختبارات</span>
@@ -608,7 +608,7 @@ export default function EnrolledCoursesSection({
               <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
                 <Link
                   href={quizzesUrl}
-                  className="group/btn inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-navy-700 to-cyan-700-white shadow-sm transition hover:from-cyan-600 hover:to-navy-800 active:scale-95 text-center"
+                  className="group/btn inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-navy-700 to-cyan-700 text-white font-bold px-3 py-2.5 text-xs shadow-sm transition hover:from-cyan-600 hover:to-navy-800 active:scale-95 text-center"
                 >
                   <span>حل الاختبارات</span>
                   <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:-translate-x-0.5" />

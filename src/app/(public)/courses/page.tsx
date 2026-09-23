@@ -137,7 +137,7 @@ export default function CoursesPage() {
                 <div className="p-6 pt-0">
                   <Link
                     href={`/grades/${group.slug}`}
-                    className="flex items-center justify-between w-full py-3 px-4 rounded-xl bg-slate-50 hover:bg-cyan-accent-50 text-slate-300 hover:text-cyan-accent text-xs font-bold border border-white/10 transition-all group"
+                    className="flex items-center justify-between w-full py-3 px-4 rounded-xl bg-slate-50 hover:bg-cyan-accent-50 text-slate-700 hover:text-slate-900 text-xs font-bold border border-slate-200 transition-all group"
                   >
                     <span>تفاصيل الصف والمعلمين والدوسيات</span>
                     <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
@@ -168,7 +168,7 @@ export default function CoursesPage() {
                 { title: 'خصم المجموعات', desc: 'خصومات تشجيعية خاصة عند تسجيل المجموعات الطلابية معاً' },
                 { title: 'خصم الإخوة', desc: 'تخفيضات خاصة عند تسجيل أكثر من طالب من العائلة الواحدة' },
               ].map((item, i) => (
-                <div key={i} className="bg-white/5/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                <div key={i} className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
                   <h3 className="font-black text-amber-400 mb-2 text-base">{item.title}</h3>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                 </div>

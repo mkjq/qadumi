@@ -44,7 +44,7 @@ export default function PointsCounter({ points, duration = 1200 }: PointsCounter
         <Star className="w-6 h-6 fill-white text-white animate-pulse" />
       </div>
       <div>
-        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
           {displayPoints.toLocaleString('ar-EG')}
         </span>
         <span className="mr-2 text-sm font-bold text-amber-600">نقطة</span>

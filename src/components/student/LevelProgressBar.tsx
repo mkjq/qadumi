@@ -78,7 +78,7 @@ export default function LevelProgressBar({ points, prestige, onOpenRoadmap }: Le
         </div>
 
         {nextLevel ? (
-          <div className="flex items-center gap-1 text-xs font-bold text-slate-400">
+          <div className="flex items-center gap-1 text-xs font-bold text-slate-600">
             <span>الرتبة القادمة:</span>
             <span className="text-cyan-700 font-extrabold">{nextLevel}</span>
           </div>
@@ -88,7 +88,7 @@ export default function LevelProgressBar({ points, prestige, onOpenRoadmap }: Le
       </div>
 
       {/* Progress Bar Track */}
-      <div className="relative h-3.5 w-full overflow-hidden rounded-full bg-white/10 p-0.5 border border-white/10/70 shadow-inner">
+      <div className="relative h-3.5 w-full overflow-hidden rounded-full bg-slate-100 p-0.5 border border-slate-200 shadow-inner">
         <motion.div
           className={`h-full rounded-full bg-gradient-to-r ${config.barGradient} shadow-sm`}
           initial={{ width: 0 }}
@@ -98,11 +98,11 @@ export default function LevelProgressBar({ points, prestige, onOpenRoadmap }: Le
       </div>
 
       {/* Progress Footer Meta */}
-      <div className="flex items-center justify-between mt-2.5 text-xs text-slate-400">
+      <div className="flex items-center justify-between mt-2.5 text-xs text-slate-600">
         <span className="font-semibold">{progressPercent}% إنجاز المستوى</span>
         {nextLevel ? (
           <span>
-            بقي <strong className="text-slate-100 font-bold">{remainingPoints}</strong> نقطة للترقية إلى {nextLevel}
+            بقي <strong className="text-slate-800 font-bold">{remainingPoints}</strong> نقطة للترقية إلى {nextLevel}
           </span>
         ) : (
           <span className="font-bold text-amber-600">أنت في قمة المتفوقين</span>

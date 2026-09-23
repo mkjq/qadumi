@@ -1,32 +1,55 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { PrismaClient } from '@prisma/client';
 import { getStudentFromRequest } from '@/lib/studentAuth';
+
+const globalForPrisma = globalThis as unknown as {
+  prismaInstance: PrismaClient | undefined;
+};
+
+const prisma =
+  globalForPrisma.prismaInstance ??
+  new PrismaClient({
+    log: ['error', 'warn'],
+  });
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prismaInstance = prisma;
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    let body: Record<string, any> = {};
+    try {
+      body = await request.json();
+    } catch {
+      body = {};
+    }
     const { rewardId, studentId: explicitStudentId } = body;
+
+    // 1. Require authenticated student session (eliminate IDOR)
+    const session = await getStudentFromRequest(request);
+    if (!session || !session.studentId) {
+      return NextResponse.json(
+        { error: 'يرجى تسجيل الدخول لاستبدال النقاط' },
+        { status: 401 }
+      );
+    }
+
+    // 2. Reject IDOR if body.studentId is provided and does not match session
+    if (explicitStudentId !== undefined && explicitStudentId !== null) {
+      const parsedExplicit = Number(explicitStudentId);
+      if (!isNaN(parsedExplicit) && parsedExplicit !== session.studentId) {
+        return NextResponse.json(
+          { error: 'غير مصرح: لا يمكنك استبدال مكافأة لحساب طالب آخر' },
+          { status: 403 }
+        );
+      }
+    }
+
+    const targetStudentId = session.studentId;
 
     if (!rewardId || typeof rewardId !== 'number') {
       return NextResponse.json(
         { error: 'يرجى تحديد المكافأة المطلوب استبدالها' },
         { status: 400 }
-      );
-    }
-
-    let targetStudentId: number | null = explicitStudentId || null;
-
-    if (!targetStudentId) {
-      const session = await getStudentFromRequest(request);
-      if (session) {
-        targetStudentId = session.studentId;
-      }
-    }
-
-    if (!targetStudentId) {
-      return NextResponse.json(
-        { error: 'يرجى تسجيل الدخول لاستبدال النقاط' },
-        { status: 401 }
       );
     }
 
@@ -67,6 +90,9 @@ export async function POST(request: Request) {
 
     // Atomic transaction for point deduction, transaction record, and redemption log
     const result = await prisma.$transaction(async (tx) => {
+      // Serialize concurrent redemptions for this student to eliminate double-spend race condition
+      await tx.$executeRaw`SELECT 1 FROM "Student" WHERE id = ${targetStudentId} FOR UPDATE`;
+
       const currentStudent = await tx.student.findUnique({
         where: { id: targetStudentId },
       });

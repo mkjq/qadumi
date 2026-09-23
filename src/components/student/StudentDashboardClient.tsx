@@ -265,7 +265,7 @@ export default function StudentDashboardClient() {
                   <button
                     type="button"
                     onClick={() => setRoadmapOpen(true)}
-                    className="rounded-full bg-cyan-500/20 border border-cyan-500/20 px-3 py-0.5 text-xs font-bold text-cyan-400 hover:bg-cyan-500/20 transition cursor-pointer flex items-center gap-1"
+                    className="rounded-full bg-cyan-500/20 border border-cyan-500/20 px-3 py-0.5 text-xs font-bold text-cyan-700 hover:bg-cyan-500/20 transition cursor-pointer flex items-center gap-1"
                     title="انقر لعرض خارطة الرتب"
                   >
                     <span>{student.level}</span>
@@ -303,7 +303,7 @@ export default function StudentDashboardClient() {
 
               <Link
                 href="/quizzes"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-navy-700 to-cyan-700-white shadow-md transition hover:from-cyan-600 hover:to-navy-800 active:scale-95"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-navy-700 to-cyan-700 text-white font-bold px-5 py-3 text-xs sm:text-sm shadow-md transition hover:from-cyan-600 hover:to-navy-800 active:scale-95"
               >
                 <Star className="w-4 h-4 text-cyan-300" />
                 <span>ابدأ اختبار جديد</span>

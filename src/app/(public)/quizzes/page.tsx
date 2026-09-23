@@ -182,8 +182,8 @@ export default function QuizzesCatalogPage() {
 
         {/* Results Counter Bar */}
         <div className="flex items-center justify-between px-2 mb-6">
-          <p className="text-sm font-semibold text-slate-600">
-            تم العثور على <span className="font-bold text-cyan-600">{filteredQuizzes.length}</span> اختبار متاح
+          <p className="text-sm font-semibold text-slate-300">
+            تم العثور على <span className="font-bold text-cyan-400">{filteredQuizzes.length}</span> اختبار متاح
           </p>
           {(selectedSubject !== 'الكل' || selectedGrade !== 'الكل' || searchQuery) && (
             <button
@@ -192,7 +192,7 @@ export default function QuizzesCatalogPage() {
                 setSelectedGrade('الكل');
                 setSearchQuery('');
               }}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-rose-600 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-rose-400 transition-colors"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>إعادة ضبط الفلاتر</span>
@@ -203,8 +203,8 @@ export default function QuizzesCatalogPage() {
         {/* Quizzes Grid */}
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <RefreshCw className="w-10 h-10 text-cyan-600 animate-spin mb-4" />
-            <p className="text-sm font-bold text-slate-600">جاري تحميل الاختبارات...</p>
+            <RefreshCw className="w-10 h-10 text-cyan-400 animate-spin mb-4" />
+            <p className="text-sm font-bold text-slate-200">جاري تحميل الاختبارات...</p>
           </div>
         ) : filteredQuizzes.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

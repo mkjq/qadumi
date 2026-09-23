@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { PrismaClient } from '@prisma/client';
 import { getStudentFromRequest, getPrestigeTier } from '@/lib/studentAuth';
+
+const globalForPrisma = globalThis as unknown as {
+  prismaInstance: PrismaClient | undefined;
+};
+
+const prisma =
+  globalForPrisma.prismaInstance ??
+  new PrismaClient({
+    log: ['error', 'warn'],
+  });
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prismaInstance = prisma;
 
 export const dynamic = 'force-dynamic';
 
@@ -24,25 +36,27 @@ export async function POST(
       body = {};
     }
 
-    // 1. Resolve student identity
-    let targetStudentId: number | null = null;
+    // 1. Authenticate student session strictly (eliminate unauthenticated fallback)
     const session = await getStudentFromRequest(request);
-
-    if (session && session.studentId) {
-      targetStudentId = session.studentId;
-    } else if (body.studentId !== undefined && body.studentId !== null) {
-      const parsedId = Number(body.studentId);
-      if (!isNaN(parsedId)) {
-        targetStudentId = parsedId;
-      }
-    }
-
-    if (!targetStudentId) {
+    if (!session || !session.studentId) {
       return NextResponse.json(
-        { error: 'غير مصرح: يرجى تسجيل الدخول أو تقديم معرف الطالب' },
+        { error: 'غير مصرح: يرجى تسجيل الدخول لحفظ نتائج الاختبار والنقاط' },
         { status: 401 }
       );
     }
+
+    // Reject IDOR attempts if body.studentId is explicitly passed and conflicts with session
+    if (body.studentId !== undefined && body.studentId !== null) {
+      const explicitId = Number(body.studentId);
+      if (!isNaN(explicitId) && explicitId !== session.studentId) {
+        return NextResponse.json(
+          { error: 'غير مصرح: لا يمكنك إرسال إجابات اختبار نيابة عن طالب آخر' },
+          { status: 403 }
+        );
+      }
+    }
+
+    const targetStudentId = session.studentId;
 
     const student = await prisma.student.findUnique({
       where: { id: targetStudentId },
@@ -54,15 +68,6 @@ export async function POST(
         { status: 404 }
       );
     }
-
-    // Check for previous submissions (first attempt check)
-    const previousSubmission = await prisma.quizSubmission.findFirst({
-      where: {
-        quizId: quizId,
-        studentId: student.id,
-      },
-    });
-    const isFirstAttempt = !previousSubmission;
 
     // 2. Fetch quiz with questions and correct options
     const quiz = await prisma.quiz.findUnique({
@@ -124,11 +129,21 @@ export async function POST(
     const bonus = scorePercentage >= (quiz.passingScore || 60) ? (quiz.bonusPoints || 20) : 0;
     const pointsEarned = (correctAnswers * pointsPerCorrect) + (correctAnswers > 0 ? bonus : 0);
 
-    // Only award points on first attempt to prevent exploitation
-    const actualPointsEarned = isFirstAttempt ? pointsEarned : 0;
-
-    // 4. Atomic database transaction
+    // 4. Concurrency-Safe Transaction with In-Transaction Verification
     const submissionResult = await prisma.$transaction(async (tx) => {
+      // Serialize concurrent submissions for this student to eliminate TOCTOU race conditions
+      await tx.$executeRaw`SELECT 1 FROM "Student" WHERE id = ${student.id} FOR UPDATE`;
+
+      // Check for previous submissions inside transaction
+      const previousSubmission = await tx.quizSubmission.findFirst({
+        where: {
+          quizId: quiz.id,
+          studentId: student.id,
+        },
+      });
+      const isFirstAttempt = !previousSubmission;
+      const actualPointsEarned = isFirstAttempt ? pointsEarned : 0;
+
       const sub = await tx.quizSubmission.create({
         data: {
           quizId: quiz.id,
@@ -141,6 +156,9 @@ export async function POST(
         },
       });
 
+      let updatedStudent = student;
+      let updatedTier = getPrestigeTier(student.points);
+
       if (actualPointsEarned > 0) {
         await tx.pointTransaction.create({
           data: {
@@ -150,24 +168,32 @@ export async function POST(
             description: `إكمال اختبار ${quiz.title} بنجاح (+${actualPointsEarned} نقطة)`,
           },
         });
-      }
 
-      const updatedStudent = await tx.student.update({
-        where: { id: student.id },
-        data: {
-          points: { increment: actualPointsEarned },
-        },
-      });
-
-      const updatedTier = getPrestigeTier(updatedStudent.points);
-      if (updatedStudent.level !== updatedTier.level) {
-        await tx.student.update({
+        updatedStudent = await tx.student.update({
           where: { id: student.id },
-          data: { level: updatedTier.level },
+          data: {
+            points: { increment: actualPointsEarned },
+          },
         });
+
+        updatedTier = getPrestigeTier(updatedStudent.points);
+        if (updatedStudent.level !== updatedTier.level) {
+          updatedStudent = await tx.student.update({
+            where: { id: student.id },
+            data: { level: updatedTier.level },
+          });
+        }
+      } else {
+        const freshStudent = await tx.student.findUnique({
+          where: { id: student.id },
+        });
+        if (freshStudent) {
+          updatedStudent = freshStudent;
+          updatedTier = getPrestigeTier(freshStudent.points);
+        }
       }
 
-      return { sub, updatedStudent, updatedTier };
+      return { sub, updatedStudent, updatedTier, isFirstAttempt, actualPointsEarned };
     });
 
     return NextResponse.json({
@@ -176,8 +202,8 @@ export async function POST(
       score: scorePercentage,
       correctAnswers,
       totalQuestions,
-      pointsEarned: actualPointsEarned,
-      isFirstAttempt,
+      pointsEarned: submissionResult.actualPointsEarned,
+      isFirstAttempt: submissionResult.isFirstAttempt,
       newTotalPoints: submissionResult.updatedStudent.points,
       level: submissionResult.updatedTier.level,
       review,

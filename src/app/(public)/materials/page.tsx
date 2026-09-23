@@ -125,7 +125,7 @@ export default function MaterialsPage() {
         {loading ? (
           <div className="flex flex-col justify-center items-center py-24 gap-3">
             <div className="w-10 h-10 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
-            <span className="text-slate-500 text-sm font-bold">جاري جلب الملفات...</span>
+            <span className="text-slate-300 text-sm font-bold">جاري جلب الملفات...</span>
           </div>
         ) : filteredMaterials.length === 0 ? (
           <div className="text-center py-20 bg-white/5 rounded-3xl border border-dashed border-slate-300 max-w-lg mx-auto p-8 shadow-sm">
@@ -138,7 +138,7 @@ export default function MaterialsPage() {
             {filteredMaterials.map((mat) => (
               <div
                 key={mat.id}
-                className="bg-white/5 rounded-3xl border border-white/10/80 shadow-sm hover:shadow-md hover:border-amber-400/80 transition-all flex flex-col justify-between overflow-hidden group"
+                className="bg-white/5 rounded-3xl border border-white/10 shadow-sm hover:shadow-md hover:border-amber-400/80 transition-all flex flex-col justify-between overflow-hidden group"
               >
                 {/* Cover Image or Icon */}
                 <div className="relative h-48 w-full bg-white/5 border-b border-white/10 flex items-center justify-center overflow-hidden">
@@ -184,7 +184,7 @@ export default function MaterialsPage() {
                       {mat.title}
                     </h3>
 
-                    <p className="text-slate-500 text-xs mb-4">
+                    <p className="text-slate-300 text-xs mb-4">
                       إعداد الأستاذ: <span className="font-bold text-white">{mat.teacherName}</span>
                     </p>
                   </div>

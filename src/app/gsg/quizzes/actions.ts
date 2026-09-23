@@ -2,14 +2,26 @@
 
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+
+async function assertAdminSession() {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    throw new Error('Unauthorized: Admin session required');
+  }
+  return session;
+}
 
 export async function deleteQuiz(id: number) {
+  await assertAdminSession();
   await prisma.quiz.delete({ where: { id } });
   revalidatePath('/gsg/quizzes');
   revalidatePath('/quizzes');
 }
 
 export async function getQuizzes() {
+  await assertAdminSession();
   return await prisma.quiz.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
@@ -21,6 +33,7 @@ export async function getQuizzes() {
 }
 
 export async function saveQuiz(data: any) {
+  await assertAdminSession();
   if (data.id) {
     // Delete existing questions and recreate them to simplify update
     await prisma.quizQuestion.deleteMany({ where: { quizId: data.id } });

@@ -1,23 +1,51 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getStudentFromRequest, getPrestigeTier } from '@/lib/studentAuth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const queryStudentId = searchParams.get('studentId');
+    const queryStudentIdStr = searchParams.get('studentId');
+    const queryStudentId = queryStudentIdStr ? parseInt(queryStudentIdStr, 10) : null;
+
+    const studentSession = await getStudentFromRequest(request);
+    const adminSession = await getServerSession(authOptions);
 
     let targetStudentId: number | null = null;
 
-    if (queryStudentId) {
-      targetStudentId = parseInt(queryStudentId, 10);
-    } else {
-      const session = await getStudentFromRequest(request);
-      if (session) {
-        targetStudentId = session.studentId;
+    if (adminSession?.user) {
+      // Authenticated Admin: allowed to view any student dashboard
+      if (queryStudentId !== null) {
+        if (isNaN(queryStudentId) || queryStudentId <= 0) {
+          return NextResponse.json({ error: 'معرف الطالب غير صالح' }, { status: 400 });
+        }
+        targetStudentId = queryStudentId;
+      } else if (studentSession) {
+        targetStudentId = studentSession.studentId;
+      } else {
+        return NextResponse.json({ error: 'يرجى تحديد معرف الطالب' }, { status: 400 });
       }
+    } else if (studentSession) {
+      // Authenticated Student: can ONLY view their own dashboard
+      if (queryStudentIdStr !== null) {
+        if (isNaN(queryStudentId!) || queryStudentId !== studentSession.studentId) {
+          return NextResponse.json(
+            { error: 'غير مصرح لك بعرض بيانات طالب آخر' },
+            { status: 403 }
+          );
+        }
+      }
+      targetStudentId = studentSession.studentId;
+    } else {
+      // Unauthenticated caller
+      return NextResponse.json(
+        { error: 'غير مصرح: يرجى تسجيل الدخول لعرض لوحة التحكم' },
+        { status: 401 }
+      );
     }
 
     if (!targetStudentId || isNaN(targetStudentId)) {

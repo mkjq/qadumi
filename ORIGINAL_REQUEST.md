@@ -170,3 +170,60 @@ Integrity mode: development
 
 ### Autonomous E2E Verification
 - [ ] An automated E2E test script (`tests/e2e-grades-teachers.ts`) passes, verifying the complete flow: `/grades` -> `/grades/[slug]` -> `/teachers/[id]` and data consistency.
+
+## 2026-09-23T14:57:11Z
+
+Please execute the Teamwork Preview plan for the Qadoumi Next.js project based on the constraints defined in `prompt_draft.md`.
+
+Requirements:
+- R1: Conduct a comprehensive UI and Contrast audit across all pages and components. Fix visual inconsistencies, particularly white text on light backgrounds or missing text contrasts (e.g. text-white on light cards).
+- R2: Audit all gamification and points mechanisms to ensure there are no loopholes allowing points farming. Ensure all patched loopholes are securely deployed.
+- R3: Ensure recent changes (Jordanian phone format starting with 07 and 10 digits, `gender` field for students, and removal of AI `Sparkles` watermarks) are consistently applied across ANY remaining forms or pages in the project.
+- R4: Use any methodology (Static Analysis, etc.) you see fit. Once you fix these issues, automatically commit and push the changes to the `main` branch on GitHub without asking for permission.
+
+Working Directory: m:\Qadoumi
+Please begin the comprehensive sweep.
+
+## 2026-09-23T19:06:36Z
+
+# Teamwork Project Prompt — Draft
+
+> Status: Launched
+> Goal: Delegate to teamwork_preview
+> Requested team: [none — teamwork routes from the description]
+
+Remediate critical gamification security vulnerabilities (race conditions, IDOR, unauthenticated endpoints), patch authorization data leaks, and finalize UI contrast fixes in the Qadoumi Next.js project based on the previous audit findings.
+
+Working directory: m:\Qadoumi
+Integrity mode: development
+
+## Requirements
+
+### R1. Gamification & Points Security
+Patch all identified vulnerabilities in the gamification system. Specifically:
+- Secure the `PUT /api/students/[id]` endpoint against unauthorized or arbitrary points modification.
+- Implement robust concurrency control (locking/transactions) for quiz submissions to prevent race conditions that multiply points.
+- Resolve the reward redemption IDOR (preventing users from redeeming rewards for others) and fix the reward double-spend concurrency bug.
+
+### R2. Authorization & Data Leaks
+Secure all API endpoints and server actions related to student lists and dashboards. Ensure strict isolation so a student can only access and modify their own data, and cannot list, view, or delete other students.
+
+### R3. UI Contrast Polish
+Finalize the UI/Contrast sweep across all remaining pages. Identify and fix any lingering visual issues, specifically unreadable text (e.g., white text on light backgrounds).
+
+## Acceptance Criteria
+
+### Security & Logic
+- [ ] The `PUT /api/students/[id]` endpoint successfully rejects unauthorized modification attempts.
+- [ ] Reward redemption endpoints strictly validate that the authenticated user matches the target student ID.
+- [ ] Student data endpoints enforce strict authorization, preventing IDOR and unauthorized data access.
+
+### Verification (Agent-as-Judge)
+- [ ] A dedicated review agent has performed rigorous static code analysis on the patched endpoints and officially certified that the race conditions, double-spending, and authorization bypasses are fully mitigated.
+
+### UI Consistency
+- [ ] All pages render with sufficient text contrast in both light and dark contexts.
+
+## 2026-09-23T19:33:43Z
+
+USER DIRECTIVE: The user is running low on token quota and has requested that we speed up the process and reduce token usage. Please finalize the Phase 3 verification (Agent-as-Judge/Adversarial challenge) immediately. Do not over-iterate or perform excessive deep checks. If the core security patches (race conditions, IDOR, auth leaks) are working, declare victory, commit, push the code to GitHub immediately, and terminate.

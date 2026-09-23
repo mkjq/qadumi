@@ -148,14 +148,14 @@ export default function PrestigeRoadmapModal({
               </p>
 
               {/* Current Points Status Banner */}
-              <div className="mt-4 inline-flex items-center gap-4 bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] border border-white/10/80 rounded-2xl px-5 py-2.5 text-xs sm:text-sm">
+              <div className="mt-4 inline-flex items-center gap-4 bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] border border-white/15 rounded-2xl px-5 py-2.5 text-xs sm:text-sm">
                 <span className="text-slate-300 font-medium">رصيدك الحالي:</span>
-                <span className="font-black text-amber-600 text-base">
+                <span className="font-black text-amber-500 text-base">
                   {currentPoints.toLocaleString('ar-EG')} نقطة
                 </span>
                 <span className="text-slate-300">|</span>
                 <span className="text-slate-300 font-medium">رتبتك الحالية:</span>
-                <span className="font-black text-navy-800 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-lg">
+                <span className="font-black text-amber-300 bg-white/10 border border-white/20 px-2.5 py-0.5 rounded-lg">
                   {currentLevel}
                 </span>
               </div>
@@ -193,21 +193,21 @@ export default function PrestigeRoadmapModal({
                           className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm ${
                             isCurrent
                               ? 'bg-gradient-to-br from-amber-500 to-gold-500 text-white shadow-amber-500/30'
-                              : 'bg-white/5 border border-white/10 text-slate-700'
+                              : 'bg-slate-100 border border-slate-200 text-slate-700'
                           }`}
                         >
                           <Icon className="w-6 h-6" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <h3 className="text-lg font-black text-white">{tier.title}</h3>
+                            <h3 className="text-lg font-black text-slate-900">{tier.title}</h3>
                             <span
                               className={`rounded-full border px-2.5 py-0.5 text-xs font-bold ${tier.badgeBg} ${tier.badgeText}`}
                             >
                               {tier.pointsRange}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-400 mt-0.5">{tier.description}</p>
+                          <p className="text-xs text-slate-600 mt-0.5">{tier.description}</p>
                         </div>
                       </div>
 
@@ -223,7 +223,7 @@ export default function PrestigeRoadmapModal({
                             <span>مكتمل</span>
                           </span>
                         ) : (
-                          <span className="text-xs font-medium text-slate-400 bg-white/10 px-3 py-1 rounded-full">
+                          <span className="text-xs font-medium text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
                             يتطلب {tier.minPoints} نقطة
                           </span>
                         )}
@@ -231,11 +231,11 @@ export default function PrestigeRoadmapModal({
                     </div>
 
                     {/* Perks List */}
-                    <div className="pt-3 border-t border-white/5">
+                    <div className="pt-3 border-t border-slate-200">
                       <p className="text-xs font-bold text-slate-700 mb-2">امتيازات هذه الرتبة:</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {tier.perks.map((perk, pIdx) => (
-                          <div key={pIdx} className="flex items-center gap-2 text-xs text-slate-300">
+                          <div key={pIdx} className="flex items-center gap-2 text-xs text-slate-700">
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
                             <span>{perk}</span>
                           </div>

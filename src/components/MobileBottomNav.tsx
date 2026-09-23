@@ -64,7 +64,7 @@ export default function MobileBottomNav() {
                 </div>
               ) : (
                 /* Inactive Clean Tab */
-                <div className="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 transition-colors py-1">
+                <div className="flex flex-col items-center justify-center text-slate-300 hover:text-cyan-300 transition-colors py-1">
                   <div className="relative">
                     <Icon size={20} className="mb-0.5" />
                     {tab.hasStar && (

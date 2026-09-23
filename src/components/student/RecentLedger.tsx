@@ -64,7 +64,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
       <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
         <div className="flex items-center gap-2">
           <History className="w-5 h-5 text-cyan-600" />
-          <h3 className="text-lg font-black text-slate-100">سجل النشاط والمعاملات</h3>
+          <h3 className="text-lg font-black text-slate-900">سجل النشاط والمعاملات</h3>
         </div>
 
         <div className="flex rounded-2xl bg-white/10 p-1">
@@ -73,7 +73,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
             className={`rounded-xl px-4 py-1.5 text-xs font-bold transition-all ${
               activeTab === 'points'
                 ? 'bg-white text-navy-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-100'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             سجل النقاط ({transactions.length})
@@ -83,7 +83,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
             className={`rounded-xl px-4 py-1.5 text-xs font-bold transition-all ${
               activeTab === 'quizzes'
                 ? 'bg-white text-navy-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-100'
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             الاختبارات المنجزة ({submissions.length})
@@ -118,7 +118,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-slate-100 line-clamp-1">{tx.description}</p>
+                        <p className="text-sm font-bold text-slate-800 line-clamp-1">{tx.description}</p>
                         <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                           <span>{typeMeta.label}</span>
                           <span>•</span>
@@ -179,7 +179,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
                       {sub.score}%
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-100">{sub.quizTitle}</h4>
+                      <h4 className="text-sm font-bold text-slate-800">{sub.quizTitle}</h4>
                       <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                         {sub.subject && <span className="font-semibold text-cyan-700">{sub.subject}</span>}
                         {sub.subject && <span>•</span>}

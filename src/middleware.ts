@@ -29,6 +29,7 @@ export async function middleware(request: NextRequest) {
     { path: '/api/gsgs', protectedMethods: ['*'] },
     { path: '/api/upload', protectedMethods: ['*'] },
     { path: '/api/upload-doc', protectedMethods: ['*'] },
+    { path: '/api/students', protectedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] },
   ];
 
   let isProtected = false;

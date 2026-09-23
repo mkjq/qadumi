@@ -145,7 +145,7 @@ export default function GradesDirectoryPage() {
 
           {/* Hero Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 bg-navy-900/40/5 border border-white/10 px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-navy-900/40 border border-white/10 px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
               <GraduationCap className="w-5 h-5 text-amber-400" />
               <span className="text-sm font-semibold text-white tracking-wide">البرامج التعليمية الشاملة</span>
             </div>
@@ -165,19 +165,19 @@ export default function GradesDirectoryPage() {
 
           {/* Key Stats Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-12">
-            <div className="p-4 rounded-2xl bg-navy-900/40/5 backdrop-blur border border-white/10 text-center hover:bg-navy-900/40/10 transition-colors">
+            <div className="p-4 rounded-2xl bg-navy-900/40 backdrop-blur border border-white/10 text-center hover:bg-navy-900/60 transition-colors">
               <div className="text-2xl sm:text-3xl font-black text-cyan-accent mb-1">١٣</div>
               <div className="text-xs sm:text-sm text-slate-300">صفاً دراسياً شاملاً</div>
             </div>
-            <div className="p-4 rounded-2xl bg-navy-900/40/5 backdrop-blur border border-white/10 text-center hover:bg-navy-900/40/10 transition-colors">
+            <div className="p-4 rounded-2xl bg-navy-900/40 backdrop-blur border border-white/10 text-center hover:bg-navy-900/60 transition-colors">
               <div className="text-2xl sm:text-3xl font-black text-emerald-400 mb-1">٣</div>
               <div className="text-xs sm:text-sm text-slate-300">مراحل تعليمية متخصصة</div>
             </div>
-            <div className="p-4 rounded-2xl bg-navy-900/40/5 backdrop-blur border border-white/10 text-center hover:bg-navy-900/40/10 transition-colors">
+            <div className="p-4 rounded-2xl bg-navy-900/40 backdrop-blur border border-white/10 text-center hover:bg-navy-900/60 transition-colors">
               <div className="text-2xl sm:text-3xl font-black text-amber-400 mb-1">+٩٠</div>
               <div className="text-xs sm:text-sm text-slate-300">مادة ومنهاج دراسي</div>
             </div>
-            <div className="p-4 rounded-2xl bg-navy-900/40/5 backdrop-blur border border-white/10 text-center hover:bg-navy-900/40/10 transition-colors">
+            <div className="p-4 rounded-2xl bg-navy-900/40 backdrop-blur border border-white/10 text-center hover:bg-navy-900/60 transition-colors">
               <div className="text-2xl sm:text-3xl font-black text-purple-400 mb-1">١٠٠٪</div>
               <div className="text-xs sm:text-sm text-slate-300">تغطية وزارية ومعتمدة</div>
             </div>
@@ -192,7 +192,7 @@ export default function GradesDirectoryPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="ابحث عن صف، مادة، أو مرحلة دراسية (مثال: عاشر، أول ثانوي، توجيهي، رياضيات)..."
-                className="w-full pr-12 pl-12 py-4 rounded-2xl bg-navy-900/40/5 text-white placeholder-slate-400 text-sm sm:text-base border border-white/10 shadow-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
+                className="w-full pr-12 pl-12 py-4 rounded-2xl bg-navy-900/40 text-white placeholder-slate-400 text-sm sm:text-base border border-white/10 shadow-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
               />
               {searchQuery && (
                 <button
@@ -214,7 +214,7 @@ export default function GradesDirectoryPage() {
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                   selectedStage === 'all'
                     ? 'bg-cyan-accent text-navy shadow-lg shadow-cyan-accent/25'
-                    : 'bg-navy-900/40/10 text-slate-200 hover:bg-navy-900/40/20'
+                    : 'bg-navy-900/40 text-slate-200 hover:bg-navy-900/60'
                 }`}
               >
                 جميع المراحل (١٣)
@@ -225,7 +225,7 @@ export default function GradesDirectoryPage() {
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
                   selectedStage === 'primary'
                     ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25'
-                    : 'bg-navy-900/40/10 text-slate-200 hover:bg-navy-900/40/20'
+                    : 'bg-navy-900/40 text-slate-200 hover:bg-navy-900/60'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />
@@ -237,7 +237,7 @@ export default function GradesDirectoryPage() {
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
                   selectedStage === 'middle'
                     ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/25'
-                    : 'bg-navy-900/40/10 text-slate-200 hover:bg-navy-900/40/20'
+                    : 'bg-navy-900/40 text-slate-200 hover:bg-navy-900/60'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-indigo-400" />
@@ -249,7 +249,7 @@ export default function GradesDirectoryPage() {
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 ${
                   selectedStage === 'secondary'
                     ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/25'
-                    : 'bg-navy-900/40/10 text-slate-200 hover:bg-navy-900/40/20'
+                    : 'bg-navy-900/40 text-slate-200 hover:bg-navy-900/60'
                 }`}
               >
                 <span className="w-2 h-2 rounded-full bg-amber-400" />
@@ -267,11 +267,11 @@ export default function GradesDirectoryPage() {
         {filteredGrades.length === 0 ? (
           /* Empty Search State */
           <div className="text-center py-20 max-w-md mx-auto">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-3xl bg-white/5 bg-navy-900/40 flex items-center justify-center text-slate-400">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-3xl bg-navy-900/40 flex items-center justify-center text-slate-400">
               <Search className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold mb-2">لم نتمكن من العثور على أي صف</h3>
-            <p className="text-slate-300 text-slate-400 text-sm mb-6">
+            <p className="text-slate-300 text-sm mb-6">
               لم نعثر على نتائج تطابق &quot;{searchQuery}&quot;. جرب البحث بكلمات أخرى كاسم الصف أو المادة.
             </p>
             <button
@@ -294,7 +294,7 @@ export default function GradesDirectoryPage() {
               return (
                 <section key={stageId} id={stageId} className="relative scroll-mt-28">
                   {/* Stage Category Header */}
-                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/10 border-white/10">
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/10">
                     <div>
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-2 border shadow-sm backdrop-blur">
                         <span
@@ -305,11 +305,11 @@ export default function GradesDirectoryPage() {
                       </div>
                       <h2 className="text-2xl sm:text-3xl font-black tracking-tight flex items-center gap-3">
                         <span>{config.name}</span>
-                        <span className="text-sm sm:text-base font-normal text-slate-300 text-slate-400">
+                        <span className="text-sm sm:text-base font-normal text-slate-400">
                           ({grades.length} صفوف)
                         </span>
                       </h2>
-                      <p className="text-sm sm:text-base text-slate-300 text-slate-400 mt-1 max-w-2xl">
+                      <p className="text-sm sm:text-base text-slate-300 mt-1 max-w-2xl">
                         {config.description}
                       </p>
                     </div>
@@ -365,24 +365,24 @@ export default function GradesDirectoryPage() {
                                 </div>
 
                                 {/* Floating Stage Tag */}
-                                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-navy-900/40/80 bg-navy-900/40/80 backdrop-blur border border-white/10 dark:border-slate-700 text-slate-700 text-slate-300 shadow-sm">
+                                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-navy-900/80 backdrop-blur border border-white/10 text-slate-200 shadow-sm">
                                   {grade.badgeText}
                                 </span>
                               </div>
 
                               {/* Title */}
-                              <h3 className="text-lg sm:text-xl font-black mb-2 text-white text-white group-hover:text-primary-600 dark:group-hover:text-cyan-accent transition-colors">
+                              <h3 className="text-lg sm:text-xl font-black mb-2 text-white group-hover:text-primary-600 dark:group-hover:text-cyan-accent transition-colors">
                                 {grade.name}
                               </h3>
 
                               {/* Description */}
-                              <p className="text-xs sm:text-sm text-slate-300 text-slate-300 line-clamp-2 leading-relaxed mb-5">
+                              <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 leading-relaxed mb-5">
                                 {grade.description}
                               </p>
 
                               {/* Curricula Subjects Preview Pills */}
                               <div className="mb-6">
-                                <div className="text-[11px] font-semibold text-slate-300 text-slate-400 mb-2 flex items-center gap-1.5">
+                                <div className="text-[11px] font-semibold text-slate-300 mb-2 flex items-center gap-1.5">
                                   <BookOpen className="w-3.5 h-3.5 text-slate-400" />
                                   <span>أبرز المواد المقررة:</span>
                                 </div>
@@ -390,13 +390,13 @@ export default function GradesDirectoryPage() {
                                   {grade.subjects.slice(0, 3).map((sub) => (
                                     <span
                                       key={sub.id}
-                                      className="text-[11px] font-medium px-2.5 py-0.5 rounded-lg bg-navy-900/40/70 bg-navy-900/40/70 border border-white/10/60 dark:border-slate-700 text-slate-700 text-slate-300"
+                                      className="text-[11px] font-medium px-2.5 py-0.5 rounded-lg bg-navy-900/60 border border-white/10 text-slate-300"
                                     >
                                       {sub.name}
                                     </span>
                                   ))}
                                   {grade.subjects.length > 3 && (
-                                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-slate-200/50 dark:bg-slate-700/50 text-slate-500 text-slate-400">
+                                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-slate-200/50 dark:bg-slate-700/50 text-slate-400">
                                       +{grade.subjects.length - 3}
                                     </span>
                                   )}
@@ -405,9 +405,9 @@ export default function GradesDirectoryPage() {
                             </div>
 
                             {/* Bottom Card Footer */}
-                            <div className="pt-4 border-t border-white/10/80 border-white/10/80">
+                            <div className="pt-4 border-t border-white/10">
                               {/* Stats Pills */}
-                              <div className="flex items-center justify-between text-xs text-slate-300 text-slate-400 mb-4">
+                              <div className="flex items-center justify-between text-xs text-slate-400 mb-4">
                                 <span className="inline-flex items-center gap-1">
                                   <BookMarked className="w-3.5 h-3.5 text-slate-400" />
                                   <span>{grade.subjects.length} مواد</span>
@@ -440,7 +440,7 @@ export default function GradesDirectoryPage() {
                                   <span>استكشف الصف والمحتوى</span>
                                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                                 </span>
-                                <div className="w-8 h-8 rounded-full bg-navy-900/40 bg-navy-900/40 flex items-center justify-center text-slate-400 group-hover:bg-navy group-hover:text-white dark:group-hover:bg-cyan-accent dark:group-hover:text-navy transition-all shadow-sm">
+                                <div className="w-8 h-8 rounded-full bg-navy-900/40 flex items-center justify-center text-slate-400 group-hover:bg-navy group-hover:text-white dark:group-hover:bg-cyan-accent dark:group-hover:text-navy transition-all shadow-sm">
                                   <ChevronLeft className="w-4 h-4" />
                                 </div>
                               </div>
@@ -465,7 +465,7 @@ export default function GradesDirectoryPage() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-right max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-900/40/10 text-gold text-xs font-bold mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-900/40 text-gold text-xs font-bold mb-3">
                 <Award className="w-3.5 h-3.5" />
                 <span>إرشاد أكاديمي متخصص</span>
               </div>
@@ -487,7 +487,7 @@ export default function GradesDirectoryPage() {
               </Link>
               <Link
                 href="/teachers"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900/40/10 hover:bg-navy-900/40/20 text-white font-semibold text-sm text-center backdrop-blur border border-white/15 transition-colors"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900/40 hover:bg-navy-900/60 text-white font-semibold text-sm text-center backdrop-blur border border-white/15 transition-colors"
               >
                 تصفح كادر المعلمين
               </Link>
