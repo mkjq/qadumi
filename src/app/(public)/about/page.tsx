@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/db';
 import DynamicLogo from '@/components/DynamicLogo';
-import { CheckCircle2, GraduationCap, Users, Award, MapPin, Target, Heart, Lightbulb, Sparkles, ChevronLeft, ArrowRight } from 'lucide-react';
+import { CheckCircle2, GraduationCap, Users, Award, MapPin, Target, Heart, Lightbulb, Star, ChevronLeft, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 

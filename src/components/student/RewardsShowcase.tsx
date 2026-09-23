@@ -2,22 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Gift,
-  Lock,
-  Sparkles,
-  CheckCircle2,
-  AlertCircle,
-  X,
-  ArrowLeft,
-  Coins,
-  ShoppingBag,
-  Percent,
-  BookOpen,
-  UserCheck,
-  Package,
-  CreditCard,
-} from 'lucide-react';
+import { Gift, Lock, Star, CheckCircle2, AlertCircle, X, ArrowLeft, Coins, ShoppingBag, Percent, BookOpen, UserCheck, Package, CreditCard,  } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export interface RewardItem {
@@ -275,7 +260,7 @@ export default function RewardsShowcase({
                       onClick={() => handleOpenModal(reward)}
                       className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-gold-600 px-4 py-3 text-xs sm:text-sm font-bold text-navy-900 shadow-md shadow-amber-500/20 transition-all hover:brightness-105 active:scale-[0.98]"
                     >
-                      <Sparkles className="w-4 h-4" />
+                      <Star className="w-4 h-4" />
                       <span>استبدال المكافأة الآن</span>
                     </button>
                   ) : (
@@ -378,7 +363,7 @@ export default function RewardsShowcase({
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4" />
+                      <Star className="w-4 h-4" />
                       <span>تأكيد الاستبدال</span>
                     </>
                   )}

@@ -136,6 +136,7 @@ model Student {
   points       Int        @default(0)
   level        String     @default("مبتدئ") // "مبتدئ", "متقدم", "بطل القدومي", "أسطورة القدومي"
   avatar       String?
+  gender       String?
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -158,6 +159,7 @@ model User {
   grade        String?
   points       Int        @default(0)
   avatar       String?
+  gender       String?
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt

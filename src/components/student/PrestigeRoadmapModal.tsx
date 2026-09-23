@@ -2,20 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Trophy,
-  Crown,
-  Medal,
-  Award,
-  Sparkles,
-  CheckCircle2,
-  X,
-  MapPin,
-  ChevronLeft,
-  Star,
-  Gift,
-  Zap,
-} from 'lucide-react';
+import { Trophy, Crown, Medal, Award, Star, CheckCircle2, X, MapPin, ChevronLeft, Gift, Zap,  } from 'lucide-react';
 
 export interface PrestigeRoadmapModalProps {
   isOpen: boolean;
@@ -150,7 +137,7 @@ export default function PrestigeRoadmapModal({
             {/* Modal Header */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-600 text-xs font-bold mb-3">
-                <Sparkles className="w-4 h-4 text-amber-500" />
+                <Star className="w-4 h-4 text-amber-500" />
                 <span>نظام الرتب التنافسية للطلاب</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">

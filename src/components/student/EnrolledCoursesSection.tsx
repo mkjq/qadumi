@@ -3,24 +3,7 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  BookOpen,
-  Calculator,
-  Atom,
-  FlaskConical,
-  Dna,
-  Globe,
-  Landmark,
-  Compass,
-  FileText,
-  Sparkles,
-  ArrowLeft,
-  CheckCircle2,
-  Award,
-  ExternalLink,
-  GraduationCap,
-  Layers,
-} from 'lucide-react';
+import { BookOpen, Calculator, Atom, FlaskConical, Dna, Globe, Landmark, Compass, FileText, Star, ArrowLeft, CheckCircle2, Award, ExternalLink, GraduationCap, Layers,  } from 'lucide-react';
 
 export interface EnrolledGradeItem {
   id: number;
@@ -533,7 +516,7 @@ export default function EnrolledCoursesSection({
             href="/quizzes"
             className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600-white shadow-sm transition hover:bg-cyan-700"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Star className="w-3.5 h-3.5" />
             <span>جميع الاختبارات</span>
           </Link>
         </div>
@@ -612,7 +595,7 @@ export default function EnrolledCoursesSection({
                   ) : (
                     <div className="flex items-center justify-between text-xs text-slate-500">
                       <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                        <Star className="w-3.5 h-3.5 text-amber-500" />
                         <span>اختبارات تفاعلية مكافئة بنقاط</span>
                       </span>
                       <span className="font-bold text-cyan-700">جاهز للبدء</span>

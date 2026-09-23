@@ -4,24 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import {
-  Trophy,
-  Award,
-  CheckCircle2,
-  Sparkles,
-  ArrowLeft,
-  GraduationCap,
-  Gift,
-  RefreshCw,
-  LogOut,
-  BookOpen,
-  ChevronRight,
-  Flame,
-  User as UserIcon,
-  AlertTriangle,
-  LogIn,
-  Home,
-} from 'lucide-react';
+import { Trophy, Award, CheckCircle2, Star, ArrowLeft, GraduationCap, Gift, RefreshCw, LogOut, BookOpen, ChevronRight, Flame, User as UserIcon, AlertTriangle, LogIn, Home,  } from 'lucide-react';
 import PointsCounter from '@/components/student/PointsCounter';
 import LevelProgressBar from '@/components/student/LevelProgressBar';
 import RecentLedger, { PointTransactionItem, QuizSubmissionItem } from '@/components/student/RecentLedger';
@@ -286,7 +269,7 @@ export default function StudentDashboardClient() {
                     title="انقر لعرض خارطة الرتب"
                   >
                     <span>{student.level}</span>
-                    <Sparkles className="w-3 h-3 text-amber-500" />
+                    <Star className="w-3 h-3 text-amber-500" />
                   </button>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-500 font-medium">
@@ -322,7 +305,7 @@ export default function StudentDashboardClient() {
                 href="/quizzes"
                 className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-navy-700 to-cyan-700-white shadow-md transition hover:from-cyan-600 hover:to-navy-800 active:scale-95"
               >
-                <Sparkles className="w-4 h-4 text-cyan-300" />
+                <Star className="w-4 h-4 text-cyan-300" />
                 <span>ابدأ اختبار جديد</span>
               </Link>
 
@@ -341,7 +324,7 @@ export default function StudentDashboardClient() {
             {/* Points Balance Column */}
             <div className="lg:col-span-5">
               <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-700 mb-2">
-                <Sparkles className="w-4 h-4 text-amber-500" />
+                <Star className="w-4 h-4 text-amber-500" />
                 <span>رصيدك التراكمي من النقاط</span>
               </span>
               <PointsCounter points={student.points} />

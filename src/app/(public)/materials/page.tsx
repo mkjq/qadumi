@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { FileText, Download, Search, BookOpen, Sparkles, GraduationCap, CheckCircle } from 'lucide-react';
+import { FileText, Download, Search, BookOpen, Star, GraduationCap, CheckCircle } from 'lucide-react';
 
 interface Material {
   id: number;
@@ -72,7 +72,7 @@ export default function MaterialsPage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 text-amber-400 text-xs sm:text-sm font-bold mb-6 border border-amber-500/30">
-            <Sparkles size={14} />
+            <Star size={14} />
             <span>متاحة مجاناً لجميع أبنائنا الطلبة</span>
           </div>
 

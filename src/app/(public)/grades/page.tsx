@@ -12,22 +12,7 @@ import {
   isMaterialInGrade,
 } from '@/lib/grades';
 import DynamicLogo from '@/components/DynamicLogo';
-import {
-  GraduationCap,
-  BookOpen,
-  FileText,
-  Users,
-  Search,
-  ArrowLeft,
-  Sparkles,
-  ChevronLeft,
-  X,
-  Layers,
-  Award,
-  BookMarked,
-  CheckCircle2,
-  Compass,
-} from 'lucide-react';
+import { GraduationCap, BookOpen, FileText, Users, Search, ArrowLeft, Star, ChevronLeft, X, Layers, Award, BookMarked, CheckCircle2, Compass,  } from 'lucide-react';
 
 interface TeacherItem {
   id: number;

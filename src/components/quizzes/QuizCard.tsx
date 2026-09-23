@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Clock, HelpCircle, Star, ArrowLeft, Award, Sparkles } from 'lucide-react';
+import { Clock, HelpCircle, Star, ArrowLeft, Award } from 'lucide-react';
 
 export interface QuizCardProps {
   quiz: {
@@ -83,7 +83,7 @@ export default function QuizCard({ quiz, index = 0 }: QuizCardProps) {
             <span
               className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${theme.badge}`}
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Star className="w-3.5 h-3.5" />
               {quiz.subject}
             </span>
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">

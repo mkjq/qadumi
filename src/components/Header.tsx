@@ -3,17 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  Menu,
-  X,
-  Phone,
-  Sparkles,
-  Trophy,
-  GraduationCap,
-  BookOpen,
-  ShoppingBag,
-  FileText,
-} from 'lucide-react';
+import { Menu, X, Phone, Star, Trophy, GraduationCap, BookOpen, ShoppingBag, FileText,  } from 'lucide-react';
 import DynamicLogo from './DynamicLogo';
 import { whatsappLink } from '@/lib/utils';
 

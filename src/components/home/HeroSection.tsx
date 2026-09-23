@@ -3,13 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  Sparkles,
-  ArrowLeft,
-  Flame,
-  MessageCircle,
-  GraduationCap,
-} from 'lucide-react';
+import { Star, ArrowLeft, Flame, MessageCircle, GraduationCap,  } from 'lucide-react';
 import { whatsappLink } from '@/lib/utils';
 import OrganicBlob from '@/components/ui/OrganicBlob';
 

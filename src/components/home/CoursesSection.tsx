@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, Sparkles, BookA, GraduationCap, Microscope, Atom, BookMarked, Trophy, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, Star, BookA, GraduationCap, Microscope, Atom, BookMarked, Trophy, HeartHandshake, ShieldCheck } from 'lucide-react';
 
 const gradeGroups = [
   { title: 'الأول للثالث الأساسي', icon: BookA, color: 'from-blue-500 to-cyan-500', iconColor: 'text-blue-500', bgColor: 'bg-blue-50', subjects: ['اللغة العربية', 'الرياضيات', 'العلوم', 'الانجليزية'] },
@@ -74,7 +74,7 @@ export default function CoursesSection() {
         <div className="relative rounded-3xl overflow-hidden bg-cyan-50/70 border border-cyan-200/80 shadow-sm">
           <div className="relative p-8 sm:p-12 text-center">
             <div className="section-label mx-auto w-fit text-xs sm:text-sm mb-4">
-              <Sparkles className="w-4 h-4 text-cyan-accent flex-shrink-0" />
+              <Star className="w-4 h-4 text-cyan-accent flex-shrink-0" />
               <span>عروض وخصومات مميزة</span>
             </div>
             

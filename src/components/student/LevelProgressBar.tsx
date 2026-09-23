@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Sparkles, ChevronLeft, HelpCircle } from 'lucide-react';
+import { Trophy, Star, ChevronLeft, HelpCircle } from 'lucide-react';
 
 export interface PrestigeInfo {
   level: string;
@@ -71,7 +71,7 @@ export default function LevelProgressBar({ points, prestige, onOpenRoadmap }: Le
               onClick={onOpenRoadmap}
               className="text-xs font-bold text-cyan-700 hover:text-cyan-800 underline underline-offset-2 flex items-center gap-1 transition"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              <Star className="w-3.5 h-3.5 text-amber-500" />
               <span>خارطة الرتب</span>
             </button>
           )}

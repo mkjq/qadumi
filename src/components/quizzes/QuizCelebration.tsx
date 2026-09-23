@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Confetti from 'react-confetti';
-import { Trophy, Star, Sparkles, CheckCircle2, RotateCcw, ArrowLeft, LayoutDashboard, HelpCircle, XCircle } from 'lucide-react';
+import { Trophy, Star, CheckCircle2, RotateCcw, ArrowLeft, LayoutDashboard, HelpCircle, XCircle } from 'lucide-react';
 
 
 export interface QuizCelebrationProps {

@@ -6,13 +6,19 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Gift, AlertCircle, CheckCircle2, UserPlus, X, Check } from 'lucide-react';
 
 const GRADE_OPTIONS = [
-  'توجيهي علمي',
-  'توجيهي أدبي',
-  'أول ثانوي علمي',
-  'أول ثانوي أدبي',
-  'العاشر',
-  'التاسع',
-  'الثامن',
+  "ثاني ثانوي",
+  "أول ثانوي",
+  "بيتك",
+  "عاشر",
+  "تاسع",
+  "ثامن",
+  "سابع",
+  "سادس",
+  "خامس",
+  "رابع",
+  "ثالث",
+  "ثاني",
+  "أول"
 ];
 
 function StudentRegisterContent() {
@@ -22,6 +28,7 @@ function StudentRegisterContent() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [grade, setGrade] = useState(GRADE_OPTIONS[0]);
+  const [gender, setGender] = useState("ذكر");
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   
@@ -53,8 +60,8 @@ function StudentRegisterContent() {
       return;
     }
 
-    if (!phone.trim() || phone.trim().length < 9) {
-      setError('يرجى إدخال رقم هاتف صحيح');
+    if (!/^07\d{8}$/.test(phone.trim())) {
+      setError("يرجى إدخال رقم هاتف أردني صحيح يبدأ بـ 07 ويتكون من 10 أرقام");
       return;
     }
 
@@ -78,6 +85,7 @@ function StudentRegisterContent() {
           name: name.trim(),
           phone: phone.trim(),
           grade,
+          gender,
           password,
         }),
       });

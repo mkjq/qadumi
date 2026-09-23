@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Filter, Search, Award, HelpCircle, BookOpen, RefreshCw } from 'lucide-react';
+import { Star, Filter, Search, Award, HelpCircle, BookOpen, RefreshCw } from 'lucide-react';
 import QuizCard from '@/components/quizzes/QuizCard';
 import OrganicBlob from '@/components/ui/OrganicBlob';
 

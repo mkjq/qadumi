@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { prisma } from '@/lib/db';
 import { parseTaughtGrades, STAGES } from '@/lib/grades';
 import { whatsappLink } from '@/lib/utils';
-import { Phone, MessageCircle, Facebook, Instagram, GraduationCap, FileText, Download, ChevronLeft, ArrowRight, Sparkles, BookOpen } from 'lucide-react';
+import { Phone, MessageCircle, Facebook, Instagram, GraduationCap, FileText, Download, ChevronLeft, ArrowRight, Star, BookOpen } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -105,7 +105,7 @@ export default async function TeacherProfilePage({ params }: TeacherProfileProps
             {/* Teacher Details */}
             <div className="flex-1 text-center md:text-right">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-accent-500/15 text-cyan-accent text-xs font-bold mb-3 border border-cyan-accent-500/20">
-                <Sparkles size={13} />
+                <Star size={13} />
                 <span>مدرس مادة {teacher.subject}</span>
               </div>
 

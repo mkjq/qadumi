@@ -1,4 +1,4 @@
-import { BookOpen, CheckCircle2, Sparkles, ArrowRight, GraduationCap } from 'lucide-react';
+import { BookOpen, CheckCircle2, Star, ArrowRight, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -72,7 +72,7 @@ export default function CoursesPage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 text-amber-400 text-xs sm:text-sm font-bold mb-6 border border-amber-500/30">
-            <Sparkles size={14} />
+            <Star size={14} />
             <span>تغطية شاملة من التأسيس حتى التوجيهي</span>
           </div>
 
@@ -150,7 +150,7 @@ export default function CoursesPage() {
           {/* ── 3. Academic Pricing Banner ── */}
           <div className="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950 rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl relative overflow-hidden border border-white/10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold mb-4 border border-amber-500/30">
-              <Sparkles size={14} />
+              <Star size={14} />
               <span>رسوم في متناول الجميع</span>
             </div>
 

@@ -7,7 +7,7 @@ import { hashPassword, signStudentToken } from '@/lib/studentAuth';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, password, grade, email } = body;
+    const { name, phone, password, grade, email, gender } = body;
 
     // 1. Validate mandatory fields
     if (!name || typeof name !== 'string' || name.trim().length < 2) {
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!phone || typeof phone !== 'string' || phone.trim().length < 9) {
+    if (!phone || typeof phone !== 'string' || !/^07\\d{8}$/.test(phone.trim())) {
       return NextResponse.json(
         { error: 'يرجى إدخال رقم هاتف صالح' },
         { status: 400 }
@@ -78,6 +78,7 @@ export async function POST(request: Request) {
         data: {
           name: cleanName,
           phone: cleanPhone,
+          gender: gender || 'ذكر',
           username: cleanPhone,
           email: cleanEmail,
           passwordHash,

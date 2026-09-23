@@ -2,7 +2,7 @@ import { prisma } from '@/lib/db';
 import DynamicLogo from '@/components/DynamicLogo';
 import ContactSection from '@/components/home/ContactSection';
 import type { Metadata } from 'next';
-import { Sparkles } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'تواصل معنا | مركز القدومي الثقافي',
@@ -34,7 +34,7 @@ export default async function ContactPage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 text-amber-400 text-xs sm:text-sm font-bold mb-6 border border-amber-500/30">
-            <Sparkles size={14} />
+            <Star size={14} />
             <span>خدمة واستفسارات مستمرة</span>
           </div>
 

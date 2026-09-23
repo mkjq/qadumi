@@ -74,7 +74,7 @@ export default async function TeachersPage() {
                       <GraduationCap className="w-20 h-20 text-white/20" />
                     </div>
                   )}
-                  <div className="teacher-img-overlay absolute inset-0" />
+                  <div className="teacher-img-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-xl bg-amber-500/90 backdrop-blur-md text-slate-950 font-black text-xs sm:text-sm shadow-md">
                     {teacher.subject}
                   </div>

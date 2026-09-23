@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Search, CreditCard, UploadCloud, X, CheckCircle, ShieldCheck, Sparkles, GraduationCap } from 'lucide-react';
+import { ShoppingCart, Search, CreditCard, UploadCloud, X, CheckCircle, ShieldCheck, Star, GraduationCap } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface CourseCard {
@@ -41,7 +41,7 @@ export default function StoreClient() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 text-amber-400 text-xs sm:text-sm font-bold mb-6 border border-amber-500/30">
-            <Sparkles size={14} />
+            <Star size={14} />
             <span>متجر بطاقات دورات ومكثفات التوجيهي</span>
           </div>
 
@@ -170,6 +170,11 @@ function CheckoutModal({ card, onClose }: { card: CourseCard; onClose: () => voi
 
   const submitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!/^07\d{8}$/.test(form.phone.trim())) {
+      toast.error("يرجى إدخال رقم هاتف أردني صحيح يبدأ بـ 07 ويتكون من 10 أرقام");
+      return;
+    }
     if (form.paymentMethod === 'CLIQ' && !form.receiptUrl) {
       toast.error('يرجى إرفاق صورة إشعار أو وصل التحويل');
       return;

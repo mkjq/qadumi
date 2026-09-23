@@ -1,14 +1,14 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle, ChevronLeft, Sparkles, Target, Heart, Zap } from 'lucide-react';
+import { CheckCircle, ChevronLeft, Star, Target, Heart, Zap } from 'lucide-react';
 
 interface AboutSectionProps { centerInfo: Record<string, string>; }
 
 const features = [
   { icon: Target, text: 'أساتذة متخصصون بخبرات عالية', color: 'text-cyan-500' },
   { icon: CheckCircle, text: 'دوسيات شاملة مصممة باحترافية', color: 'text-green-500' },
-  { icon: Sparkles, text: 'نسبة نجاح 99% في الثانوية', color: 'text-yellow-500' },
+  { icon: Star, text: 'نسبة نجاح 99% في الثانوية', color: 'text-yellow-500' },
   { icon: Heart, text: 'أسعار مناسبة وخصومات متعددة', color: 'text-pink-500' },
   { icon: Zap, text: 'متابعة فردية لكل طالب', color: 'text-purple-500' },
   { icon: CheckCircle, text: 'امتحانات دورية ومستمرة', color: 'text-blue-500' },
@@ -78,7 +78,7 @@ export default function AboutSection({ centerInfo }: AboutSectionProps) {
             <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 relative">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-6 h-6 text-amber-500" />
+                  <Star className="w-6 h-6 text-amber-500" />
                 </div>
                 <div>
                   <h3 className="text-navy-900 font-black text-lg">منذ عام {centerInfo?.founded || '2000'}م</h3>

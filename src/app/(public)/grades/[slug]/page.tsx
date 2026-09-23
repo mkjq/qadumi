@@ -4,7 +4,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/db';
 import { getGradeBySlug, getAllGradeSlugs, isTeacherInGrade, isMaterialInGrade, STAGES } from '@/lib/grades';
-import { BookOpen, FileText, Users, Download, ExternalLink, Phone, MessageCircle, ChevronLeft, ArrowRight, Sparkles, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { BookOpen, FileText, Users, Download, ExternalLink, Phone, MessageCircle, ChevronLeft, ArrowRight, Star, GraduationCap, CheckCircle2 } from 'lucide-react';
 import { whatsappLink } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
@@ -70,7 +70,7 @@ export default async function GradeDetailPage({ params }: GradePageProps) {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-cyan-accent text-xs sm:text-sm font-bold mb-3 backdrop-blur-sm border border-white/10">
-                <Sparkles size={14} />
+                <Star size={14} />
                 <span>{stage.name}</span>
                 <span className="text-white/40">•</span>
                 <span>{grade.badgeText}</span>
