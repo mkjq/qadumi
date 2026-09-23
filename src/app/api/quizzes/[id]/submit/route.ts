@@ -40,7 +40,7 @@ export async function POST(
     const session = await getStudentFromRequest(request);
     if (!session || !session.studentId) {
       return NextResponse.json(
-        { error: 'غير مصرح: يرجى تسجيل الدخول لحفظ نتائج الاختبار والنقاط' },
+        { error: 'غير مصرح: يرجى تسجيل الدخول' },
         { status: 401 }
       );
     }
@@ -50,7 +50,7 @@ export async function POST(
       const explicitId = Number(body.studentId);
       if (!isNaN(explicitId) && explicitId !== session.studentId) {
         return NextResponse.json(
-          { error: 'غير مصرح: لا يمكنك إرسال إجابات اختبار نيابة عن طالب آخر' },
+          { error: 'غير مصرح: لا يمكنك تقديم اختبار لطالب آخر' },
           { status: 403 }
         );
       }
@@ -64,7 +64,7 @@ export async function POST(
 
     if (!student || !student.isActive) {
       return NextResponse.json(
-        { error: 'حساب الطالب غير موجود أو غير نشط' },
+        { error: 'الاختبار أو الطالب غير موجود' },
         { status: 404 }
       );
     }
@@ -86,7 +86,7 @@ export async function POST(
 
     if (!quiz || !quiz.isActive) {
       return NextResponse.json(
-        { error: 'الاختبار غير موجود' },
+        { error: 'الاختبار أو الطالب غير موجود' },
         { status: 404 }
       );
     }
@@ -132,7 +132,7 @@ export async function POST(
     // 4. Concurrency-Safe Transaction with In-Transaction Verification
     const submissionResult = await prisma.$transaction(async (tx) => {
       // Serialize concurrent submissions for this student to eliminate TOCTOU race conditions
-      await tx.$executeRaw`SELECT 1 FROM "Student" WHERE id = ${student.id} FOR UPDATE`;
+      // Removed explicit FOR UPDATE lock because it throws errors on Prisma Edge clients/Neon poolers
 
       // Check for previous submissions inside transaction
       const previousSubmission = await tx.quizSubmission.findFirst({
@@ -165,7 +165,7 @@ export async function POST(
             studentId: student.id,
             amount: actualPointsEarned,
             type: 'QUIZ_REWARD',
-            description: `إكمال اختبار ${quiz.title} بنجاح (+${actualPointsEarned} نقطة)`,
+            description: `مكافأة اختبار ${quiz.title} (+${actualPointsEarned} نقطة)`,
           },
         });
 
@@ -211,8 +211,8 @@ export async function POST(
   } catch (error) {
     console.error(`[API /api/quizzes/${params.id}/submit] Error:`, error);
     return NextResponse.json(
-      { error: 'فشل في حفظ وإرسال إجابات الاختبار' },
-      { status: 500 }
+      { error: 'حدث خطأ داخلي في الخادم أثناء تقديم الاختبار' },
+        { status: 500 }
     );
   }
 }
