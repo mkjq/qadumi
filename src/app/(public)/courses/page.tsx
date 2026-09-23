@@ -103,29 +103,34 @@ export default function CoursesPage() {
             {gradeGroups.map((group, i) => (
               <div
                 key={i}
-                className="bg-white/5 rounded-3xl border border-white/10 shadow-sm hover:shadow-md hover:border-amber-400/60 transition-all overflow-hidden flex flex-col justify-between"
+                className="group relative bg-white/[0.03] rounded-3xl border border-white/10 shadow-lg hover:shadow-2xl hover:shadow-cyan-500/5 hover:border-cyan-400/30 transition-all duration-300 overflow-hidden flex flex-col justify-between backdrop-blur-sm"
               >
                 <div>
                   {/* Card Banner */}
-                  <div className={`bg-gradient-to-r ${group.headerGradient} p-6 text-white relative`}>
-                    <span className="text-[11px] font-bold text-white/70 block mb-1">{group.grades}</span>
-                    <h3 className="text-xl font-black leading-snug">{group.title}</h3>
+                  <div className={`bg-gradient-to-r ${group.headerGradient} p-6 sm:p-7 text-white relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                    <div className="relative z-10">
+                      <span className="inline-block text-[11px] font-bold text-white/60 bg-white/10 rounded-full px-3 py-1 mb-2">{group.grades}</span>
+                      <h3 className="text-xl sm:text-2xl font-black leading-snug">{group.title}</h3>
+                    </div>
                   </div>
 
                   {/* Subject List */}
-                  <div className="p-6">
-                    <div className="space-y-2.5 mb-6">
+                  <div className="p-6 sm:p-7">
+                    <div className="space-y-3 mb-6">
                       {group.subjects.map((subject) => (
-                        <div key={subject} className="flex items-center gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                          <span className="text-slate-300 text-xs sm:text-sm font-semibold">{subject}</span>
+                        <div key={subject} className="flex items-center gap-3 group/item">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-500/10 flex-shrink-0">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          </div>
+                          <span className="text-slate-300 text-sm font-medium group-hover/item:text-white transition-colors">{subject}</span>
                         </div>
                       ))}
                     </div>
 
                     {group.note && (
-                      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 mb-4">
-                        <p className="text-amber-800 text-xs sm:text-sm font-bold flex items-center gap-1.5">
+                      <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 mb-4">
+                        <p className="text-amber-300 text-xs sm:text-sm font-bold flex items-center gap-2">
                           <span>⭐</span>
                           <span>{group.note}</span>
                         </p>
@@ -134,13 +139,13 @@ export default function CoursesPage() {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0">
+                <div className="p-6 sm:p-7 pt-0">
                   <Link
                     href={`/grades/${group.slug}`}
-                    className="flex items-center justify-between w-full py-3 px-4 rounded-xl bg-slate-50 hover:bg-cyan-accent-50 text-slate-700 hover:text-slate-900 text-xs font-bold border border-slate-200 transition-all group"
+                    className="flex items-center justify-between w-full py-3.5 px-5 rounded-2xl bg-white/5 hover:bg-cyan-500/15 text-slate-300 hover:text-cyan-300 text-xs font-bold border border-white/10 hover:border-cyan-500/30 transition-all duration-200 group/btn"
                   >
                     <span>تفاصيل الصف والمعلمين والدوسيات</span>
-                    <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
+                    <ArrowRight size={14} className="rotate-180 group-hover/btn:-translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

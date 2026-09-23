@@ -54,6 +54,25 @@ body {
   background-clip: text;
 }
 
+/* ── Gradient Text (generic alias for cyan) ── */
+.gradient-text {
+  background: linear-gradient(135deg, #00A3E0 0%, #4DC0EC 50%, #00A3E0 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient Background (navy hero sections) ── */
+.gradient-bg {
+  background: linear-gradient(135deg, #051124 0%, #091C3B 50%, #0A2246 100%);
+}
+
+/* ── Light section background ── */
+.section-bg-light {
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+}
+
 /* ── Buttons ── */
 .btn-primary {
   background: #0B1D3A;
