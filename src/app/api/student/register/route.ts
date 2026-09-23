@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!phone || typeof phone !== 'string' || !/^07\d{8}$/.test(phone.trim())) {
+    if (!phone || typeof phone !== 'string' || (!/^07[0-9]{8}$/.test(phone.replace(/[^0-9]/g, "")))) {
       return NextResponse.json(
         { error: 'يرجى إدخال رقم هاتف صالح' },
         { status: 400 }

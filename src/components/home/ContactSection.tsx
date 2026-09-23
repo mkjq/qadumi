@@ -50,7 +50,7 @@ export default function ContactSection({ centerInfo }: ContactSectionProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.message || !form.grade || !form.phone) return;
-    if (!/^07\d{8}$/.test(form.phone.trim())) {
+    if ((!/^07[0-9]{8}$/.test(form.phone.replace(/[^0-9]/g, "")))) {
       toast.error("يرجى إدخال رقم هاتف أردني صحيح يبدأ بـ 07 ويتكون من 10 أرقام");
       return;
     }

@@ -171,7 +171,7 @@ function CheckoutModal({ card, onClose }: { card: CourseCard; onClose: () => voi
   const submitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!/^07\d{8}$/.test(form.phone.trim())) {
+    if ((!/^07[0-9]{8}$/.test(form.phone.replace(/[^0-9]/g, "")))) {
       toast.error("يرجى إدخال رقم هاتف أردني صحيح يبدأ بـ 07 ويتكون من 10 أرقام");
       return;
     }

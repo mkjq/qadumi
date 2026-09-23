@@ -60,7 +60,7 @@ function StudentRegisterContent() {
       return;
     }
 
-    if (!/^07\d{8}$/.test(phone.trim())) {
+    if ((!/^07[0-9]{8}$/.test(phone.replace(/[^0-9]/g, "")))) {
       setError("يرجى إدخال رقم هاتف أردني صحيح يبدأ بـ 07 ويتكون من 10 أرقام");
       return;
     }
