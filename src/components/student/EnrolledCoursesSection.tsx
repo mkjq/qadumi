@@ -512,11 +512,11 @@ export default function EnrolledCoursesSection({
             <GraduationCap className="w-4 h-4 text-cyan-600" />
             <span>المواد والمساقات المسجلة لصفك</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-navy-900 flex items-center gap-2">
             <span>منهاج {grade || 'دراستك'}</span>
-            <span className="text-xs font-bold text-slate-400">({subjects.length} مواد مقررة)</span>
+            <span className="text-xs font-bold text-slate-500">({subjects.length} مواد مقررة)</span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
             اختر أي مادة لبدء حل الاختبارات التشخيصية والوزارية وتجميع النقاط والمكافآت
           </p>
         </div>
@@ -524,14 +524,14 @@ export default function EnrolledCoursesSection({
         <div className="flex items-center gap-2">
           <Link
             href="/materials"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5/80 px-3.5 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] hover:border-slate-300 backdrop-blur-sm"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-gradient-to-b from-slate-50 to-slate-100 hover:border-slate-300 backdrop-blur-sm"
           >
             <FileText className="w-3.5 h-3.5 text-cyan-600" />
             <span>بنك الدوسيات والملخصات</span>
           </Link>
           <Link
             href="/quizzes"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-cyan-700"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600-white shadow-sm transition hover:bg-cyan-700"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>جميع الاختبارات</span>
@@ -556,7 +556,7 @@ export default function EnrolledCoursesSection({
               key={subject.id}
               variants={cardVariants}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className={`group relative flex flex-col justify-between rounded-3xl border border-white/10/80 bg-white/5/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-xl ${subject.borderHover}`}
+              className={`group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-xl ${subject.borderHover}`}
             >
               {/* Subtle top ambient gradient */}
               <div
@@ -573,10 +573,10 @@ export default function EnrolledCoursesSection({
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-black text-white group-hover:text-navy-800 transition-colors">
+                      <h3 className="text-lg font-black text-navy-900 group-hover:text-navy-800 transition-colors">
                         {subject.name}
                       </h3>
-                      <span className="text-xs text-slate-400 font-medium">
+                      <span className="text-xs text-slate-500 font-medium">
                         {grade || 'المنهاج الأردني'}
                       </span>
                     </div>
@@ -595,22 +595,22 @@ export default function EnrolledCoursesSection({
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed line-clamp-2">
+                <p className="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed line-clamp-2">
                   {subject.description}
                 </p>
 
                 {/* Performance or Completion indicator */}
-                <div className="mb-5 rounded-2xl bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246]/80 border border-white/5 p-3">
+                <div className="mb-5 rounded-2xl bg-gradient-to-b from-slate-50 to-slate-100/80 border border-slate-200 p-3">
                   {stats.completedCount > 0 ? (
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-400 font-medium">معدل تحصيلك في المادة:</span>
+                      <span className="text-slate-500 font-medium">معدل تحصيلك في المادة:</span>
                       <span className="font-black text-emerald-600 flex items-center gap-1">
                         <Award className="w-3.5 h-3.5" />
                         <span>{stats.avgScore}%</span>
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between text-xs text-slate-400">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
                       <span className="flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                         <span>اختبارات تفاعلية مكافئة بنقاط</span>
@@ -622,10 +622,10 @@ export default function EnrolledCoursesSection({
               </div>
 
               {/* Action Buttons */}
-              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5">
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
                 <Link
                   href={quizzesUrl}
-                  className="group/btn inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-navy-700 to-cyan-700 px-3 py-2.5 text-xs font-bold text-white shadow-sm transition hover:from-cyan-600 hover:to-navy-800 active:scale-95 text-center"
+                  className="group/btn inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-navy-700 to-cyan-700-white shadow-sm transition hover:from-cyan-600 hover:to-navy-800 active:scale-95 text-center"
                 >
                   <span>حل الاختبارات</span>
                   <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:-translate-x-0.5" />
@@ -633,9 +633,9 @@ export default function EnrolledCoursesSection({
 
                 <Link
                   href="/materials"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] hover:border-slate-300 text-center"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-gradient-to-b from-slate-50 to-slate-100 hover:border-slate-300 text-center"
                 >
-                  <FileText className="w-3.5 h-3.5 text-slate-400" />
+                  <FileText className="w-3.5 h-3.5 text-slate-500" />
                   <span>الدوسيات</span>
                 </Link>
               </div>

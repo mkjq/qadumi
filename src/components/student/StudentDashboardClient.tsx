@@ -206,16 +206,16 @@ export default function StudentDashboardClient() {
         <OrganicBlob variant="cyan" size="xl" className="-top-24 -right-24 opacity-20 pointer-events-none" />
         <OrganicBlob variant="gold" size="lg" className="bottom-10 left-10 opacity-20 pointer-events-none" />
 
-        <div className="relative max-w-md w-full rounded-3xl border border-rose-200 bg-white/5/5/95 p-8 shadow-xl backdrop-blur-xl text-center">
+        <div className="relative max-w-md w-full rounded-3xl border border-rose-200 bg-white/95 p-8 shadow-xl backdrop-blur-xl text-center">
           <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-rose-100 text-rose-600 shadow-inner">
             <AlertTriangle className="h-8 w-8" />
           </div>
 
-          <h2 className="text-2xl font-black text-white mb-2">
+          <h2 className="text-2xl font-black text-navy-900 mb-2">
             تعذر الاتصال بلوحة تحكم الطالب
           </h2>
 
-          <p className="text-sm text-slate-300 mb-4 leading-relaxed">
+          <p className="text-sm text-slate-600 mb-4 leading-relaxed">
             {error || 'حدث خطأ في استرجاع بياناتك ونقاطك التراكمية. يرجى إعادة المحاولة.'}
           </p>
 
@@ -230,9 +230,9 @@ export default function StudentDashboardClient() {
 
             <Link
               href="/student/login"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5/5 px-5 py-3 text-sm font-bold text-slate-700 shadow-md transition hover:bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-md transition hover:bg-gradient-to-b from-slate-50 to-slate-100"
             >
-              <LogIn className="w-4 h-4 text-slate-400" />
+              <LogIn className="w-4 h-4 text-slate-500" />
               <span>تسجيل الدخول</span>
             </Link>
           </div>
@@ -260,7 +260,7 @@ export default function StudentDashboardClient() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl border border-white/10/80 bg-white/5/5/90 p-6 sm:p-8 shadow-md backdrop-blur-md mb-8"
+          className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-md backdrop-blur-md mb-8"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             {/* Avatar & Student Name */}
@@ -269,14 +269,14 @@ export default function StudentDashboardClient() {
                 <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-3xl bg-gradient-to-tr from-navy-800 via-navy-700 to-cyan-600 text-2xl sm:text-3xl font-black text-white shadow-lg shadow-cyan-500/20 ring-4 ring-white">
                   {studentInitial}
                 </div>
-                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-white shadow-md ring-2 ring-white">
+                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-navy-900 shadow-md ring-2 ring-white">
                   <Flame className="w-3.5 h-3.5 fill-white" />
                 </div>
               </div>
 
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <h1 className="text-2xl sm:text-3xl font-black text-white">
+                  <h1 className="text-2xl sm:text-3xl font-black text-navy-900">
                     {student.name}
                   </h1>
                   <button
@@ -289,9 +289,9 @@ export default function StudentDashboardClient() {
                     <Sparkles className="w-3 h-3 text-amber-500" />
                   </button>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-400 font-medium">
+                <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-500 font-medium">
                   <span className="flex items-center gap-1.5">
-                    <GraduationCap className="w-4 h-4 text-slate-400" />
+                    <GraduationCap className="w-4 h-4 text-slate-500" />
                     {student.grade}
                   </span>
                   {student.phone && (
@@ -311,7 +311,7 @@ export default function StudentDashboardClient() {
                 type="button"
                 onClick={handleManualRefresh}
                 disabled={refreshing}
-                className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5/5 px-3.5 py-3 text-xs sm:text-sm font-bold text-slate-300 shadow-md transition hover:bg-gradient-to-b from-[#051124] via-[#091C3B] to-[#0A2246] hover:text-white active:scale-95 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-xs sm:text-sm font-bold text-slate-600 shadow-md transition hover:bg-gradient-to-b from-slate-50 to-slate-100 hover:text-navy-900 active:scale-95 disabled:opacity-50"
                 title="تحديث فوري للبيانات والنقاط"
               >
                 <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin text-cyan-600' : ''}`} />
@@ -320,7 +320,7 @@ export default function StudentDashboardClient() {
 
               <Link
                 href="/quizzes"
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-navy-700 to-cyan-700 px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition hover:from-cyan-600 hover:to-navy-800 active:scale-95"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-navy-700 to-cyan-700-white shadow-md transition hover:from-cyan-600 hover:to-navy-800 active:scale-95"
               >
                 <Sparkles className="w-4 h-4 text-cyan-300" />
                 <span>ابدأ اختبار جديد</span>
@@ -345,13 +345,13 @@ export default function StudentDashboardClient() {
                 <span>رصيدك التراكمي من النقاط</span>
               </span>
               <PointsCounter points={student.points} />
-              <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                 كل اختبار تحله بنجاح يضيف نقاطاً جديدة لرصيدك يمكنك استبدالها بخصومات حقيقية وجوائز من مركز القدومي!
               </p>
             </div>
 
             {/* Level Progression Column */}
-            <div className="lg:col-span-7 bg-white/5/5/80 rounded-2xl p-6 border border-white/10/80 shadow-md">
+            <div className="lg:col-span-7 bg-white/80 rounded-2xl p-6 border border-slate-200 shadow-md">
               <LevelProgressBar
                 points={student.points}
                 prestige={student.prestige}
@@ -367,50 +367,50 @@ export default function StudentDashboardClient() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="rounded-3xl border border-white/10/80 bg-white/5/5/90 p-6 shadow-md backdrop-blur-md"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md backdrop-blur-md"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-slate-400">الاختبارات المكتملة</span>
+              <span className="text-xs font-bold text-slate-500">الاختبارات المكتملة</span>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white">{stats.quizzesCompleted}</p>
-            <p className="text-xs text-slate-400 mt-1">اختبارات تم تسليمها وتصحيحها</p>
+            <p className="text-3xl font-black text-navy-900">{stats.quizzesCompleted}</p>
+            <p className="text-xs text-slate-500 mt-1">اختبارات تم تسليمها وتصحيحها</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-3xl border border-white/10/80 bg-white/5/5/90 p-6 shadow-md backdrop-blur-md"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md backdrop-blur-md"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-slate-400">معدل الدقة والتحصيل</span>
+              <span className="text-xs font-bold text-slate-500">معدل الدقة والتحصيل</span>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                 <Award className="w-5 h-5" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white">{stats.averageScore}%</p>
-            <p className="text-xs text-slate-400 mt-1">متوسط علاماتك في جميع الاختبارات</p>
+            <p className="text-3xl font-black text-navy-900">{stats.averageScore}%</p>
+            <p className="text-xs text-slate-500 mt-1">متوسط علاماتك في جميع الاختبارات</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="rounded-3xl border border-white/10/80 bg-white/5/5/90 p-6 shadow-md backdrop-blur-md"
+            className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md backdrop-blur-md"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-slate-400">إجمالي النقاط المكتسبة</span>
+              <span className="text-xs font-bold text-slate-500">إجمالي النقاط المكتسبة</span>
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                 <Trophy className="w-5 h-5" />
               </div>
             </div>
-            <p className="text-3xl font-black text-white">
+            <p className="text-3xl font-black text-navy-900">
               {stats.totalPointsEarned.toLocaleString('ar-EG')}
             </p>
-            <p className="text-xs text-slate-400 mt-1">مجموع النقاط التي جمعتها منذ التسجيل</p>
+            <p className="text-xs text-slate-500 mt-1">مجموع النقاط التي جمعتها منذ التسجيل</p>
           </motion.div>
         </div>
 
@@ -433,8 +433,8 @@ export default function StudentDashboardClient() {
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-xl font-black text-white">اختبارات مقترحة لصفك الدراسي</h3>
-                <p className="text-xs sm:text-sm text-slate-400">اختبارات موجهة ومطابقة لمنهاج {student.grade}</p>
+                <h3 className="text-xl font-black text-navy-900">اختبارات مقترحة لصفك الدراسي</h3>
+                <p className="text-xs sm:text-sm text-slate-500">اختبارات موجهة ومطابقة لمنهاج {student.grade}</p>
               </div>
               <Link
                 href="/quizzes"

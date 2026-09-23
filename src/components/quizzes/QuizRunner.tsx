@@ -40,16 +40,25 @@ export interface QuizRunnerProps {
   isSubmitting: boolean;
 }
 
+const isEnglishText = (text: string) => {
+  if (!text) return false;
+  const match = text.match(/[a-zA-Z\u0600-\u06FF]/);
+  return match ? /[a-zA-Z]/.test(match[0]) : false;
+};
+
 const arabicOptionLetters = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
 
 export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [timeLeft, setTimeLeft] = useState(quiz.durationMinutes * 60);
+  
+  const totalQuestions = quiz.questions.length;
+  const secondsPerQuestion = Math.max(10, Math.floor((quiz.durationMinutes * 60) / (totalQuestions || 1)));
+  
+  const [timeLeft, setTimeLeft] = useState(secondsPerQuestion);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [cheatWarnings, setCheatWarnings] = useState(0);
 
-  const totalQuestions = quiz.questions.length;
   const currentQuestion = quiz.questions[currentIndex];
   const progressPercent = Math.round(((currentIndex + 1) / totalQuestions) * 100);
   const answeredCount = Object.keys(answers).length;
@@ -63,16 +72,21 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          // Auto-submit when time expires
-          onSubmit(answers);
-          return 0;
+          // Auto-advance or auto-submit when time expires
+          if (currentIndex < totalQuestions - 1) {
+            setCurrentIndex((idx) => idx + 1);
+            return secondsPerQuestion;
+          } else {
+            onSubmit(answers);
+            return 0;
+          }
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [quiz.durationMinutes, answers, onSubmit]);
+  }, [quiz.durationMinutes, currentIndex, totalQuestions, answers, onSubmit, secondsPerQuestion]);
 
   // Anti-Cheat: Detect blur/visibility change
   useEffect(() => {
@@ -153,7 +167,7 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const isTimeCritical = timeLeft > 0 && timeLeft <= 60; // 1 min or less
+  const isTimeCritical = timeLeft > 0 && timeLeft <= 10; // 10 seconds or less
 
   const handleSelectOption = (optionId: number) => {
     if (!currentQuestion) return;
@@ -166,12 +180,14 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
   const handleNext = () => {
     if (currentIndex < totalQuestions - 1) {
       setCurrentIndex((prev) => prev + 1);
+      setTimeLeft(secondsPerQuestion);
     }
   };
 
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
+      setTimeLeft(secondsPerQuestion);
     }
   };
 
@@ -295,7 +311,10 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
                 <HelpCircle className="w-5 h-5" />
                 <span>السؤال رقم {currentIndex + 1} ({currentQuestion.points || 10} درجات)</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white leading-relaxed">
+              <h2 
+                className={`text-xl sm:text-2xl font-bold text-white leading-relaxed ${isEnglishText(currentQuestion.question) ? 'text-left' : 'text-right'}`}
+                dir={isEnglishText(currentQuestion.question) ? 'ltr' : 'rtl'}
+              >
                 {currentQuestion.question}
               </h2>
             </div>
@@ -313,7 +332,8 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
                     whileHover={{ y: -2, scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     onClick={() => handleSelectOption(option.id)}
-                    className={`group flex w-full items-center justify-between rounded-2xl border p-5 text-right transition-all duration-200 ${
+                    dir={isEnglishText(currentQuestion.question) ? 'ltr' : 'rtl'}
+                    className={`group flex w-full items-center justify-between rounded-2xl border p-5 transition-all duration-200 ${isEnglishText(currentQuestion.question) ? 'text-left' : 'text-right'} ${
                       isSelected
                         ? 'border-cyan-400 bg-cyan-500/20 text-white font-bold shadow-lg shadow-cyan-500/10 ring-1 ring-cyan-400/50'
                         : 'border-white/10 bg-white/5 text-slate-300 hover:border-cyan-400/50 hover:bg-white/10 hover:text-white'
