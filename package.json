@@ -17,7 +17,6 @@
     "@aws-sdk/s3-request-presigner": "^3.1128.0",
     "@hookform/resolvers": "^3.9.0",
     "@neondatabase/serverless": "^1.1.0",
-    "@opennextjs/cloudflare": "^1.20.6",
     "@prisma/adapter-neon": "^5.22.0",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
@@ -46,6 +45,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@opennextjs/cloudflare": "^1.20.6",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",

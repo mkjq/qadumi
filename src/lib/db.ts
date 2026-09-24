@@ -1,4 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+
+
+import { PrismaClient } from '@prisma/client/wasm';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
 
@@ -18,11 +20,27 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    adapter,
-    log: ['error', 'warn'],
-  });
+let prismaInstance: PrismaClient | null = globalForPrisma.prisma || null;
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+export const prisma = new Proxy({} as PrismaClient, {
+  get(target, prop) {
+    if (prop === 'then') return undefined; // Promise chaining support
+    if (process.env.SKIP_PRISMA) {
+      return () => [];
+    }
+    if (!prismaInstance) {
+      prismaInstance = new PrismaClient({
+        adapter,
+        log: ['error', 'warn'],
+      });
+      if (process.env.NODE_ENV !== 'production') {
+        globalForPrisma.prisma = prismaInstance;
+      }
+    }
+    const value = prismaInstance[prop as keyof PrismaClient];
+    if (typeof value === 'function') {
+      return value.bind(prismaInstance);
+    }
+    return value;
+  }
+});

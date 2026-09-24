@@ -82,24 +82,6 @@ function patchOpenNext() {
           console.log('Patched Lottie expression eval in:', full);
         }
 
-        // Catch any remaining direct eval
-        const matches = [...code.matchAll(/eval\("([^"]+)"\)/g)];
-        for (const match of matches) {
-          console.log('Found direct string eval:', match[0]);
-        }
-        
-        // Patch Prisma Client require to use /edge in Cloudflare worker
-        if (code.includes('require("@prisma/client")')) {
-          code = code.replaceAll('require("@prisma/client")', 'require("@prisma/client/edge")');
-          modified = true;
-          console.log('Patched Prisma Client require to edge in:', full);
-        }
-        if (code.includes('from "@prisma/client"')) {
-          code = code.replaceAll('from "@prisma/client"', 'from "@prisma/client/edge"');
-          modified = true;
-          console.log('Patched Prisma Client import to edge in:', full);
-        }
-
         if (modified) {
           fs.writeFileSync(full, code, 'utf8');
         }
