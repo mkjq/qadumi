@@ -124,7 +124,7 @@ export default function CardsAdminPage() {
             placeholder="بحث عن بطاقة، أستاذ، أو مادة..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-4 pr-10 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full pl-4 pr-10 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-900 bg-white"
           />
         </div>
 

@@ -51,7 +51,7 @@ export default async function TeachersPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {teachers.map((teacher) => (
-              <div key={teacher.id} className="teacher-card overflow-hidden group flex flex-col h-full shadow-lg">
+              <div key={teacher.id} className="teacher-card bg-white rounded-2xl border border-slate-200 overflow-hidden group flex flex-col h-full shadow-lg">
                 {/* Image */}
                 <div className="relative h-64 sm:h-72 bg-gradient-to-br from-primary-900 to-primary-800 overflow-hidden">
                   {teacher.image ? (

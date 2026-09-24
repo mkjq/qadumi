@@ -200,7 +200,7 @@ export default function RewardsShowcase({
                       className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-105 ${
                         isUnlocked
                           ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-navy-900 shadow-amber-500/20'
-                          : 'bg-white/10 text-slate-500'
+                          : 'bg-slate-100 text-slate-500'
                       }`}
                     >
                       <Icon className="w-6 h-6" />
@@ -216,7 +216,7 @@ export default function RewardsShowcase({
                         className={`text-[11px] font-bold mt-1 px-2 py-0.5 rounded-full ${
                           isUnlocked
                             ? 'text-emerald-700 bg-emerald-50'
-                            : 'text-slate-500 bg-white/10'
+                            : 'text-slate-600 bg-slate-100'
                         }`}
                       >
                         {isUnlocked ? 'متاح للاستبدال' : `متبقي ${pointsNeeded} نقطة`}
@@ -243,7 +243,7 @@ export default function RewardsShowcase({
                         <span>التقدم نحو المكافأة:</span>
                         <span>{progressPercent}%</span>
                       </div>
-                      <div className="h-2 w-full rounded-full bg-white/20 overflow-hidden">
+                      <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-500"
                           style={{ width: `${progressPercent}%` }}
@@ -266,7 +266,7 @@ export default function RewardsShowcase({
                   ) : (
                     <button
                       disabled
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 px-4 py-3 text-xs sm:text-sm font-bold text-slate-500 cursor-not-allowed border border-slate-200/60"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-100 px-4 py-3 text-xs sm:text-sm font-bold text-slate-500 cursor-not-allowed border border-slate-200/60"
                     >
                       <Lock className="w-4 h-4 text-slate-500" />
                       <span>اجمع النقاط لفتح المكافأة</span>
@@ -295,7 +295,7 @@ export default function RewardsShowcase({
               <button
                 onClick={handleCloseModal}
                 disabled={isRedeeming}
-                className="absolute top-5 left-5 p-2 rounded-full text-slate-500 hover:text-slate-600 hover:bg-white/10 transition"
+                className="absolute top-5 left-5 p-2 rounded-full text-slate-500 hover:text-slate-600 hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>

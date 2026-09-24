@@ -112,7 +112,7 @@ function StudentRegisterContent() {
   };
 
   const ConditionItem = ({ met, text }: { met: boolean; text: string }) => (
-    <div className={`flex items-center gap-1.5 text-xs font-bold transition-colors ${met ? 'text-green-700' : 'text-slate-500'}`}>
+    <div className={`flex items-center gap-1.5 text-xs font-bold transition-colors ${met ? 'text-green-800 font-bold' : 'text-slate-700 font-black'}`}>
       {met ? <Check size={14} className="text-green-600" /> : <X size={14} />}
       <span>{text}</span>
     </div>
@@ -129,7 +129,7 @@ function StudentRegisterContent() {
           {/* Title */}
           <div className="flex flex-col mb-2 w-full">
             <span className="text-[#323232] font-black text-2xl mb-1">حساب جديد</span>
-            <span className="text-[#666666] font-bold text-[17px]">سجل وانضم لمنصتنا التعليمية</span>
+            <span className="text-[#323232] font-bold text-[17px]">سجل وانضم لمنصتنا التعليمية</span>
           </div>
 
           {/* Welcome Bonus Notice Pill */}

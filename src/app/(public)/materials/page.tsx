@@ -150,7 +150,7 @@ export default function MaterialsPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-black">
+                    <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-black">
                       <FileText size={32} />
                     </div>
                   )}

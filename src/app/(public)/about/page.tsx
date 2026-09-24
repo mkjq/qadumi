@@ -92,7 +92,7 @@ export default async function AboutPage() {
                   <stat.icon className="w-6 h-6" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-black text-white mb-1">{stat.value}</div>
-                <div className="text-slate-500 text-xs sm:text-sm font-semibold">{stat.label}</div>
+                <div className="text-slate-300 text-xs sm:text-sm font-semibold">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -122,7 +122,7 @@ export default async function AboutPage() {
                   <div key={i} className="relative group hover:scale-[1.02] transition-transform duration-300">
                     {/* Golden Dot */}
                     <div className="absolute -right-[31px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow group-hover:scale-125 transition-transform duration-300" />
-                    <div className="text-sm font-black text-amber-600 mb-1">{m.year}م</div>
+                    <div className="text-sm font-black text-amber-400 mb-1">{m.year}م</div>
                     <div className="text-base font-bold text-white">{m.text}</div>
                   </div>
                 ))}
@@ -137,7 +137,7 @@ export default async function AboutPage() {
               نرحب بطلابنا الأعزاء في مقرنا الرئيسي والوحيد المجهز بأحدث الوسائل التعليمية:
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-10">
-              <div className="flex items-center gap-2 bg-white/5/10 border border-white/15 px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg">
+              <div className="flex items-center gap-2 bg-white/10 border border-white/15 px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg">
                 <MapPin className="w-5 h-5 text-cyan-400" />
                 <span>ضاحية الأمير حسن</span>
               </div>

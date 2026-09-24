@@ -106,7 +106,7 @@ export default function AdminStudentsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">رصيد النقاط</label>
-                <input required type="number" min="0" value={editingStudent?.points ?? ''} onChange={(e) => setEditingStudent({...editingStudent, points: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
+                <input required type="number" min="0" value={editingStudent?.points ?? ''} onChange={(e) => setEditingStudent({...editingStudent, points: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none text-gray-900 bg-white" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">المستوى (اللقب)</label>

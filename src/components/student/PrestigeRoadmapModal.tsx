@@ -36,7 +36,7 @@ const PRESTIGE_TIERS: TierDefinition[] = [
     minPoints: 0,
     maxPoints: 99,
     icon: Medal,
-    badgeBg: 'bg-white/10 border-slate-300',
+    badgeBg: 'bg-slate-100 border-slate-300',
     badgeText: 'text-slate-700',
     borderColor: 'border-white/10',
     bgGradient: 'from-slate-50 to-white',
@@ -92,7 +92,7 @@ const PRESTIGE_TIERS: TierDefinition[] = [
     maxPoints: Infinity,
     icon: Crown,
     badgeBg: 'bg-gradient-to-r from-amber-400 to-gold-500 border-amber-300',
-    badgeText: 'text-white',
+    badgeText: 'text-amber-950 font-black',
     borderColor: 'border-amber-400',
     bgGradient: 'from-amber-50/60 via-gold-50/20 to-white',
     description: 'التاج الشرفي الأسمى في صرح مركز القدومي الثقافي؛ تكريم استثنائي لمسيرة التميز.',
@@ -122,7 +122,7 @@ export default function PrestigeRoadmapModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="relative w-full max-w-3xl my-8 rounded-3xl bg-white/5 p-6 sm:p-8 shadow-2xl border border-white/10"
+            className="relative w-full max-w-3xl my-8 rounded-3xl bg-[#0B1D3A] p-6 sm:p-8 shadow-2xl border border-white/10"
             dir="rtl"
           >
             {/* Close Button */}
