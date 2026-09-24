@@ -1,0 +1,11 @@
+﻿// Patch Prisma Client require to use /edge in Cloudflare worker
+        if (code.includes('require(\"@prisma/client\")')) {
+          code = code.replaceAll('require(\"@prisma/client\")', 'require(\"@prisma/client/edge\")');
+          modified = true;
+          console.log('Patched Prisma Client require to edge in:', full);
+        }
+        if (code.includes('import { PrismaClient } from \"@prisma/client\"')) {
+          code = code.replaceAll('import { PrismaClient } from \"@prisma/client\"', 'import { PrismaClient } from \"@prisma/client/edge\"');
+          modified = true;
+          console.log('Patched Prisma Client import to edge in:', full);
+        }

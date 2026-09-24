@@ -10,7 +10,7 @@
     "db:push": "prisma db push",
     "db:seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' prisma/seed.ts",
     "postinstall": "prisma generate",
-    "pages:build": "npx opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion"
+    "pages:build": "npx opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion && node patch-bundle.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1128.0",
