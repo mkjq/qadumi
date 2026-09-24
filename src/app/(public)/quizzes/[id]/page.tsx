@@ -70,7 +70,7 @@ export default function QuizDetailPage() {
           if (res.status === 404) {
             throw new Error('الاختبار المطلوب غير موجود أو تم إيقافه.');
           }
-          throw new Error('حدث خطأ أثناء تحميل الاختبار.');
+          throw new Error(`حدث خطأ أثناء تحميل الاختبار. (كود: ${res.status})`);
         }
         const data = await res.json();
         if (data.quiz) {
