@@ -1,18 +1,8 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+
 import { getStudentFromRequest, getPrestigeTier } from '@/lib/studentAuth';
 
-const globalForPrisma = globalThis as unknown as {
-  prismaInstance: PrismaClient | undefined;
-};
-
-const prisma =
-  globalForPrisma.prismaInstance ??
-  new PrismaClient({
-    log: ['error', 'warn'],
-  });
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prismaInstance = prisma;
+import { prisma } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -216,3 +206,4 @@ export async function POST(
     );
   }
 }
+
