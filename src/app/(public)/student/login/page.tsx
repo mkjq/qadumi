@@ -76,7 +76,7 @@ function StudentLoginContent() {
           {/* Title */}
           <div className="flex flex-col mb-2 w-full">
             <span className="text-[#323232] font-black text-2xl mb-1">أهلاً بك مجدداً،</span>
-            <span className="text-[#666666] font-bold text-[17px]">سجل دخولك للمتابعة</span>
+            <span className="text-[#323232] font-bold text-[17px]">سجل دخولك للمتابعة</span>
           </div>
 
           {/* Feedback Messages */}
@@ -143,9 +143,9 @@ function StudentLoginContent() {
           {/* Separator & Links */}
           <div className="w-full mt-2">
             <div className="w-full flex items-center justify-center gap-2 mb-4">
-              <div className="h-[3px] flex-1 rounded-[5px] bg-[#666666]" />
+              <div className="h-[3px] flex-1 rounded-[5px] bg-[#323232]" />
               <span className="text-[#323232] font-black text-sm px-2">أو</span>
-              <div className="h-[3px] flex-1 rounded-[5px] bg-[#666666]" />
+              <div className="h-[3px] flex-1 rounded-[5px] bg-[#323232]" />
             </div>
 
             <div className="flex flex-col items-center gap-3 text-[14px] font-bold text-[#323232]">

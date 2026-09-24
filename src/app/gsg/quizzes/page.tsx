@@ -154,7 +154,7 @@ export default function AdminQuizzesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">عنوان الاختبار</label>
-                <input required type="text" value={editingQuiz?.title} onChange={(e) => setEditingQuiz({...editingQuiz, title: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none" />
+                <input required type="text" value={editingQuiz?.title} onChange={(e) => setEditingQuiz({...editingQuiz, title: e.target.value})} className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-gray-900 outline-none text-gray-900 bg-white" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">الوصف</label>
@@ -207,7 +207,7 @@ export default function AdminQuizzesPage() {
                   </button>
                   <div className="mb-4 pr-10">
                     <label className="block text-sm font-bold text-gray-700 mb-2">نص السؤال {qIndex + 1}</label>
-                    <input required type="text" value={q.question} onChange={(e) => updateQuestion(qIndex, e.target.value)} className="w-full border rounded-lg p-2.5 outline-none" placeholder="اكتب السؤال هنا..." />
+                    <input required type="text" value={q.question} onChange={(e) => updateQuestion(qIndex, e.target.value)} className="w-full border rounded-lg p-2.5 outline-none text-gray-900 bg-white" placeholder="اكتب السؤال هنا..." />
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -216,7 +216,7 @@ export default function AdminQuizzesPage() {
                         <button type="button" onClick={() => setCorrectOption(qIndex, oIndex)} className={`w-6 h-6 rounded-full flex items-center justify-center border flex-shrink-0 ${opt.isCorrect ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-gray-300'}`}>
                           {opt.isCorrect && <CheckCircle size={14} />}
                         </button>
-                        <input required type="text" value={opt.text} onChange={(e) => updateOption(qIndex, oIndex, e.target.value)} className="w-full bg-transparent outline-none text-sm p-1" placeholder={`الخيار ${oIndex + 1}`} />
+                        <input required type="text" value={opt.text} onChange={(e) => updateOption(qIndex, oIndex, e.target.value)} className="w-full bg-transparent outline-none text-sm p-1 text-gray-900" placeholder={`الخيار ${oIndex + 1}`} />
                       </div>
                     ))}
                   </div>

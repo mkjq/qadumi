@@ -67,7 +67,7 @@ export default function RecentLedger({ transactions = [], submissions = [] }: Re
           <h3 className="text-lg font-black text-slate-900">سجل النشاط والمعاملات</h3>
         </div>
 
-        <div className="flex rounded-2xl bg-white/10 p-1">
+        <div className="flex rounded-2xl bg-slate-100 p-1 border border-slate-200/60">
           <button
             onClick={() => setActiveTab('points')}
             className={`rounded-xl px-4 py-1.5 text-xs font-bold transition-all ${

@@ -234,7 +234,7 @@ function CheckoutModal({ card, onClose }: { card: CourseCard; onClose: () => voi
                     type="text"
                     value={form.customerName}
                     onChange={(e) => setForm({ ...form, customerName: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 text-sm font-medium"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 text-sm font-medium text-slate-900"
                     placeholder="اسم الطالب الكامل"
                   />
                 </div>
@@ -248,7 +248,7 @@ function CheckoutModal({ card, onClose }: { card: CourseCard; onClose: () => voi
                     dir="ltr"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 text-sm font-medium text-right"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 text-sm font-medium text-right text-slate-900"
                     placeholder="07XXXXXXXX"
                   />
                 </div>
@@ -342,7 +342,7 @@ function CheckoutModal({ card, onClose }: { card: CourseCard; onClose: () => voi
                     value={form.address}
                     onChange={(e) => setForm({ ...form, address: e.target.value })}
                     rows={3}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 resize-none text-sm"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 resize-none text-sm text-slate-900"
                     placeholder="المدينة، المنطقة، الشارع، أقرب معلم معروف..."
                   />
                   <p className="text-[11px] text-slate-400 mt-1.5">* تضاف رسوم توصيل رمزية للمندوب عند الاستلام</p>
