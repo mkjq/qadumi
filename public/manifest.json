@@ -1,0 +1,22 @@
+{
+  "name": "مركز القدومي الثقافي",
+  "short_name": "القدومي",
+  "description": "تطبيق مركز القدومي الثقافي التعليمي",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/logos/logo-original-notext-white.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/images/logos/logo-original-notext-white.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

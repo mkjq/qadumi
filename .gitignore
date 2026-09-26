@@ -43,3 +43,10 @@ tests/
 next-env.d.ts
 .open-next
 .wrangler
+
+mobile_app/
+google_play_assets/
+*.log
+build_log*.txt
+temp_*.tsx
+

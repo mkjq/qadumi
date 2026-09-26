@@ -11,6 +11,12 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0',
+};
+
 export const dynamic = 'force-dynamic';
 
 export async function GET(
@@ -22,7 +28,7 @@ export async function GET(
     if (isNaN(quizId)) {
       return NextResponse.json(
         { error: 'معرف الاختبار غير صالح' },
-        { status: 400 }
+        { status: 400, headers: NO_CACHE_HEADERS }
       );
     }
 
@@ -43,7 +49,7 @@ export async function GET(
     if (!quiz || !quiz.isActive) {
       return NextResponse.json(
         { error: 'الاختبار غير موجود' },
-        { status: 404 }
+        { status: 404, headers: NO_CACHE_HEADERS }
       );
     }
 
@@ -81,12 +87,12 @@ export async function GET(
         questionCount: quiz.questions.length,
         questions: shuffledQuestions,
       },
-    });
+    }, { headers: NO_CACHE_HEADERS });
   } catch (error) {
     console.error(`[API /api/quizzes/${params.id}] Error:`, error);
     return NextResponse.json(
       { error: 'فشل في جلب بيانات الاختبار' },
-      { status: 500 }
+      { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }

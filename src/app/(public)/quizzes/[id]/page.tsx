@@ -65,7 +65,9 @@ export default function QuizDetailPage() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch(`/api/quizzes/${quizId}`);
+        const res = await fetch(`/api/quizzes/${quizId}?_t=${Date.now()}`, {
+          cache: 'no-store',
+        });
         if (!res.ok) {
           if (res.status === 404) {
             throw new Error('الاختبار المطلوب غير موجود أو تم إيقافه.');
@@ -101,6 +103,7 @@ export default function QuizDetailPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        cache: 'no-store',
       });
 
       if (!res.ok) {
@@ -144,7 +147,7 @@ export default function QuizDetailPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-slate-50 via-cyan-50/20 to-white pt-28 pb-20 overflow-hidden" dir="rtl">
+    <div className="relative min-h-screen bg-gradient-to-b from-slate-900 via-[#0B1D3A] to-slate-900 pt-28 pb-20 overflow-hidden" dir="rtl">
       {/* Background Blobs */}
       <OrganicBlob variant="cyan" size="2xl" className="-top-40 -left-40 opacity-20" />
       <OrganicBlob variant="electric" size="xl" className="top-1/2 -right-32 opacity-25" />
@@ -153,7 +156,7 @@ export default function QuizDetailPage() {
       {loading && (
         <div className="flex flex-col items-center justify-center py-32 text-center">
           <RefreshCw className="w-10 h-10 text-cyan-600 animate-spin mb-4" />
-          <p className="text-base font-bold text-slate-700">جاري تجهيز الاختبار المحوسب...</p>
+          <p className="text-base font-bold text-white">جاري تجهيز الاختبار المحوسب...</p>
         </div>
       )}
 
@@ -163,8 +166,8 @@ export default function QuizDetailPage() {
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100 text-rose-600">
             <AlertCircle className="w-8 h-8" />
           </div>
-          <h2 className="text-xl font-bold text-slate-800 mb-2">عذراً، تعذر فتح الاختبار</h2>
-          <p className="text-sm text-slate-600 mb-6">{error}</p>
+          <h2 className="text-xl font-bold text-white mb-2">عذراً، تعذر فتح الاختبار</h2>
+          <p className="text-sm text-slate-300 mb-6">{error}</p>
           <Link
             href="/quizzes"
             className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:bg-cyan-700"

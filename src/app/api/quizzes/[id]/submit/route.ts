@@ -4,6 +4,12 @@ import { getStudentFromRequest, getPrestigeTier } from '@/lib/studentAuth';
 
 import { prisma } from '@/lib/db';
 
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0',
+};
+
 export const dynamic = 'force-dynamic';
 
 export async function POST(
@@ -197,12 +203,12 @@ export async function POST(
       newTotalPoints: submissionResult.updatedStudent.points,
       level: submissionResult.updatedTier.level,
       review,
-    });
+    }, { headers: NO_CACHE_HEADERS });
   } catch (error) {
     console.error(`[API /api/quizzes/${params.id}/submit] Error:`, error);
     return NextResponse.json(
       { error: 'حدث خطأ داخلي في الخادم أثناء تقديم الاختبار' },
-        { status: 500 }
+        { status: 500, headers: NO_CACHE_HEADERS }
     );
   }
 }

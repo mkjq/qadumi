@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { Providers } from '@/components/Providers';
@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     locale: 'ar_JO',
     type: 'website',
   },
+manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -61,7 +62,9 @@ export default function RootLayout({
             }}
           />
         </Providers>
+      <script dangerouslySetInnerHTML={{ __html: "if ('serviceWorker' in navigator) { window.addEventListener('load', function() { navigator.serviceWorker.register('/sw.js').catch(function(err) { console.log('SW ref failed', err); }); }); }" }} />
       </body>
     </html>
   );
 }
+

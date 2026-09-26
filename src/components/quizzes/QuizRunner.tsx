@@ -333,15 +333,25 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
                     whileTap={{ scale: 0.99 }}
                     onClick={() => handleSelectOption(option.id)}
                     dir={isEnglishText(currentQuestion.question) ? 'ltr' : 'rtl'}
-                    className={`group flex w-full items-center justify-between rounded-2xl border p-5 transition-all duration-200 ${isEnglishText(currentQuestion.question) ? 'text-left' : 'text-right'} ${
+                    className={`group flex w-full items-center gap-4 rounded-2xl border p-5 transition-all duration-200 ${isEnglishText(currentQuestion.question) ? 'text-left' : 'text-right'} ${
                       isSelected
                         ? 'border-cyan-400 bg-cyan-500/20 text-white font-bold shadow-lg shadow-cyan-500/10 ring-1 ring-cyan-400/50'
                         : 'border-white/10 bg-white/5 text-slate-300 hover:border-cyan-400/50 hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <div className="flex items-center gap-4">
+                    <div
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors ${
+                        isSelected
+                          ? 'border-cyan-400 bg-cyan-400 text-navy-900'
+                          : 'border-slate-500 bg-transparent'
+                      }`}
+                    >
+                      {isSelected && <span className="h-2.5 w-2.5 rounded-full bg-navy-900" />}
+                    </div>
+
+                    <div className="flex items-center gap-3">
                       <span
-                        className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-colors ${
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-colors ${
                           isSelected
                             ? 'bg-cyan-500 text-navy-900 shadow-md'
                             : 'bg-white/10 text-slate-400 group-hover:bg-cyan-500/20 group-hover:text-cyan-300'
@@ -350,16 +360,6 @@ export default function QuizRunner({ quiz, onSubmit, isSubmitting }: QuizRunnerP
                         {letter}
                       </span>
                       <span className="text-base sm:text-lg leading-snug">{option.text}</span>
-                    </div>
-
-                    <div
-                      className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${
-                        isSelected
-                          ? 'border-cyan-400 bg-cyan-400 text-navy-900'
-                          : 'border-slate-500 bg-transparent'
-                      }`}
-                    >
-                      {isSelected && <span className="h-2.5 w-2.5 rounded-full bg-navy-900" />}
                     </div>
                   </motion.button>
                 );
